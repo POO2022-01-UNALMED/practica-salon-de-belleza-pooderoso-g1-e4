@@ -1,5 +1,7 @@
 package operacional;
 
+import java.util.ArrayList;
+
 import organizacional.Empleado;
 
 public class CuentadeAhorro {
@@ -8,12 +10,18 @@ public class CuentadeAhorro {
 	Empleado titularCuenta;
 	private long numeroCuenta;
 	private String fechaCreacion;
+	private ArrayList<CuentadeAhorro> cuentasRegistradas;
 	
+	
+	//construtor
 	public CuentadeAhorro (Empleado titular, long numeroCuenta) {
 			this.titularCuenta=titular;
 			this.numeroCuenta=numeroCuenta;
+			cuentasRegistradas.add(this);
 	}
+	
 
+	//getters y setters
 	public Empleado getTitularCuenta() {
 		return titularCuenta;
 	}
