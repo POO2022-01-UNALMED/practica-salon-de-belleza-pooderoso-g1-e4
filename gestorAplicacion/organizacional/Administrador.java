@@ -6,7 +6,11 @@ public class Administrador extends Persona{
 	//atributos
 	private String horarioLaboral;
 	private int nomina;
-	private ArrayList<Empleado> empleadosAsigandos;
+	
+	
+	//stributo clase
+	public static ArrayList<Cliente> clientes =new ArrayList<Cliente>(); 
+	public static ArrayList<Empleado> empleadosAsigandos= new ArrayList<Empleado>();
 	
 	
 	//constructor base
@@ -75,6 +79,9 @@ public class Administrador extends Persona{
 	}
 	
 	public void pagarNomina() {
+		//cuentaahorros
+		//Factura
+		//Empleados
 		System.out.println("nomina Pagada");		
 	}
 	

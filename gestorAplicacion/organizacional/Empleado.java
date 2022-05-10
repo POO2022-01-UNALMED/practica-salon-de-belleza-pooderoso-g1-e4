@@ -14,11 +14,12 @@ public class Empleado extends Persona {
 	public Empleado(String nombre, String apellido, int id, int edad, int numero, String especialidad, Factura factura, Producto productoVendido) {
 		super(nombre, apellido, id, edad, numero);
 		this.especialidad = especialidad;
-		this.serviciosRealizados.add(factura);
-		this.productosVendidos.add(productoVendido);	
+		//this.serviciosRealizados.add(factura);
+		//this.productosVendidos.add(productoVendido);	
+		Administrador.empleadosAsigandos.add(this);//Cardinalidad de clases
 	}
 	
-	public void calcularSueldo() {
+	public void calcularSueldo() {//poner metodo en nomina
 		double montoServicios = 0;
 		for(Factura factura : serviciosRealizados) {
 			montoServicios = montoServicios + factura.getPrecioTotal();

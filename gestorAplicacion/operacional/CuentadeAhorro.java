@@ -48,7 +48,7 @@ public class CuentadeAhorro {
 
 	//poner que atributo del cliente
 	public String toString() {
-		return "El empleado "+ titularCuenta.nombre +" "+titularCuenta.apellido+" "+"tiene una cuenta de ahorros con número: "+ numeroCuenta + ", abierta el:_ " +fechaCreacion;
+		return "El empleado "+ titularCuenta.getNombre() +" "+titularCuenta.getApellido()+" "+"tiene una cuenta de ahorros con número: "+ numeroCuenta + ", abierta el:_ " +fechaCreacion;
 		
 	}
 

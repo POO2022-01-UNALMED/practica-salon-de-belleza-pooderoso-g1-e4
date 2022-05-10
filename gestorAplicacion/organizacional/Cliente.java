@@ -1,15 +1,18 @@
 package organizacional;
 
 import operacional.*;
+import organizacional.*;
 import java.util.*;
+
 
 public class Cliente extends Persona {
 	
 	// Atributos
 	private String anotaciones;
-	private ArrayList<Cita> citasGeneradas;
-	private ArrayList<Factura> facturas;
-	private boolean ClientePremiun;
+	private ArrayList<Cita>  citasGeneradas=new ArrayList<Cita> () ;
+	private ArrayList<Factura> facturas = new  ArrayList<Factura> ();
+	
+	private boolean ClientePremiun;//Revisar
 
 	// constructor base
 	public Cliente(String nombre, String apellido, int id, int edad, int numero, String anotaciones,
@@ -19,6 +22,7 @@ public class Cliente extends Persona {
 		this.citasGeneradas = citasGeneradas;
 		this.facturas = facturas;
 		ClientePremiun = clientePremiun;
+		Administrador.clientes.add(this);
 	}
 	
 	//Getters y Setters
