@@ -15,6 +15,7 @@ public class Cita {
 	public static int NumCitas=0;
 	
 	
+	
 	public Cita(Empleado empleado, Cliente cliente, ArrayList<Servicio> servicios, LocalDateTime fechaReserva, LocalDateTime fechaCita, int duracion) {
 		Cita.NumCitas ++;
 		this.idCita = Cita.NumCitas;
