@@ -1,6 +1,30 @@
 package gestorAplicacion.organizacional;
+import java.io.Serializable;
+import java.util.ArrayList;
 
-public class Persona {
+public class Persona implements Serializable {  //implements del serializable
+	
+	//todo esto es del serializador
+	private static final long serialVersionUID = 1L;
+	
+	private static ArrayList<Persona> personas;
+	static {
+		personas = new ArrayList<Persona>();
+	}
+
+	
+	public static ArrayList<Persona> getPersonas() {
+		return personas;
+	}
+
+	public static void setPersonas(ArrayList<Persona> personas) {
+		Persona.personas = personas;
+	}
+
+
+	//también en cada constructor se debe poner el add al array
+	// ahora si el codigo
+	
 	// Atributos
 	private String nombre;
 	private String apellido;
@@ -16,6 +40,7 @@ public class Persona {
 		this.id = id;
 		Edad = edad;
 		Numero = numero;
+		personas.add(this);
 	}
 
 	// getters y setters

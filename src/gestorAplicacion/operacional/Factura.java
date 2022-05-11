@@ -1,9 +1,32 @@
 package gestorAplicacion.operacional;
 import java.util.ArrayList;
-import organizacional.*;
+
+import java.io.Serializable;
 import java.time.*;
 
-public class Factura {
+
+public class Factura implements Serializable {  //implements del serializable
+	
+	//todo esto es del serializador
+	private static final long serialVersionUID = 1L;
+	
+	private static ArrayList<Factura> facturas;
+	static {
+		facturas = new ArrayList<Factura>();
+	}
+	
+	public static ArrayList<Factura> getFacturas() {
+		return facturas;
+	}
+
+	public static void setFacturas(ArrayList<Factura> facturas) {
+		Factura.facturas = facturas;
+	}
+	
+	//también en cada constructor se debe poner el add al array
+	// ahora si el codigo
+	
+
 	private int idFactura;
 	private Cita cita;
 	private double precioTotal;
@@ -17,6 +40,7 @@ public class Factura {
 		this.cita = cita;
 		this.fecha = fecha;
 		this.metodoPago = metodoPago;
+		facturas.add(this);
 	}
 	
 	//Metodos get y set:

@@ -1,15 +1,35 @@
 package gestorAplicacion.organizacional;
-
-import operacional.*;
-import organizacional.*;
+import java.io.Serializable;
 import java.util.*;
 
 import gestorAplicacion.operacional.Cita;
 import gestorAplicacion.operacional.Factura;
 
 
-public class Cliente extends Persona {
+public class Cliente extends Persona implements Serializable {  //implements del serializable
 	
+	//todo esto es del serializador
+	private static final long serialVersionUID = 1L;
+	
+	private static ArrayList<Cliente> clientes;
+	static {
+		clientes = new ArrayList<Cliente>();
+	}
+	
+	public static ArrayList<Cliente> getClientes() {
+		return clientes;
+	}
+
+	public static void setClientes(ArrayList<Cliente> clientes) {
+		Cliente.clientes = clientes;
+	}
+	
+
+	//también en cada constructor se debe poner el add al array
+	// ahora si el codigo{
+	
+	
+
 	// Atributos
 	private String anotaciones;
 	private ArrayList<Cita>  citasGeneradas=new ArrayList<Cita> () ;
@@ -26,6 +46,7 @@ public class Cliente extends Persona {
 		this.facturas = facturas;
 		ClientePremiun = clientePremiun;
 		Administrador.clientes.add(this);
+		clientes.add(this);
 	}
 	
 	//Getters y Setters

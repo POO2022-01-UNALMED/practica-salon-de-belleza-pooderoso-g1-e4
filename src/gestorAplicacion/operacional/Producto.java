@@ -1,6 +1,31 @@
  package gestorAplicacion.operacional;
 
-public class Producto {
+ import java.io.Serializable;
+import java.util.ArrayList;
+ 
+public class Producto implements Serializable {  //implements del serializable
+	
+	//todo esto es del serializador
+	private static final long serialVersionUID = 1L;
+	
+	private static ArrayList<Producto> productos;
+	static {
+		productos = new ArrayList<Producto>();
+	}
+	
+	public static ArrayList<Producto> getProductos() {
+		return productos;
+	}
+	public static void setProductos(ArrayList<Producto> productos) {
+		Producto.productos = productos;
+	}
+	
+	//también en cada constructor se debe poner el add al array
+	// ahora si el codigo
+	
+	
+	//falta el constructor.
+	
 	private String productoId;
 	private int existencias;
 	private String nombreProducto;

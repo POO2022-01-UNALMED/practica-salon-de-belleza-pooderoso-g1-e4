@@ -1,9 +1,35 @@
 package gestorAplicacion.operacional;
 
-import gestorAplicacion.operacional.Producto;
+
 import gestorAplicacion.organizacional.Empleado;
 
-public class Venta {
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class Venta implements Serializable {  //implements del serializable
+		
+		//todo esto es del serializador
+		private static final long serialVersionUID = 1L;
+		
+		private static ArrayList<Venta> ventas;
+		static {
+			ventas = new ArrayList<Venta>();
+		}
+		
+
+		public static ArrayList<Venta> getVentas() {
+				return ventas;
+			}
+
+			public static void setVentas(ArrayList<Venta> ventas) {
+				Venta.ventas = ventas;
+			}
+		
+	
+		//también en cada constructor se debe poner el add al array
+		// ahora si el codigo
+
 
 	Producto productoVendido;
 	Empleado empleadoComision;
@@ -16,11 +42,12 @@ public class Venta {
 		this.productoVendido = productoVendido;
 		this.empleadoComision = empleadoComision;
 		this.fechaVenta = fechaVenta;
+		ventas.add(this);
 	}
 	
 	//cálculo comisión
 	public double calcularComision(Producto productoVendido) {
-		comision= this.productoVendido.costo * porcentajeComision;
+		comision= this.productoVendido.getPrecioVenta() * porcentajeComision;
 		return comision;
 	}    //crear lista de comisiones de cada empleado, en la clase empleado
 	
@@ -50,8 +77,8 @@ public class Venta {
 	}
 	
 	public String toString() {
-		return "El empleado "+ empleadoComision.nombre +" "+empleadoComision.apellido+" "+""
-				+ " realizó una venta de "+ productoVendido.nombre + " el día"+ fechaVenta+" y recibirá una comisión de: " 
+		return "El empleado "+ empleadoComision.getNombre() +" "+empleadoComision.getApellido()+" "+""
+				+ " realizó una venta de "+ productoVendido.getNombreProducto() + " el día"+ fechaVenta+" y recibirá una comisión de: " 
 				+ calcularComision(productoVendido);
 		
 	}

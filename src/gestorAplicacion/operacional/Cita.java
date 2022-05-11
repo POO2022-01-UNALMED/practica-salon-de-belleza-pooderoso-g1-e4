@@ -1,12 +1,35 @@
 package gestorAplicacion.operacional;
 import java.util.ArrayList;
 
+
 import gestorAplicacion.organizacional.Cliente;
 import gestorAplicacion.organizacional.Empleado;
-import organizacional.*;
+
+import java.io.Serializable;
 import java.time.*;
 
-public class Cita {
+public class Cita implements Serializable {  //implements del serializable
+	
+	//todo esto es del serializador
+	private static final long serialVersionUID = 1L;
+	
+	private static ArrayList<Cita> citas;
+	static {
+		citas = new ArrayList<Cita>();
+	}
+	
+	public static ArrayList<Cita> getCitas() {
+		return citas;
+	}
+
+
+	public static void setCitas(ArrayList<Cita> citas) {
+		Cita.citas = citas;
+		
+	}
+	//también en cada constructor se debe poner el add al array
+	// ahora si el codigo
+	
 	private int idCita;
 	private Empleado empleado;
 	private Cliente cliente;
@@ -24,6 +47,7 @@ public class Cita {
 		this.idCita = Cita.NumCitas;
 		this.empleado = empleado; this.cliente = cliente; this.servicios = servicios;
 		this.fechaReserva = fechaReserva; this.fechaCita = fechaCita; this.duracion = duracion; 
+		citas.add(this);
 	}
 	
 	

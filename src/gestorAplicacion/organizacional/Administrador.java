@@ -1,9 +1,33 @@
 package gestorAplicacion.organizacional;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Administrador extends Persona{
+
+public class Administrador extends Persona implements Serializable {  //implements del serializable
+	
+	//todo esto es del serializador
+	private static final long serialVersionUID = 1L;
+	
+	private static ArrayList<Administrador> administradores;
+	static {
+		administradores = new ArrayList<Administrador>();
+	}
+	
+	
+	public static ArrayList<Administrador> getAdministradores() {
+		return administradores;
+	}
+
+	public static void setAdministradores(ArrayList<Administrador> administradores) {
+		Administrador.administradores = administradores;
+	}
+
+	//también en cada constructor se debe poner el add al array
+	// ahora si el codigo{
+	
 	//atributos
+	
 	private String horarioLaboral;
 	private int nomina;
 	
@@ -18,7 +42,8 @@ public class Administrador extends Persona{
 		super(nombre, apellido, id, edad, numero);
 		this.horarioLaboral=horarioLaboral;
 		this.nomina=nomina;
-		this.empleadosAsigandos=empleadosAsigandos;		
+		this.empleadosAsigandos=empleadosAsigandos;	
+		administradores.add(this);
 	}
 	
 	//getter y setters

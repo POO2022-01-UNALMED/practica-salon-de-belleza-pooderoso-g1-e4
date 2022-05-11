@@ -1,12 +1,34 @@
 package gestorAplicacion.organizacional;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
 import gestorAplicacion.operacional.Factura;
 import gestorAplicacion.operacional.Producto;
-import operacional.*;
 
-public class Empleado extends Persona {
+public class Empleado extends Persona implements Serializable {  //implements del serializable
+	
+	//todo esto es del serializador
+	private static final long serialVersionUID = 1L;
+	
+	private static ArrayList<Empleado> empleados;
+	static {
+		empleados = new ArrayList<Empleado>();
+	}
+	
+	public static ArrayList<Empleado> getEmpleados() {
+		return empleados;
+	}
+
+	public static void setEmpleados(ArrayList<Empleado> empleados) {
+		Empleado.empleados = empleados;
+	}
+
+
+	//también en cada constructor se debe poner el add al array
+	// ahora si el codigo
+
+
 
 	private String especialidad;
 	private ArrayList<Factura> serviciosRealizados = new ArrayList<Factura>();
@@ -20,6 +42,7 @@ public class Empleado extends Persona {
 		//this.serviciosRealizados.add(factura);
 		//this.productosVendidos.add(productoVendido);	
 		Administrador.empleadosAsigandos.add(this);//Cardinalidad de clases
+		empleados.add(this);
 	}
 	
 	public void calcularSueldo() {//poner metodo en nomina
