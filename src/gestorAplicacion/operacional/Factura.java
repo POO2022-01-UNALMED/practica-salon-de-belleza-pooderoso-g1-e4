@@ -33,6 +33,7 @@ public class Factura implements Serializable {  //implements del serializable
 	private LocalDateTime fecha;
 	private String metodoPago;
 	public static int NumFacturas=0;
+	private ArrayList<Venta> productosVendidos = new ArrayList<Venta>();
 	
 	public Factura(Cita cita, LocalDateTime fecha, String metodoPago) {
 		Factura.NumFacturas++;
@@ -40,6 +41,15 @@ public class Factura implements Serializable {  //implements del serializable
 		this.cita = cita;
 		this.fecha = fecha;
 		this.metodoPago = metodoPago;
+		facturas.add(this);
+	}
+	
+	public Factura( ArrayList<Venta> productosVendidos, LocalDateTime fechaCompra, String metodoPago) {
+		Factura.NumFacturas++;
+		this.idFactura = Factura.NumFacturas;
+		this.fecha = fechaCompra;
+		this.metodoPago = metodoPago;
+		this.productosVendidos = productosVendidos;
 		facturas.add(this);
 	}
 	
@@ -77,5 +87,18 @@ public class Factura implements Serializable {  //implements del serializable
 	}
 	public void setMetodoPago(String metodoPago) {
 		this.metodoPago = metodoPago;
+	}
+	
+	public void precioTotalProductos(ArrayList<Venta> productosVendidos) {
+		
+		float totalPagar = 0;
+		
+		for(Venta v : productosVendidos) {
+			
+			totalPagar = totalPagar +  v.getProductoVendido().getPrecioVenta() * v.getCantidadVendida();
+			
+		}
+		
+		this.precioTotal = totalPagar;
 	}
 }

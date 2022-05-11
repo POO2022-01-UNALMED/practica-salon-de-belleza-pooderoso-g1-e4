@@ -30,18 +30,24 @@ public class Venta implements Serializable {  //implements del serializable
 		//también en cada constructor se debe poner el add al array
 		// ahora si el codigo
 
-
-	Producto productoVendido;
-	Empleado empleadoComision;
+	
+	private Producto productoVendido;
+	private int idVenta;
+	private int cantidadVendida;
+	private Empleado empleadoComision;
 	private String fechaVenta;
 	private double comision;
 	public final static double porcentajeComision = 0.2;
+	public static int numVenta;
 	
 	
-	public Venta(Producto productoVendido, Empleado empleadoComision, String fechaVenta) {
+	public Venta(Producto productoVendido, Empleado empleadoComision, String fechaVenta, int cantidadVendida) {
 		this.productoVendido = productoVendido;
 		this.empleadoComision = empleadoComision;
 		this.fechaVenta = fechaVenta;
+		this.cantidadVendida = cantidadVendida;
+		Venta.numVenta++;
+		this.idVenta = Venta.numVenta;
 		ventas.add(this);
 	}
 	
@@ -75,6 +81,11 @@ public class Venta implements Serializable {  //implements del serializable
 	public void setFechaVenta(String fechaVenta) {
 		this.fechaVenta = fechaVenta;
 	}
+	
+	public int getCantidadVendida() {
+		return this.cantidadVendida;
+	}
+	
 	
 	public String toString() {
 		return "El empleado "+ empleadoComision.getNombre() +" "+empleadoComision.getApellido()+" "+""
