@@ -1,7 +1,7 @@
-package operacional;
+package gestorAplicacion.operacional;
 
-import operacional.Producto;
-import organizacional.Empleado;
+import gestorAplicacion.operacional.Producto;
+import gestorAplicacion.organizacional.Empleado;
 
 public class Venta {
 

@@ -1,8 +1,11 @@
-package organizacional;
+package gestorAplicacion.organizacional;
 
 import operacional.*;
 import organizacional.*;
 import java.util.*;
+
+import gestorAplicacion.operacional.Cita;
+import gestorAplicacion.operacional.Factura;
 
 
 public class Cliente extends Persona {

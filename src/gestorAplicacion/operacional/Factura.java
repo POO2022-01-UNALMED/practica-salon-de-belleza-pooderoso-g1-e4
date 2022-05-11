@@ -1,4 +1,4 @@
-package operacional;
+package gestorAplicacion.operacional;
 import java.util.ArrayList;
 import organizacional.*;
 import java.time.*;

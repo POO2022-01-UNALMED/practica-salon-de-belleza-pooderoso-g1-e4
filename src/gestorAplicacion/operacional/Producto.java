@@ -1,4 +1,4 @@
- package operacional;
+ package gestorAplicacion.operacional;
 
 public class Producto {
 	private String productoId;

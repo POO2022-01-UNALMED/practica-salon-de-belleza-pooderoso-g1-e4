@@ -1,4 +1,4 @@
-package organizacional;
+package gestorAplicacion.organizacional;
 import java.util.ArrayList;
 
 

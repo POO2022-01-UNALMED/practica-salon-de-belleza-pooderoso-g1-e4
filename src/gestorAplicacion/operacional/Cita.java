@@ -1,5 +1,8 @@
-package operacional;
+package gestorAplicacion.operacional;
 import java.util.ArrayList;
+
+import gestorAplicacion.organizacional.Cliente;
+import gestorAplicacion.organizacional.Empleado;
 import organizacional.*;
 import java.time.*;
 
@@ -8,7 +11,7 @@ public class Cita {
 	private Empleado empleado;
 	private Cliente cliente;
 	private ArrayList<Servicio> servicios = new ArrayList<Servicio>();
-	private LocalDateTime fechaReserva; //año, mes, dia, hora y minutos
+	private LocalDateTime fechaReserva; //aï¿½o, mes, dia, hora y minutos
 	private LocalDateTime fechaCita;
 	private int duracion; //minutos
 	private Factura factura;

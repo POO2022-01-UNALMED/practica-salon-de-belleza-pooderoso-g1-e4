@@ -1,6 +1,9 @@
-package organizacional;
+package gestorAplicacion.organizacional;
 
 import java.util.ArrayList;
+
+import gestorAplicacion.operacional.Factura;
+import gestorAplicacion.operacional.Producto;
 import operacional.*;
 
 public class Empleado extends Persona {
