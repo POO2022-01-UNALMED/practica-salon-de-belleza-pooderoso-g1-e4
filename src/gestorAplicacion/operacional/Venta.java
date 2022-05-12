@@ -41,6 +41,7 @@ public class Venta implements Serializable {  //implements del serializable
 	public static int numVenta;
 	
 	
+	
 	public Venta(Producto productoVendido, Empleado empleadoComision, String fechaVenta, int cantidadVendida) {
 		this.productoVendido = productoVendido;
 		this.empleadoComision = empleadoComision;

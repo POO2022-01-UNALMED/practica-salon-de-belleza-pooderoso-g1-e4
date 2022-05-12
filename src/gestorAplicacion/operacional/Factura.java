@@ -1,5 +1,6 @@
 package gestorAplicacion.operacional;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import java.io.Serializable;
 import java.time.*;
@@ -33,7 +34,7 @@ public class Factura implements Serializable {  //implements del serializable
 	private LocalDateTime fecha;
 	private String metodoPago;
 	public static int NumFacturas=0;
-	private ArrayList<Venta> productosVendidos = new ArrayList<Venta>();
+	private HashMap<Producto, Integer> productosVendidos = new HashMap<Producto, Integer>(); // Dict con producto y cantidad
 	
 	public Factura(Cita cita, LocalDateTime fecha, String metodoPago) {
 		Factura.NumFacturas++;
@@ -44,7 +45,7 @@ public class Factura implements Serializable {  //implements del serializable
 		facturas.add(this);
 	}
 	
-	public Factura( ArrayList<Venta> productosVendidos, LocalDateTime fechaCompra, String metodoPago) {
+	public Factura( HashMap<Producto, Integer> productosVendidos, LocalDateTime fechaCompra, String metodoPago) {
 		Factura.NumFacturas++;
 		this.idFactura = Factura.NumFacturas;
 		this.fecha = fechaCompra;
@@ -89,16 +90,23 @@ public class Factura implements Serializable {  //implements del serializable
 		this.metodoPago = metodoPago;
 	}
 	
-	public void precioTotalProductos(ArrayList<Venta> productosVendidos) {
+	public void precioTotalProductos() {
 		
 		float totalPagar = 0;
 		
-		for(Venta v : productosVendidos) {
+		
+		for(Producto p : this.productosVendidos.keySet()) {
 			
-			totalPagar = totalPagar +  v.getProductoVendido().getPrecioVenta() * v.getCantidadVendida();
+			totalPagar = totalPagar +  p.getPrecioVenta() * this.productosVendidos.get(p);
 			
 		}
 		
 		this.precioTotal = totalPagar;
 	}
+	
+	public void agregarProductosAVender(Producto producto, int cantidad) {
+		this.productosVendidos.put(producto, cantidad);
+	}
+	
+	
 }

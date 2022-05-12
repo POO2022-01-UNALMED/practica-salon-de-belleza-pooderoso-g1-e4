@@ -20,18 +20,22 @@ public class Producto implements Serializable {  //implements del serializable
 		Producto.productos = productos;
 	}
 	
-	//también en cada constructor se debe poner el add al array
+	
 	// ahora si el codigo
-	
-	
-	//falta el constructor.
 	
 	private String productoId;
 	private int existencias;
 	private String nombreProducto;
 	private float precioVenta;
 	
-
+	
+	public Producto(String productoId, int existencias, String nombreProducto, float precioVenta){
+		this.productoId = productoId;
+		this.existencias = existencias;
+		this.nombreProducto = nombreProducto;
+		this.precioVenta = precioVenta;
+		
+	}
 	
 	public String getProductoId() {
 		return productoId;
@@ -58,9 +62,20 @@ public class Producto implements Serializable {  //implements del serializable
 		this.precioVenta = precioVenta;
 	}
 	
-	//metodo de vendido
+	public void actualizarExistencias(int cantidad) {
+		if(this.existencias >= cantidad) {
+			
+			this.existencias = this.existencias - cantidad;
+		}		
+	}
 	
-	
-	
+	public boolean sePuedeVender(int cantidad) {
+		if(this.existencias >= cantidad) {
+			return true;
+		}
+		
+		return false;
+	}
+
 	
 }
