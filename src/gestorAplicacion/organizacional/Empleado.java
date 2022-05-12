@@ -2,6 +2,7 @@ package gestorAplicacion.organizacional;
 
 import java.util.ArrayList;
 import java.io.Serializable;
+import java.time.*;
 
 import gestorAplicacion.operacional.Factura;
 import gestorAplicacion.operacional.Producto;
@@ -34,6 +35,11 @@ public class Empleado extends Persona implements Serializable {  //implements de
 	private ArrayList<Factura> serviciosRealizados = new ArrayList<Factura>();
 	private ArrayList<Producto> productosVendidos = new ArrayList<Producto>();
 	private double sueldo;
+	
+	//Constantes de tiempos de atención de los empleados (9 am - 6 pm)
+	
+	public final static LocalTime HoraInicio = LocalTime.of(9, 0,0,0);
+	public final static LocalTime HoraFinal = LocalTime.of(18, 0,0,0);
 	
 	
 	public Empleado(String nombre, String apellido, int id, int edad, int numero, String especialidad, Factura factura, Producto productoVendido) {

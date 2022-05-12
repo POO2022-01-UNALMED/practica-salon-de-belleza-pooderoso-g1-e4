@@ -31,6 +31,7 @@ public class Cita implements Serializable {  //implements del serializable
 	// ahora si el codigo
 	
 	private int idCita;
+	private String estado;
 	private Empleado empleado;
 	private Cliente cliente;
 	private ArrayList<Servicio> servicios = new ArrayList<Servicio>();
@@ -45,6 +46,7 @@ public class Cita implements Serializable {  //implements del serializable
 	public Cita(Empleado empleado, Cliente cliente, ArrayList<Servicio> servicios, LocalDateTime fechaReserva, LocalDateTime fechaCita, int duracion) {
 		Cita.NumCitas ++;
 		this.idCita = Cita.NumCitas;
+		this.estado="Pendiente";
 		this.empleado = empleado; this.cliente = cliente; this.servicios = servicios;
 		this.fechaReserva = fechaReserva; this.fechaCita = fechaCita; this.duracion = duracion; 
 		citas.add(this);
@@ -58,6 +60,14 @@ public class Cita implements Serializable {  //implements del serializable
 	public void setId(int id) {
 		this.idCita = id;
 	}
+	
+	public String getEstado() {
+		return this.getEstado();
+	}
+	
+	public void setEstado(String estado) {
+		this.estado=estado;
+	}	
 	
 	public Empleado getEmpleado() {
 		return this.empleado;
