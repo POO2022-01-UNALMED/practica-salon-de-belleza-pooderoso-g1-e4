@@ -91,14 +91,10 @@ public class Factura implements Serializable {  //implements del serializable
 	}
 	
 	public void precioTotalProductos() {
-		
 		float totalPagar = 0;
-		
-		
 		for(Producto p : this.productosVendidos.keySet()) {
 			
 			totalPagar = totalPagar +  p.getPrecioVenta() * this.productosVendidos.get(p);
-			
 		}
 		
 		this.precioTotal = totalPagar;

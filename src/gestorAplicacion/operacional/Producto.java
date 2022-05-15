@@ -23,24 +23,25 @@ public class Producto implements Serializable {  //implements del serializable
 	
 	// ahora si el codigo
 	
-	private String productoId;
+	private int productoId;
 	private int existencias;
 	private String nombreProducto;
 	private float precioVenta;
 	
 	
-	public Producto(String productoId, int existencias, String nombreProducto, float precioVenta){
+	
+	public Producto(int productoId, int existencias, String nombreProducto, float precioVenta){
 		this.productoId = productoId;
 		this.existencias = existencias;
 		this.nombreProducto = nombreProducto;
 		this.precioVenta = precioVenta;
-		
+		productos.add(this);
 	}
 	
-	public String getProductoId() {
+	public int getProductoId() {
 		return productoId;
 	}
-	public void setProductoId(String productoId) {
+	public void setProductoId(int productoId) {
 		this.productoId = productoId;
 	}
 	public int getExistencias() {
