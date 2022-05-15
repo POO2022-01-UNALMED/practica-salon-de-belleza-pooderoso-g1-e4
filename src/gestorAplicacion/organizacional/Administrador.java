@@ -38,7 +38,7 @@ public class Administrador extends Persona implements Serializable {  //implemen
 	
 	
 	//constructor base
-	public Administrador(String nombre, String apellido, int id, int edad, int numero, String horarioLaboral, int nomina,ArrayList<Empleado> empleadosAsigandos ) {
+	public Administrador(String nombre, String apellido, int id, int edad, int numero, String horarioLaboral, int nomina ) {
 		super(nombre, apellido, id, edad, numero);
 		this.horarioLaboral=horarioLaboral;
 		this.nomina=nomina;
@@ -47,7 +47,6 @@ public class Administrador extends Persona implements Serializable {  //implemen
 	}
 	
 	//getter y setters
-
 
 	public String getHorarioLaboral() {
 		return horarioLaboral;
