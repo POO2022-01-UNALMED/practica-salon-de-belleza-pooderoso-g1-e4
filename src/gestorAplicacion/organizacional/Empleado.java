@@ -30,7 +30,7 @@ public class Empleado extends Persona implements Serializable {  //implements de
 	// ahora si el codigo
 
 
-
+	private String idEmpleado;
 	private String especialidad;
 	private ArrayList<Factura> serviciosRealizados = new ArrayList<Factura>();
 	private ArrayList<Producto> productosVendidos = new ArrayList<Producto>();
@@ -42,11 +42,10 @@ public class Empleado extends Persona implements Serializable {  //implements de
 	public final static LocalTime HoraFinal = LocalTime.of(18, 0,0,0);
 	
 	
-	public Empleado(String nombre, String apellido, int id, int edad, int numero, String especialidad, Factura factura, Producto productoVendido) {
+	public Empleado(String nombre, String apellido, int id, int edad, int numero, String especialidad) {
 		super(nombre, apellido, id, edad, numero);
+		this.idEmpleado = idEmpleado;
 		this.especialidad = especialidad;
-		//this.serviciosRealizados.add(factura);
-		//this.productosVendidos.add(productoVendido);	
 		Administrador.empleadosAsigandos.add(this);//Cardinalidad de clases
 		empleados.add(this);
 	}
@@ -95,6 +94,10 @@ public class Empleado extends Persona implements Serializable {  //implements de
 	@Override
 	public String toString() {
 		return "nombre= " + super.getNombre() + ", especialista= " + this.getEspecialidad() + ", sueldo = "  + this.getSueldo() + ", productos vendidos= " + this.getProductosVendidos() + ", servicios realizados= " + this.getServiciosRealizados();
+	}
+	
+	public String getIdEmpleado() {
+		return idEmpleado;
 	}
 	
 }

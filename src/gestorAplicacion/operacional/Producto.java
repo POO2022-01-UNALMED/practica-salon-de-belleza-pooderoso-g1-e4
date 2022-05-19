@@ -16,13 +16,14 @@ public class Producto implements Serializable {  //implements del serializable
 	public static ArrayList<Producto> getProductos() {
 		return productos;
 	}
+	
 	public static void setProductos(ArrayList<Producto> productos) {
 		Producto.productos = productos;
 	}
 	
 	
 	// ahora si el codigo
-	
+	public static int numProducto = 0;
 	private int productoId;
 	private int existencias;
 	private String nombreProducto;
@@ -30,11 +31,12 @@ public class Producto implements Serializable {  //implements del serializable
 	
 	
 	
-	public Producto(int productoId, int existencias, String nombreProducto, float precioVenta){
-		this.productoId = productoId;
+	public Producto(int existencias, String nombreProducto, float precioVenta){
+		this.productoId = Producto.numProducto;
 		this.existencias = existencias;
 		this.nombreProducto = nombreProducto;
 		this.precioVenta = precioVenta;
+		Producto.numProducto++;
 		productos.add(this);
 	}
 	
@@ -76,6 +78,11 @@ public class Producto implements Serializable {  //implements del serializable
 		}
 		
 		return false;
+	}
+	
+	public String toString() {
+		return "El producto= "+ nombreProducto +" "+ "Tiene existencias de= " + existencias;
+		
 	}
 
 	
