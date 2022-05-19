@@ -104,5 +104,20 @@ public class Factura implements Serializable {  //implements del serializable
 		this.productosVendidos.put(producto, cantidad);
 	}
 	
+	public void precioTotalServicios() {
+		float totalPagar = 0;
+		ArrayList<Servicio> servicios = this.cita.getServicios();
+		for(Servicio s: servicios) {
+			totalPagar += s.value;
+		}
+	}
+	
+	public float totalFactura() { //deberia ejecutarse este metodo al crear un objeto de clase Factura?
+		float ans = 0;
+		ans = this.precioTotalProductos()+ this.precioTotalServicios();
+		this.precioTotal = ans;
+		return ans;
+	}
+	
 	
 }

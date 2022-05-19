@@ -13,8 +13,8 @@ import gestorAplicacion.operacional.*;
 public class Interfaz {
 	public static void main(String[] args) {
 		Scanner entrada =new Scanner(System.in);
-		Empleado empleado1 =new Empleado("Marlon", "Nivia", 100349061, 21, 32088456, "Uï¿½as");
-		Empleado empleado2 =new Empleado("Julian", "Ospina", 525206530, 20, 3208844, "Pelo");//El numero no alcanza parce
+		Empleado empleado1 =new Empleado("Marlon", "Nivia", 1000349061, 21, 32088456, "Uï¿½as", null, null);
+		Empleado empleado2 =new Empleado("Julian", "Ospina", 525206530, 20, 3208844, "Pelo", null, null);//El numero no alcanza parce
 		Administrador SuperAdministador =new Administrador("Juan","Cuadrado",123,21,444444,"12-2",2222);
 		int opcion = 0;
 		do {
@@ -35,7 +35,7 @@ public class Interfaz {
 			case 1: reservarCita(SuperAdministador); break;
 			case 2: mi2(); break;
 			case 3 : facturar(); break;
-			case 4: System.out.println("!!Gracias por usar nuestra aplicación!!");break;
+			case 4: System.out.println("!!Gracias por usar nuestra aplicaciï¿½n!!");break;
 			
 			}
 			
@@ -95,7 +95,7 @@ public class Interfaz {
 		
 		Producto gomina = new Producto(20, "Gomina", 2500);
 		Producto keratina = new Producto(53, "keratina", 30000);
-		Producto colagenoCapilar = new Producto(15, "Colágeno Capilar", 3000);
+		Producto colagenoCapilar = new Producto(15, "Colï¿½geno Capilar", 3000);
 		Producto balsamo = new Producto(5, "Balsamo", 1500);
 		Producto esmalte = new Producto(10, "Esmalte", 4000);
 		Producto removedor = new Producto(11, "Removedor", 5500);
@@ -104,7 +104,7 @@ public class Interfaz {
 		Scanner entradasVenta = new Scanner(System.in);
 		System.out.println("1. Factura de producto ");
 		System.out.println("2. Factura de servicio ");
-		System.out.println("Qué desea facturar? ");
+		System.out.println("Quï¿½ desea facturar? ");
 		int tipoFactura = entradasVenta.nextInt();
 		
 		
@@ -134,7 +134,7 @@ public class Interfaz {
 						
 				}
 						
-				System.out.println("Presione 1 para ingresar más productos ó 0 para continuar ");
+				System.out.println("Presione 1 para ingresar mï¿½s productos ï¿½ 0 para continuar ");
 				bandera = entradasVenta.nextInt();
 				
 			}
@@ -143,7 +143,7 @@ public class Interfaz {
 			System.out.println("1. Efectivo");
 			System.out.println("2. QR");
 			System.out.println("3. Transferencia");
-			System.out.println("Cual es el método de pago?");
+			System.out.println("Cual es el mï¿½todo de pago?");
 			String metodoPago="";
 			int tipoMetodoPago = entradasVenta.nextInt();
 			
