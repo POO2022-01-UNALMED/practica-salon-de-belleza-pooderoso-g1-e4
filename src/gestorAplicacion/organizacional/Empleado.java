@@ -43,8 +43,7 @@ public class Empleado extends Persona implements Serializable {  //implements de
 	
 	
 	public Empleado(String nombre, String apellido, int id, int edad, int numero, String especialidad) {
-		super(nombre, apellido, id, edad, numero);
-		this.idEmpleado = idEmpleado;
+		super(nombre, apellido, id, edad, numero);		
 		this.especialidad = especialidad;
 		Administrador.empleadosAsigandos.add(this);//Cardinalidad de clases
 		empleados.add(this);
