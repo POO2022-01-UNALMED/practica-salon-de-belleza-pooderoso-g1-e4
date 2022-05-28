@@ -90,30 +90,30 @@ public class Factura implements Serializable {  //implements del serializable
 		this.metodoPago = metodoPago;
 	}
 	
-	public void precioTotalProductos() {
-		
+	public float precioTotalProductos() {
 		float totalPagar = 0;
-		
-		
 		for(Producto p : this.productosVendidos.keySet()) {
 			
 			totalPagar = totalPagar +  p.getPrecioVenta() * this.productosVendidos.get(p);
-			
 		}
 		
 		this.precioTotal = totalPagar;
+		return totalPagar;
 	}
 	
 	public void agregarProductosAVender(Producto producto, int cantidad) {
 		this.productosVendidos.put(producto, cantidad);
 	}
 	
-	public void precioTotalServicios() {
+	public float precioTotalServicios() {
 		float totalPagar = 0;
 		ArrayList<Servicio> servicios = this.cita.getServicios();
-		for(Servicio s: servicios) {
-			totalPagar += s.value;
+		
+		for(Servicio s : servicios) {
+			totalPagar += s.getPrecio();
 		}
+		
+		return totalPagar;
 	}
 	
 	public float totalFactura() { //deberia ejecutarse este metodo al crear un objeto de clase Factura?

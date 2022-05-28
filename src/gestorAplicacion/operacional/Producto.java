@@ -1,4 +1,4 @@
- package gestorAplicacion.operacional;
+package gestorAplicacion.operacional;
 
  import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,39 +16,44 @@ public class Producto implements Serializable {  //implements del serializable
 	public static ArrayList<Producto> getProductos() {
 		return productos;
 	}
+	
 	public static void setProductos(ArrayList<Producto> productos) {
 		Producto.productos = productos;
 	}
 	
 	
 	// ahora si el codigo
-	
-	private String productoId;
-	private int existencias;
+	public static int numProducto = 0;
+	private int productoId;
 	private String nombreProducto;
 	private float precioVenta;
 	
 	
-	public Producto(String productoId, int existencias, String nombreProducto, float precioVenta){
-		this.productoId = productoId;
-		this.existencias = existencias;
+	
+	public Producto(String nombreProducto, float precioVenta){
+		this.productoId = Producto.numProducto;
+		//this.existencias = existencias;
 		this.nombreProducto = nombreProducto;
 		this.precioVenta = precioVenta;
-		
+		Producto.numProducto++;
+		productos.add(this);
 	}
 	
-	public String getProductoId() {
+	public int getProductoId() {
 		return productoId;
 	}
-	public void setProductoId(String productoId) {
+	public void setProductoId(int productoId) {
 		this.productoId = productoId;
 	}
+	/*
 	public int getExistencias() {
 		return existencias;
 	}
+	
 	public void setExistencias(int existencias) {
 		this.existencias = existencias;
 	}
+	*/
 	public String getNombreProducto() {
 		return nombreProducto;
 	}
@@ -62,19 +67,11 @@ public class Producto implements Serializable {  //implements del serializable
 		this.precioVenta = precioVenta;
 	}
 	
-	public void actualizarExistencias(int cantidad) {
-		if(this.existencias >= cantidad) {
-			
-			this.existencias = this.existencias - cantidad;
-		}		
-	}
+
 	
-	public boolean sePuedeVender(int cantidad) {
-		if(this.existencias >= cantidad) {
-			return true;
-		}
+	public String toString() {
+		return "El producto= "+ nombreProducto +" "+ "tiene un precio de venta de = " + precioVenta;
 		
-		return false;
 	}
 
 	

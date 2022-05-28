@@ -5,6 +5,7 @@ import gestorAplicacion.organizacional.Empleado;
 
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Venta implements Serializable {  //implements del serializable
@@ -35,14 +36,14 @@ public class Venta implements Serializable {  //implements del serializable
 	private int idVenta;
 	private int cantidadVendida;
 	private Empleado empleadoComision;
-	private String fechaVenta;
+	private LocalDateTime fechaVenta;
 	private double comision;
 	public final static double porcentajeComision = 0.2;
 	public static int numVenta;
 	
 	
 	
-	public Venta(Producto productoVendido, Empleado empleadoComision, String fechaVenta, int cantidadVendida) {
+	public Venta(Producto productoVendido, Empleado empleadoComision, LocalDateTime fechaVenta, int cantidadVendida) {
 		this.productoVendido = productoVendido;
 		this.empleadoComision = empleadoComision;
 		this.fechaVenta = fechaVenta;
@@ -75,11 +76,11 @@ public class Venta implements Serializable {  //implements del serializable
 		this.empleadoComision = empleadoComision;
 	}
 
-	public String getFechaVenta() {
+	public LocalDateTime getFechaVenta() {
 		return fechaVenta;
 	}
 
-	public void setFechaVenta(String fechaVenta) {
+	public void setFechaVenta(LocalDateTime fechaVenta) {
 		this.fechaVenta = fechaVenta;
 	}
 	
@@ -90,7 +91,7 @@ public class Venta implements Serializable {  //implements del serializable
 	
 	public String toString() {
 		return "El empleado "+ empleadoComision.getNombre() +" "+empleadoComision.getApellido()+" "+""
-				+ " realizó una venta de "+ productoVendido.getNombreProducto() + " el día"+ fechaVenta+" y recibirá una comisión de: " 
+				+ " realiza una venta de "+ productoVendido.getNombreProducto() + " en la fecha "+ fechaVenta+" y recibe una comisi�n de: " 
 				+ calcularComision(productoVendido);
 		
 	}

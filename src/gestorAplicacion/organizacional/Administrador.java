@@ -86,6 +86,11 @@ public class Administrador extends Persona implements Serializable {  //implemen
 	
 	//Metodos
 	
+	public void venderProducto() {
+		
+		
+	}
+	
 	public void generarFactura() {
 		System.out.println("generamos la Fcatura");		
 	}
