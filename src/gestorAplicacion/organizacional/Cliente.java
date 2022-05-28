@@ -49,6 +49,13 @@ public class Cliente extends Persona implements Serializable {  //implements del
 		clientes.add(this);
 	}
 	
+	public Cliente(String nombre, String apellido, int id, int edad, int numero, String anotaciones, boolean clientePremiun) {
+		super(nombre, apellido, id, edad, numero);
+		this.anotaciones = anotaciones;
+		ClientePremiun = clientePremiun;
+		Administrador.clientes.add(this);
+		clientes.add(this);
+	}
 	//Getters y Setters
 
 	public String getAnotaciones() {
@@ -66,6 +73,10 @@ public class Cliente extends Persona implements Serializable {  //implements del
 	public void setCitasGeneradas(ArrayList<Cita> citasGeneradas) {
 		this.citasGeneradas = citasGeneradas;
 	}
+	public void addCita(Cita cita) {
+		this.citasGeneradas.add(cita);
+	}
+	
 
 	public ArrayList<Factura> getFacturas() {
 		return facturas;
@@ -73,6 +84,9 @@ public class Cliente extends Persona implements Serializable {  //implements del
 
 	public void setFacturas(ArrayList<Factura> facturas) {
 		this.facturas = facturas;
+	}
+	public void addFactura(Factura factura) {
+		this.facturas.add(factura);
 	}
 
 	public boolean isClientePremiun() {

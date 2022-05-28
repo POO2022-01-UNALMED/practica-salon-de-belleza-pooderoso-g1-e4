@@ -38,24 +38,28 @@ public class Venta implements Serializable {  //implements del serializable
 	private Empleado empleadoComision;
 	private LocalDateTime fechaVenta;
 	private double comision;
+	private Inventario inventario;
 	public final static double porcentajeComision = 0.2;
 	public static int numVenta;
 	
 	
 	
-	public Venta(Producto productoVendido, Empleado empleadoComision, LocalDateTime fechaVenta, int cantidadVendida) {
+	public Venta(Producto productoVendido, Empleado empleadoComision, LocalDateTime fechaVenta, int cantidadVendida, Inventario inventario) {
 		this.productoVendido = productoVendido;
 		this.empleadoComision = empleadoComision;
 		this.fechaVenta = fechaVenta;
 		this.cantidadVendida = cantidadVendida;
 		Venta.numVenta++;
 		this.idVenta = Venta.numVenta;
+		this.inventario = inventario;
+		this.inventario.actualizarExistencias(productoVendido, cantidadVendida);
 		ventas.add(this);
 	}
 	
 	//cálculo comisión
 	public double calcularComision(Producto productoVendido) {
 		comision= this.productoVendido.getPrecioVenta() * porcentajeComision;
+		
 		return comision;
 	}    //crear lista de comisiones de cada empleado, en la clase empleado
 	

@@ -9,6 +9,7 @@ import gestorAplicacion.organizacional.Administrador;
 import gestorAplicacion.organizacional.Cliente;
 import gestorAplicacion.organizacional.Empleado;
 import gestorAplicacion.operacional.*;
+import uiMain.funcionalidades.*;
 
 public class Interfaz {
 	public static void main(String[] args) {
@@ -24,7 +25,8 @@ public class Interfaz {
 			System.out.println("1.Reservar cita");
 			System.out.println("2.Cancelar cita");
 			System.out.println("3.Facturar");
-			System.out.println("4.Terminar");
+			System.out.println("4. Balance Contable");
+			System.out.println("5.Terminar");
 			System.out.println("                       ");
 			System.out.print("Digite Opcion: ");
 			opcion = Integer.parseInt(entrada.nextLine());
@@ -35,7 +37,8 @@ public class Interfaz {
 			case 1: reservarCita(SuperAdministador); break;
 			case 2: mi2(); break;
 			case 3 : facturar(); break;
-			case 4: System.out.println("!!Gracias por usar nuestra aplicaci�n!!");break;
+			case 4: BalanceContable.calcularBalance();
+			case 5: System.out.println("!!Gracias por usar nuestra aplicaci�n!!");break;
 			
 			}
 			
@@ -93,13 +96,13 @@ public class Interfaz {
 	
 	public static void facturar() {
 		
-		Producto gomina = new Producto(20, "Gomina", 2500);
-		Producto keratina = new Producto(53, "keratina", 30000);
-		Producto colagenoCapilar = new Producto(15, "Col�geno Capilar", 3000);
-		Producto balsamo = new Producto(5, "Balsamo", 1500);
-		Producto esmalte = new Producto(10, "Esmalte", 4000);
-		Producto removedor = new Producto(11, "Removedor", 5500);
-		Producto acondicionador  = new Producto(5, "Acondicionador", 700);
+		Producto gomina = new Producto("Gomina", 2500);
+		Producto keratina = new Producto("keratina", 30000);
+		Producto colagenoCapilar = new Producto("Colageno Capilar", 3000);
+		Producto balsamo = new Producto("Balsamo", 1500);
+		Producto esmalte = new Producto("Esmalte", 4000);
+		Producto removedor = new Producto("Removedor", 5500);
+		Producto acondicionador  = new Producto("Acondicionador", 700);
 		
 		Scanner entradasVenta = new Scanner(System.in);
 		System.out.println("1. Factura de producto ");
