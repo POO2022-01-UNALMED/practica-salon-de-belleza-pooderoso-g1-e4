@@ -19,5 +19,9 @@ public enum Servicio {
 		this.precio = precio;
 	}
 	
+	public float getPrecio() {
+		return precio;
+	}
+	
 
 }

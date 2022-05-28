@@ -1,32 +1,72 @@
 package gestorAplicacion.operacional;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
+
+
 
 import java.io.Serializable;
 
 
 public class Inventario {
-	private ArrayList<Producto> listaProductos = new ArrayList<Producto>();
-	public Inventario(ArrayList<Producto> lista) {
+	private HashMap<Producto, Integer> listaProductos = new HashMap<Producto, Integer>();
+	
+	public Inventario(HashMap<Producto, Integer> lista) {
 		this.listaProductos = lista;
 	}
 	
-	public ArrayList<Producto> getListaProductos(){
+	public HashMap<Producto, Integer> getListaProductos(){
 		return this.listaProductos;
 	}
-	public void setListaProductos(ArrayList<Producto> listaProductos) {
+	public void setListaProductos(HashMap<Producto, Integer> listaProductos) {
 		this.listaProductos = listaProductos;
 	}
 	
-	public void agregarProducto(Producto producto) {
-		this.listaProductos.add(producto);
+	public void agregarProducto(Producto producto, int existencias) {
+		this.listaProductos.put(producto, existencias);
 	}
 	public float calcularPatrimonio() {
 		float total = 0;
-		for(Producto p: this.listaProductos) {
-			total += p.getPrecioVenta()*p.getExistencias();
+		for(Map.Entry<Producto, Integer> set : listaProductos.entrySet()) {
+			total += set.getKey().getPrecioVenta()*set.getValue();
 		}
 		return total;
+		/*
+		for(Producto p: this.listaProductos) {
+			total += p.getPrecioVenta()*p.getValue();
+		}
+		return total;
+		*/
 	}
+	
+	public void actualizarExistencias(Producto producto, int cantidad) {
+		if(sePuedeVender(producto, cantidad)) {
+			Integer oldValue = this.listaProductos.get(producto);
+			this.listaProductos.put(producto,  oldValue-cantidad);
+		}		
+	}
+	
+	public boolean sePuedeVender(Producto producto, int cantidad) {
+		if(this.listaProductos.get(producto) >= cantidad) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	// Caso de uso:
+	/*
+	public static void main(String[] args) {
+		Producto p1 = new Producto("Shampoo",15000), p2= new Producto("Gomina",12000), p3 = new Producto("Esmalte",10000);
+		HashMap<Producto, Integer> listaInventario = new HashMap<Producto, Integer>();
+		listaInventario.put(p1, 10);
+		listaInventario.put(p2,15);
+		listaInventario.put(p3,25);
+		Inventario inv = new Inventario(listaInventario);
+		System.out.println(inv.calcularPatrimonio());
+		inv.actualizarExistencias(p1, 5);
+		System.out.println(inv.getListaProductos());
+		System.out.println(inv.calcularPatrimonio());
+	}
+	*/
+	
 }
