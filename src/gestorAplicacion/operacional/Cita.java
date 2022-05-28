@@ -8,6 +8,7 @@ import gestorAplicacion.organizacional.Empleado;
 
 import java.io.Serializable;
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 
 public class Cita implements Serializable {  //implements del serializable
 	
@@ -117,4 +118,13 @@ public class Cita implements Serializable {  //implements del serializable
 	public void setFactura(Factura factura) {
 		this.factura = factura;
 	}
+
+
+	@Override
+	public String toString() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		return "Cliente=" + cliente + ", fecha= " + fechaCita + ", duracion=" + duracion + ". Termina a las"+ fechaCita.plusMinutes(duracion).format(formatter);
+	}
+	
+	
 }

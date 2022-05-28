@@ -34,7 +34,7 @@ public class Interfaz {
 			
 			
 			switch(opcion) {
-			case 1: reservarCita(SuperAdministador); break;
+			case 1: GestionarCita.reservarCita(); break;
 			case 2: mi2(); break;
 			case 3 : facturar(); break;
 			case 4: BalanceContable.calcularBalance();
@@ -50,49 +50,7 @@ public class Interfaz {
 		//entrada.close();
 	}
 	
-	public static void reservarCita(Administrador SuperAdministador) {
-		//Variable para la entrada de datos
-		Scanner entrada = new Scanner(System.in);
 		
-		//Es un nuevo Cliente?
-		System.out.println("1.Cliente ya existente");
-		System.out.println("2.Nuevo Cliente");
-		System.out.print("Digite Opcion: ");
-		int TipoCliente=entrada.nextInt();
-		
-		if (TipoCliente==1){
-			
-			int cedulaEmpleado;
-			System.out.println("                       ");
-			//System.out.println("reserv�");
-			mostrarEmpleados( SuperAdministador);
-			System.out.println("                       ");
-			System.out.println("Dijite la identificacion del empleado de preferencia: ");
-			cedulaEmpleado=entrada.nextInt();
-		}
-		else {
-			System.out.println("Por favor ingrese los datos del cliente");
-			System.out.println("                       ");
-			System.out.println("Por favor ingrese nombre del cliente: ");
-			String nombre=entrada.nextLine();
-			System.out.println("Por favor ingrese apellido del cliente: ");
-			String apellido=entrada.nextLine();			
-			System.out.println("Por favor ingrese identificai�n del cliente: ");
-			int id=entrada.nextInt();
-			System.out.println("Por favor ingrese edad del cliente: ");			
-			int edad=entrada.nextInt();
-			System.out.println("Por favor ingrese numero del cliente: ");
-			int numero=entrada.nextInt();
-			System.out.println("Por favor ingrese anotaciones del cliente: ");
-			String anotaciones=entrada.nextLine();
-			
-			Cliente nuevoCliente = new Cliente(nombre, apellido, id, edad, numero, anotaciones, null, null, false);
-		}
-		
-		
-		
-	}
-	
 	
 	public static void facturar() {
 		
@@ -198,13 +156,6 @@ public class Interfaz {
 	
 	public static void mi2() {
 		System.out.println("cancel�");
-	}
-	
-	public static void mostrarEmpleados(Administrador SuperAdministador) {		
-		for(Empleado e : SuperAdministador.empleadosAsigandos) {
-			System.out.println(e);
-		}
-				
 	}
 	
 	
