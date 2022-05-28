@@ -38,13 +38,12 @@ public class Cliente extends Persona implements Serializable {  //implements del
 	private boolean ClientePremiun;//Revisar
 
 	// constructor base
-	public Cliente(String nombre, String apellido, int id, int edad, int numero, String anotaciones,
-			ArrayList<Cita> citasGeneradas, ArrayList<Factura> facturas, boolean clientePremiun) {
+	public Cliente(String nombre, String apellido, int id, int edad, int numero, String anotaciones) {
 		super(nombre, apellido, id, edad, numero);
 		this.anotaciones = anotaciones;
-		this.citasGeneradas = citasGeneradas;
-		this.facturas = facturas;
-		ClientePremiun = clientePremiun;
+		this.citasGeneradas = null;
+		this.facturas = null;
+		ClientePremiun = false;
 		Administrador.clientes.add(this);
 		clientes.add(this);
 	}
@@ -100,8 +99,8 @@ public class Cliente extends Persona implements Serializable {  //implements del
 	//toSring
 	@Override
 	public String toString() {
-		return "Cliente [anotaciones=" + anotaciones + ", citasGeneradas=" + citasGeneradas + ", facturas=" + facturas
-				+ ", ClientePremiun=" + ClientePremiun + "]";
+		return "Cliente: "+ this.getNombre() +" "+ this.getApellido()+", anotaciones: "+ anotaciones;
+		
 	}
 	
 	
