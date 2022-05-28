@@ -50,6 +50,7 @@ public class Cita implements Serializable {  //implements del serializable
 		this.estado="Pendiente";
 		this.empleado = empleado; this.cliente = cliente; this.servicios = servicios;
 		this.fechaReserva = fechaReserva; this.fechaCita = fechaCita; this.duracion = duracion; 
+		cliente.addCita(this);
 		citas.add(this);
 	}
 	
