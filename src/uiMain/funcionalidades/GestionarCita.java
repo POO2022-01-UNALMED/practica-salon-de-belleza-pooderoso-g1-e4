@@ -15,7 +15,7 @@ public class GestionarCita {
 		Empleado empleado2 =new Empleado("Julian", "Ospina", 525206530, 20, 3208845, "Pelo");//El numero no alcanza parce poner l de Long		
 		//----------------------------
 		Cliente c1 =new Cliente("Luisa", "Palacio", 12, 23, 301623697 , "Ninguna");
-		Cita Cita1= new Cita(empleado1, null, null, LocalDateTime.now() , LocalDateTime.of(2022, 5, 30, 14, 0) , 60);
+		Cita Cita1= new Cita(empleado1, c1, null, LocalDateTime.now() , LocalDateTime.of(2022, 5, 30, 14, 0) , 60);
 		
 		//Factura Factura1= new Factura(Cita1, LocalDateTime.now() ,"QR"); Yo no uso Facturas
 		//empleado1.getServiciosRealizados().add(Factura1);		
@@ -174,14 +174,16 @@ public class GestionarCita {
 			else {
 				gestorInterfaz.escribir(" ");
 				boolean validar=false;
+				LocalDateTime citaFinal = null;
 				while(validar==false) {
 					int hora=gestorInterfaz.leerEntero("Digite la hora");
 					int minuto=gestorInterfaz.leerEntero("Digite los minutos");			
 					//devolver hora de la cita				
-					LocalDateTime citaFinal=LocalDateTime.of(2022, mes, dia, hora, minuto); //crea la cita
+					citaFinal=LocalDateTime.of(2022, mes, dia, hora, minuto); //crea la cita
 					validar=GestionarCita.validarHora(p, citaFinal, servicios);
-					return citaFinal;
+					
 				}
+				return citaFinal;
 				
 			}
 			
@@ -200,14 +202,16 @@ public class GestionarCita {
 			else {
 				//validar hora
 				boolean validar=false;
+				LocalDateTime citaFinal = null;
 				while(validar==false) {
 					int hora=gestorInterfaz.leerEntero("Digite la hora");
 					int minuto=gestorInterfaz.leerEntero("Digite los minutos");			
 					//devolver hora de la cita				
-					LocalDateTime citaFinal=LocalDateTime.of(2022, mes, dia, hora, minuto); //crea la cita
+					citaFinal=LocalDateTime.of(2022, mes, dia, hora, minuto); //crea la cita
 					validar=GestionarCita.validarHora(p, citaFinal, servicios);
-					return citaFinal;
+					
 				}
+				return citaFinal;
 				
 				
 			}
@@ -230,19 +234,19 @@ public class GestionarCita {
 			
 		}
 		
-		for(Factura factura : p.getServiciosRealizados()) {	//Recorrer citas del empleado					
-			int mesComparacion=factura.getCita().getFechaCita().getMonthValue(); //Mes cita
-			int diaComparacion=factura.getCita().getFechaCita().getDayOfMonth(); //Dia cita
-			LocalDateTime existenteInicial=factura.getCita().getFechaCita();//hora Inicial
-			LocalDateTime existenteFinal=factura.getCita().getFechaCita().plusMinutes(factura.getCita().getDuracion());//hora Final
-			if((horaTentativa.getMonthValue() == mesComparacion)  && (horaTentativa.getDayOfMonth() == diaComparacion)) { //comparamos la cita
+		for(Cita cita : p.getCitasAsignadas()) {	//Recorrer citas del empleado					
+			int mesComparacion=cita.getFechaCita().getMonthValue(); //Mes cita
+			int diaComparacion=cita.getFechaCita().getDayOfMonth(); //Dia cita
+			LocalDateTime existenteInicial=cita.getFechaCita();//hora Inicial
+			LocalDateTime existenteFinal=cita.getFechaCita().plusMinutes(cita.getDuracion());//hora Final
+			if((horaTentativa.getMonthValue() == mesComparacion)  && (horaTentativa.getDayOfMonth() == diaComparacion) && !cita.getEstado().equals("Cancelada")) { //comparamos la cita
 				if((horaTentativa.isBefore(existenteInicial) &&  horaTentativaFin.isBefore(existenteFinal)) || (horaTentativa.isAfter(existenteInicial) &&  horaTentativaFin.isAfter(horaTentativaFin))) {
 					gestorInterfaz.escribir(" ");
 					gestorInterfaz.escribir("Es posible generar la cita");
 					return true;
 				}
 				else {
-					gestorInterfaz.escribir("Existen horas trocadas con la cita: "+factura.getCita());
+					gestorInterfaz.escribir("Existen horas trocadas con la cita: "+cita);
 					return false;
 				}
 
@@ -373,6 +377,93 @@ public class GestionarCita {
 		Cita nuevaCita=new Cita( empleado,  cliente, servicios,fechaReserva, fechaCita, duracion);
 		System.out.println(nuevaCita);
 		
-	}	
+	}
+	
+	
+	public static void  gestionCancelar() {
+		int cedula =gestorInterfaz.leerEntero("Ingrese la identificación del cliente o del empleado al cual se le quiere cancelar la cita: ");
+		
+		
+		Persona persona =devolverPersona(cedula);
+		
+		while (persona==null) {
+			cedula=gestorInterfaz.leerEntero("Verfique la identificación de la persona");
+			gestorInterfaz.escribir(" ");
+			persona =devolverPersona(cedula);
+		}
+		
+		
+		if (persona instanceof Empleado) {
+			GestionarCita.cancelarCita(((Empleado)persona));
+			
+		}
+		else {
+			GestionarCita.cancelarCita(((Cliente)persona));
+		}		
+	}
+	
+	public static Persona devolverPersona(int cedula) {		
+		Persona persona;
+		for(Empleado empleado : Administrador.empleadosAsigandos ) {
+			if(empleado.getId()==cedula) {
+				gestorInterfaz.escribir("Empleado encontarado: " + empleado);
+				return empleado;
+			}
+		}
+		
+		for(Cliente cliente : Administrador.clientes) {
+			if(cliente.getId()==cedula) {
+				gestorInterfaz.escribir("Cliente encontarado: " + cliente);
+				return cliente;
+			}
+		}		
+		return null;						
+	}
+	
+	public static void cancelarCita(Empleado empleado) {
+		
+		for (Cita cita : empleado.getCitasAsignadas()) {
+			if(cita.getEstado()!="Cancelada") {
+				gestorInterfaz.escribir("id de la cita: "+cita.getId()+" - "+cita);
+				gestorInterfaz.escribir(" ");				
+			}
+			
+		}
+		
+		int id=gestorInterfaz.leerEntero("Digite el id de la cita que desea cancelar: ");
+		
+		for (Cita cita : empleado.getCitasAsignadas()) {
+			if(id==cita.getId()) {
+				cita.setEstado("Cancelada");
+				gestorInterfaz.escribir(cita+" estado de la cita:" + cita.getEstado());
+				break;
+			}					
+		}
+		
+	}
+	
+	public static void cancelarCita(Cliente cliente) {
+		
+		for (Cita cita : cliente.getCitasGeneradas()) {
+			if(cita.getEstado()!="Cancelada") {
+				gestorInterfaz.escribir("id de la cita: "+cita.getId()+" - "+cita);
+				gestorInterfaz.escribir(" ");
+			}
+
+		}
+		
+		int id=gestorInterfaz.leerEntero("Digite el id de la cita que desea cancelar: ");
+		
+		for (Cita cita : cliente.getCitasGeneradas()) {
+			if(id==cita.getId()) {
+				cita.setEstado("Cancelada");
+				gestorInterfaz.escribir(cita+". **Estado de la cita:" + cita.getEstado()+"**");
+				break;
+			}					
+		}
+		
+		
+	}
+	
 
 }

@@ -9,6 +9,7 @@ import gestorAplicacion.organizacional.Empleado;
 import java.io.Serializable;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 public class Cita implements Serializable {  //implements del serializable
 	
@@ -53,8 +54,9 @@ public class Cita implements Serializable {  //implements del serializable
 		this.fechaReserva = fechaReserva; 
 		this.fechaCita = fechaCita; 
 		this.duracion = duracion; 
-		//cliente.addCita(this);
-		(empleado.getCitasAsignadas()).add(this);//Se le añade una a la lista de citas el empleado
+		cliente.addCita(this);
+		empleado.getCitasAsignadas().add(this);//Se le añade una a la lista de citas el empleado
+		
 		citas.add(this);
 	}
 	
@@ -68,7 +70,7 @@ public class Cita implements Serializable {  //implements del serializable
 	}
 	
 	public String getEstado() {
-		return this.getEstado();
+		return this.estado;
 	}
 	
 	public void setEstado(String estado) {
@@ -126,8 +128,11 @@ public class Cita implements Serializable {  //implements del serializable
 
 	@Override
 	public String toString() {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-		return "Cliente=" + cliente + ", fecha= " + fechaReserva + ", duracion=" + duracion + ". Termina a las "+ fechaCita.plusMinutes(duracion).format(formatter);
+		
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");	
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");	
+		return "Cliente=" + cliente + ", fecha de la cita= " + fechaCita.format(format) + ", duracion=" + duracion + ". Termina a las "+ fechaCita.plusMinutes(duracion).format(formatter);
 	}
 	
 	
