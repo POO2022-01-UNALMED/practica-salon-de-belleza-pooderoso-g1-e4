@@ -42,7 +42,7 @@ public class Facturacion {
 		Empleado empleado = null;
 		
 		//Producto que se venderá
-		Producto productoAVender = null;
+		
 		
 		//Ingreso de productos al inventario
 		inventario.agregarProducto(gomina, 23);
@@ -76,6 +76,9 @@ public class Facturacion {
 			int bandera = 1;
 			
 			while(bandera != 0) {
+				//Inicializar cada producto a vender
+				Producto productoAVender = null;
+				
 				//Mientras se quiera más productos
 				if(bandera == 1) {
 					//Menu de productos a vender
@@ -85,17 +88,27 @@ public class Facturacion {
 						System.out.println(p.getNombreProducto() + " - id: " + p.getProductoId());
 					}
 					System.out.println(" ");
-					System.out.println("Ingrese el codigo del producto");
-					int productoId = entradasVenta.nextInt();
+					
+					//Verificar que un producto si exista: 
+					while(productoAVender == null) {
+						System.out.println("Ingrese el codigo del producto");
+						int productoId = entradasVenta.nextInt();
+						
+						//Obtener el producto existente que se va a vender
+						for (Producto producto : inventario.getListaProductos().keySet()){
+							if(producto.getProductoId() == productoId) {
+								productoAVender = producto;
+							}
+						}
+						
+						if(productoAVender == null) {
+							System.out.println("No se encuentra el producto con id " + productoId);
+						}
+						
+					}
+					
 					System.out.println("Ingrese la cantidad del producto");
 					int cantidadProducto = entradasVenta.nextInt();
-					
-					//Obtener el producto existente que se va a vender
-					for (Producto producto : inventario.getListaProductos().keySet()){
-						if(producto.getProductoId() == productoId) {
-							productoAVender = producto;
-						}
-					}
 					
 					//Obtener el empleado que venderá el producto
 					for(Empleado emp : Empleado.getEmpleados()) {
