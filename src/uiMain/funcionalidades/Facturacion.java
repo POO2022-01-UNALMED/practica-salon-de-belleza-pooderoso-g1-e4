@@ -1,4 +1,5 @@
 package uiMain.funcionalidades;
+import java.time.format.DateTimeFormatter;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -44,9 +45,6 @@ public class Facturacion {
 		//Empleado que venderá el producto
 		Empleado empleado = null;
 		
-		//Producto que se venderá
-		
-		
 		//Ingreso de productos al inventario
 		inventario.agregarProducto(gomina, 23);
 		inventario.agregarProducto(keratina, 11);
@@ -54,6 +52,8 @@ public class Facturacion {
 		inventario.agregarProducto(balsamo, 21);
 		inventario.agregarProducto(esmalte, 34);
 		
+		//Configuracion de formato de fecha
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 		
 		//Menú principal de facturación
 		Scanner entradaFacturacion = new Scanner(System.in);
@@ -143,7 +143,7 @@ public class Facturacion {
 			
 			//Generar venta - Actualiza existencias y asigna producto a vendedor para comision
 			for(Map.Entry<Producto, Integer> productos : productosVendidos.entrySet()) {
-				System.out.println("Creando objetos de venta");
+
 				new Venta(productos.getKey(), empleado, horaVenta, productos.getValue(), inventario);
 			}
 			//Menu método de pago
@@ -168,43 +168,65 @@ public class Facturacion {
 			Factura facturaProductos = new Factura(productosVendidos, horaFactura, metodoPago);	
 			facturaProductos.precioTotalProductos();
 			System.out.println("===============================");
+			System.out.println("Factura # " + facturaProductos.getIdFactura());
+			System.out.println("Fecha: " + facturaProductos.getFecha().format(formato));
+			System.out.println("Vendido por " + empleado.getNombre() + " " + empleado.getApellido());
+			for(Map.Entry<Producto, Integer> productosFactura : facturaProductos.getProductosVendidos().entrySet()) {
+				System.out.println(productosFactura.getKey().getNombreProducto() + " - " + productosFactura.getValue() + " Unds");
+			}
 			System.out.println("El valor a pagar es de " + facturaProductos.getPrecioTotal());
 			System.out.println("===============================");
 			
-			
-			System.out.println(Venta.getVentas());
-			System.out.println(inventario.mostrarExistencias());
-			System.out.println("                                ");
-			System.out.println("                                ");
-			System.out.println(empleado);
+		
+			//System.out.println(Venta.getVentas());
+			//System.out.println(inventario.mostrarExistencias());
+			//System.out.println("                                ");
+			//System.out.println("                                ");
+			//System.out.println(empleado);
 		}
 		else if(tipoFactura == 2) {
 			
 			Cliente clienteCita = null;
 			Cita citaAFacturar = null;
+			System.out.println("Clientes registrados: ");
+			for(Cliente cliente : Cliente.getClientes()) {
+				
+				System.out.println(cliente.getId() + " - " + cliente.getNombre() + " "+  cliente.getApellido());
+				
+			}
 			
-			
+			System.out.println("   ");
 			System.out.println("Por favor ingrese el id del cliente");
 			
 			int idCliente = entradaFacturacion.nextInt();
 			ArrayList<Cliente> clientesRegistrados = Cliente.getClientes();
 			ArrayList<Cita> citasTomadas = Cita.getCitas();
 			
-			for(Cliente c : clientesRegistrados) {
-				if(c.getId() == idCliente) {
-					System.out.println("Cliente : ");
-					System.out.println("   ");
-					System.out.println(c.getNombre() + " " + c.getApellido() + " " + c.getId());
-					clienteCita = c;
+			while(clienteCita == null) {
+				
+				for(Cliente c : clientesRegistrados) {
+					if(c.getId() == idCliente) {
+						System.out.println("Cliente : " + c.getNombre() + " " + c.getApellido() + " " + c.getId());
+						clienteCita = c;
+					}
 				}
+				
+				if(clienteCita == null) {
+					System.out.println("Parece que el cliente no tiene una cita para cancelar");
+					System.out.println("Por favor ingrese el id de un cliente registrado");
+					idCliente = entradaFacturacion.nextInt();
+				}
+				
 			}
+			
+			
 			
 			for(Cita c : citasTomadas) {
 				if(c.getCliente().getId() == clienteCita.getId()) {
 					
 					System.out.println("las citas de este cliente son: ");
 					System.out.println("   ");
-					System.out.println(+ c.getId() +  " " + c.getFechaReserva());
+					System.out.println("Cita Id #: " + c.getId() +  " realizada el: " + c.getFechaReserva().format(formato));
 		
 				}
 				
@@ -247,7 +269,11 @@ public class Facturacion {
 			Factura facturaCita = new Factura(citaAFacturar, horaFacturaCita, metodoPagoFactura);
 			
 			System.out.println("===============================");
-			System.out.println("El valor a pagar es de " + facturaCita.precioTotalServicios());
+			System.out.println("Factura # " + facturaCita.getIdFactura());
+			System.out.println("Fecha: " + facturaCita.getFecha().format(formato));
+			System.out.println("Cliente id # " + facturaCita.getCita().getCliente().getId() +  " - " + facturaCita.getCita().getCliente().getNombre() + " " + facturaCita.getCita().getCliente().getApellido());
+			System.out.println("Atendió " + facturaCita.getCita().getEmpleado().getNombre() +  " " + facturaCita.getCita().getEmpleado().getApellido() + " - id " + facturaCita.getCita().getEmpleado().getId());
+			System.out.println("El valor a pagar es de " + facturaCita.precioTotalServicios()); 
 			System.out.println("===============================");
 			
 		

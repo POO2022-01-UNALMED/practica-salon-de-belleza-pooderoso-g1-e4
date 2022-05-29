@@ -126,5 +126,9 @@ public class Factura implements Serializable {  //implements del serializable
 		return ans;
 	}
 	
+	public HashMap<Producto, Integer> getProductosVendidos(){
+		return this.productosVendidos;
+	}
+	
 	
 }
