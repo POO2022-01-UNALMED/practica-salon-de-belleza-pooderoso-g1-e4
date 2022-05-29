@@ -2,14 +2,17 @@ package uiMain.funcionalidades;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 
 import gestorAplicacion.operacional.Factura;
 import gestorAplicacion.operacional.Producto;
 import gestorAplicacion.operacional.Venta;
+import gestorAplicacion.organizacional.Cliente;
 import gestorAplicacion.organizacional.Empleado;
 import gestorAplicacion.operacional.Inventario;
+import gestorAplicacion.operacional.Cita;
 
 public class Facturacion {
 	
@@ -29,7 +32,7 @@ public class Facturacion {
 		Producto acondicionador  = new Producto("Acondicionador", 700);
 		
 		
-		//*INICIALIZACIÓN
+		//*INICIALIZACIÓN PRODUCTOS
 		
 		//Inventario
 		HashMap<Producto, Integer> stockInicial = new HashMap<Producto, Integer>();
@@ -53,11 +56,14 @@ public class Facturacion {
 		
 		
 		//Menú principal de facturación
-		Scanner entradasVenta = new Scanner(System.in);
+		Scanner entradaFacturacion = new Scanner(System.in);
 		System.out.println("1. Factura de producto ");
 		System.out.println("2. Factura de servicio ");
 		System.out.println("Qué desea facturar? ");
-		int tipoFactura = entradasVenta.nextInt();
+		int tipoFactura = entradaFacturacion.nextInt();
+		
+		
+		//* INICIALIZACION SERVICIOS
 		
 		// Factura productos
 		if(tipoFactura == 1) {
@@ -69,10 +75,10 @@ public class Facturacion {
 			}
 			System.out.println(" ");
 			System.out.println("Por favor ingrese el id del Empleado que vende el producto ");
-			int idEmpleado = entradasVenta.nextInt();
+			int idEmpleado = entradaFacturacion.nextInt();
 			System.out.println("                       ");
 			//System.out.println("Presione 1 para ingresar un producto ");
-			//int bandera = entradasVenta.nextInt();
+			//int bandera = entradaFacturacion.nextInt();
 			int bandera = 1;
 			
 			while(bandera != 0) {
@@ -92,7 +98,7 @@ public class Facturacion {
 					//Verificar que un producto si exista: 
 					while(productoAVender == null) {
 						System.out.println("Ingrese el codigo del producto");
-						int productoId = entradasVenta.nextInt();
+						int productoId = entradaFacturacion.nextInt();
 						
 						//Obtener el producto existente que se va a vender
 						for (Producto producto : inventario.getListaProductos().keySet()){
@@ -108,7 +114,7 @@ public class Facturacion {
 					}
 					
 					System.out.println("Ingrese la cantidad del producto");
-					int cantidadProducto = entradasVenta.nextInt();
+					int cantidadProducto = entradaFacturacion.nextInt();
 					
 					//Obtener el empleado que venderá el producto
 					for(Empleado emp : Empleado.getEmpleados()) {
@@ -129,7 +135,7 @@ public class Facturacion {
 				}
 						
 				System.out.println("Presione 1 para ingresar mas productos o 0 para continuar ");
-				bandera = entradasVenta.nextInt();
+				bandera = entradaFacturacion.nextInt();
 				
 			}
 			
@@ -144,9 +150,9 @@ public class Facturacion {
 			System.out.println("1. Efectivo");
 			System.out.println("2. QR");
 			System.out.println("3. Transferencia");
-			System.out.println("Cual es el mï¿½todo de pago?");
+			System.out.println("Cual es el metodo de pago?");
 			String metodoPago="";
-			int tipoMetodoPago = entradasVenta.nextInt();
+			int tipoMetodoPago = entradaFacturacion.nextInt();
 			
 			switch(tipoMetodoPago){
 				case 1:
@@ -173,7 +179,80 @@ public class Facturacion {
 			System.out.println(empleado);
 		}
 		else if(tipoFactura == 2) {
-			System.out.println("Factura de un servicio");
+			
+			Cliente clienteCita = null;
+			Cita citaAFacturar = null;
+			
+			
+			System.out.println("Por favor ingrese el id del cliente");
+			
+			int idCliente = entradaFacturacion.nextInt();
+			ArrayList<Cliente> clientesRegistrados = Cliente.getClientes();
+			ArrayList<Cita> citasTomadas = Cita.getCitas();
+			
+			for(Cliente c : clientesRegistrados) {
+				if(c.getId() == idCliente) {
+					System.out.println("Cliente : ");
+					System.out.println("   ");
+					System.out.println(c.getNombre() + " " + c.getApellido() + " " + c.getId());
+					clienteCita = c;
+				}
+			}
+			
+			for(Cita c : citasTomadas) {
+				if(c.getCliente().getId() == clienteCita.getId()) {
+					
+					System.out.println("las citas de este cliente son: ");
+					System.out.println("   ");
+					System.out.println(+ c.getId() +  " " + c.getFechaReserva());
+		
+				}
+				
+			}
+			
+			System.out.println("Por favor ingrese el id de la cita que a cancelar: ");
+			
+			int idCita = entradaFacturacion.nextInt();
+
+
+			for(Cita c : citasTomadas) {
+				if(c.getId() == idCita) {
+					
+					citaAFacturar = c;
+					
+		
+				}
+				
+			}
+			
+			LocalDateTime horaFacturaCita = LocalDateTime.now();
+			
+			System.out.println("1. Efectivo");
+			System.out.println("2. QR");
+			System.out.println("3. Transferencia");
+			System.out.println("Cual es el metodo de pago?");
+			String metodoPagoFactura ="";
+			int tipoMetodoPago = entradaFacturacion.nextInt();
+			
+			switch(tipoMetodoPago){
+				case 1:
+					metodoPagoFactura = "Efectivo";break;
+				case 2:
+					metodoPagoFactura = "QR";break;
+				case 3: 
+					metodoPagoFactura = "Transferencia";break;
+					
+			}
+			
+			Factura facturaCita = new Factura(citaAFacturar, horaFacturaCita, metodoPagoFactura);
+			
+			System.out.println("===============================");
+			System.out.println("El valor a pagar es de " + facturaCita.precioTotalServicios());
+			System.out.println("===============================");
+			
+		
+			
+			
 		}
 		
 		
