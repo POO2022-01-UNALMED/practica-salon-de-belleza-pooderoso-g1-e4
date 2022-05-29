@@ -55,7 +55,9 @@ public class Cita implements Serializable {
 		this.fechaCita = fechaCita; 
 		this.duracion = duracion; 
 		cliente.addCita(this);
+
 		empleado.getCitasAsignadas().add(this);//Se le anade una a la lista de citas el empleado
+
 		
 		
 		citas.add(this);//del Serializador
@@ -135,6 +137,7 @@ public class Cita implements Serializable {
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");	
 		return "Cliente=" + cliente + ", fecha de la cita= " + fechaCita.format(format) + ", duracion=" + duracion + ". Termina a las "+ fechaCita.plusMinutes(duracion).format(formatter);
 	}
+	
 	
 	
 }
