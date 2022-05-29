@@ -1,5 +1,7 @@
 package gestorAplicacion.operacional;
 import java.util.ArrayList;
+import java.time.LocalDateTime;
+
 import java.util.HashMap;
 
 import java.io.Serializable;
@@ -51,7 +53,7 @@ public class Factura implements Serializable {  //implements del serializable
 		this.fecha = fechaCompra;
 		this.metodoPago = metodoPago;
 		this.productosVendidos = productosVendidos;
-		this.cita.getCliente().addFactura(this);
+		//this.cita.getCliente().addFactura(this);
 		facturas.add(this);
 	}
 	

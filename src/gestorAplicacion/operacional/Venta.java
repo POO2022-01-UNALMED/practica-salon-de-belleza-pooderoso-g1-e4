@@ -47,12 +47,14 @@ public class Venta implements Serializable {  //implements del serializable
 	public Venta(Producto productoVendido, Empleado empleadoComision, LocalDateTime fechaVenta, int cantidadVendida, Inventario inventario) {
 		this.productoVendido = productoVendido;
 		this.empleadoComision = empleadoComision;
+		this.empleadoComision.setProductosVendidos(productoVendido);
 		this.fechaVenta = fechaVenta;
 		this.cantidadVendida = cantidadVendida;
 		Venta.numVenta++;
 		this.idVenta = Venta.numVenta;
 		this.inventario = inventario;
 		this.inventario.actualizarExistencias(productoVendido, cantidadVendida);
+		
 		ventas.add(this);
 	}
 	
