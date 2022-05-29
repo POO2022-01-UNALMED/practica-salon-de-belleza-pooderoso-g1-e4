@@ -2,6 +2,9 @@ package uiMain;
 
 import java.time.LocalDateTime;
 import java.util.*;
+
+import baseDatos.Serializador;
+
 import static java.util.Map.entry; 
 
 
@@ -57,6 +60,7 @@ public class Interfaz {
 			gestorInterfaz.escribir("3.Facturar");
 			gestorInterfaz.escribir("4.Balance Contable");
 			gestorInterfaz.escribir("5.Terminar");
+			gestorInterfaz.escribir("6.Guardar y salir");
 			gestorInterfaz.escribir("                       ");
 			gestorInterfaz.escribir("Digite Opcion: ");
 			opcion = Integer.parseInt(entrada.nextLine());
@@ -68,7 +72,7 @@ public class Interfaz {
 			case 2: GestionarCita.gestionCancelar(); break;
 			case 4: BalanceContable.calcularBalance();
 			case 5: System.out.println("!!Gracias por usar nuestra aplicaci�n!!");break;
-			
+			case 6: Serializador.serializarTodo();		
 			}
 			
 			
