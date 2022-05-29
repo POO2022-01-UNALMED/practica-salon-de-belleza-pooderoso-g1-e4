@@ -7,9 +7,8 @@ import java.time.*;
 import gestorAplicacion.operacional.*;
 
 
-public class Empleado extends Persona implements Serializable {  //implements del serializable
-	
-	//todo esto es del serializador
+public class Empleado extends Persona implements Serializable {  	
+	//-----------SERIALIZADOR-----------
 	private static final long serialVersionUID = 1L;
 	
 	private static ArrayList<Empleado> empleados;
@@ -26,10 +25,7 @@ public class Empleado extends Persona implements Serializable {  //implements de
 	}
 
 
-	//tambiÃ©n en cada constructor se debe poner el add al array
-	// ahora si el codigo
-
-
+	//-----------ATRIBUTOS-----------
 	private String idEmpleado;
 	private String especialidad;
 	private ArrayList<Factura> serviciosRealizados = new ArrayList<Factura>();
@@ -37,12 +33,12 @@ public class Empleado extends Persona implements Serializable {  //implements de
 	private ArrayList<Producto> productosVendidos = new ArrayList<Producto>();
 	private double sueldo;
 	
-	//Constantes de tiempos de atención de los empleados (9 am - 6 pm)
 	
+	//Constantes de tiempos de atención de los empleados (9 am - 6 pm)
 	public final static LocalTime HoraInicio = LocalTime.of(9, 0,0,0);
 	public final static LocalTime HoraFinal = LocalTime.of(18, 0,0,0);
 	
-	
+	//-----------CONSTRUCTOR-----------
 	public Empleado(String nombre, String apellido, int id, int edad, int numero, String especialidad) {
 		super(nombre, apellido, id, edad, numero);		
 		this.especialidad = especialidad;
@@ -59,10 +55,10 @@ public class Empleado extends Persona implements Serializable {  //implements de
 		this.sueldo = montoServicios;
 	}
 	
+	//-----------GETTERS y SETTERS-----------
 	public String getEspecialidad() {
 		return especialidad;
 	}
-
 	public void setEspecialidad(String especialidad) {
 		this.especialidad = especialidad;
 	}
@@ -70,7 +66,6 @@ public class Empleado extends Persona implements Serializable {  //implements de
 	public ArrayList<Factura> getServiciosRealizados() {
 		return serviciosRealizados;
 	}
-
 	public void setServiciosRealizados(Factura servicio) {
 		this.serviciosRealizados.add(servicio);
 	}
@@ -78,7 +73,6 @@ public class Empleado extends Persona implements Serializable {  //implements de
 	public ArrayList<Producto> getProductosVendidos() {
 		return productosVendidos;
 	}
-
 	public void setProductosVendidos(Producto producto) {
 		this.productosVendidos.add(producto);
 	}
@@ -86,27 +80,27 @@ public class Empleado extends Persona implements Serializable {  //implements de
 	public double getSueldo() {
 		return sueldo;
 	}
-
 	public void setSueldo(double sueldo) {
 		this.sueldo = sueldo;
 	}
 	
-	
 	public ArrayList<Cita> getCitasAsignadas() {
 		return citasAsignadas;
 	}
-
 	public void setCitasAsignadas(ArrayList<Cita> citasAsignadas) {
 		this.citasAsignadas = citasAsignadas;
-	}
-
-	@Override
-	public String toString() {
-		return "nombre= " + super.getNombre() + ", especialista= " + this.getEspecialidad()+ ", id: "+this.getId();
 	}
 	
 	public String getIdEmpleado() {
 		return idEmpleado;
+	}
+	
+
+	
+	////-----------OTROS METODOS-----------
+	@Override
+	public String toString() {
+		return "nombre= " + super.getNombre() + ", especialista= " + this.getEspecialidad()+ ", id: "+this.getId();
 	}
 	
 }

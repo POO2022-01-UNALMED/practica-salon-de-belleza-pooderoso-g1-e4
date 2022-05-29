@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 
 
-public class Administrador extends Persona implements Serializable {  //implements del serializable
+public class Administrador extends Persona implements Serializable {  
 	
-	//todo esto es del serializador
+	//-----------SERIALIZADOR-----------
 	private static final long serialVersionUID = 1L;
 	
 	private static ArrayList<Administrador> administradores;
@@ -23,21 +23,19 @@ public class Administrador extends Persona implements Serializable {  //implemen
 		Administrador.administradores = administradores;
 	}
 
-	//también en cada constructor se debe poner el add al array
-	// ahora si el codigo{
+
 	
-	//atributos
-	
+	//-----------ATRIBUTOS DE INSTANCIA-----------
 	private String horarioLaboral;
 	private int nomina;
 	
 	
-	//stributo clase
+	//-----------ATRIBUTOS DE CLASE-----------
 	public static ArrayList<Cliente> clientes =new ArrayList<Cliente>(); 
 	public static ArrayList<Empleado> empleadosAsigandos= new ArrayList<Empleado>();
 	
 	
-	//constructor base
+	//-----------CONSTRUCTOR-----------
 	public Administrador(String nombre, String apellido, int id, int edad, int numero, String horarioLaboral, int nomina ) {
 		super(nombre, apellido, id, edad, numero);
 		this.horarioLaboral=horarioLaboral;
@@ -46,18 +44,14 @@ public class Administrador extends Persona implements Serializable {  //implemen
 		administradores.add(this);
 	}
 	
-	//getter y setters
-
+	
+	//-----------GETTERS y SETTERS-----------
 	public String getHorarioLaboral() {
 		return horarioLaboral;
 	}
-
-
 	public void setHorarioLaboral(String horarioLaboral) {
 		this.horarioLaboral = horarioLaboral;
 	}
-
-
 	public int getNomina() {
 		return nomina;
 	}
@@ -66,29 +60,22 @@ public class Administrador extends Persona implements Serializable {  //implemen
 	public void setNomina(int nomina) {
 		this.nomina = nomina;
 	}
-
-
 	public ArrayList<Empleado> getEmpleadosAsigandos() {
 		return empleadosAsigandos;
 	}
-
-
 	public void setEmpleadosAsigandos(ArrayList<Empleado> empleadosAsigandos) {
-		this.empleadosAsigandos = empleadosAsigandos;
+		Administrador.empleadosAsigandos = empleadosAsigandos;
 	}
 
-	//toString
+	
+	//-----------OTROS METODOS-----------
 	@Override
 	public String toString() {
 		return "Administrador [horarioLaboral=" + horarioLaboral + ", nomina=" + nomina + ", empleadosAsigandos="
 				+ empleadosAsigandos + "]";
 	}
-	
-	//Metodos
-	
+
 	public void venderProducto() {
-		
-		
 	}
 	
 	public void generarFactura() {
@@ -117,15 +104,4 @@ public class Administrador extends Persona implements Serializable {  //implemen
 	public void ventaProductos() {
 		System.out.println("venta Productos");		
 	}	
-	
-	
-	
-	
-	
-	
-	
-
-	
-	
-
 }

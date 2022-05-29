@@ -6,9 +6,9 @@ import gestorAplicacion.operacional.Cita;
 import gestorAplicacion.operacional.Factura;
 
 
-public class Cliente extends Persona implements Serializable {  //implements del serializable
+public class Cliente extends Persona implements Serializable {  
 	
-	//todo esto es del serializador
+	//-----------SERIALIZADOR-----------
 	private static final long serialVersionUID = 1L;
 	
 	private static ArrayList<Cliente> clientes;
@@ -24,20 +24,16 @@ public class Cliente extends Persona implements Serializable {  //implements del
 		Cliente.clientes = clientes;
 	}
 	
-
-	//también en cada constructor se debe poner el add al array
-	// ahora si el codigo{
 	
 	
-
-	// Atributos
+	//-----------ATRIBUTOS-----------
 	private String anotaciones;
 	private ArrayList<Cita>  citasGeneradas=new ArrayList<Cita> () ;
 	private ArrayList<Factura> facturas = new  ArrayList<Factura> ();
 	
 	private boolean ClientePremiun;//Revisar
 
-	// constructor base
+	//-----------CONSTRUCTORES-----------
 	public Cliente(String nombre, String apellido, int id, int edad, int numero, String anotaciones) {
 		super(nombre, apellido, id, edad, numero);
 		this.anotaciones = anotaciones;
@@ -55,12 +51,12 @@ public class Cliente extends Persona implements Serializable {  //implements del
 		Administrador.clientes.add(this);
 		clientes.add(this);
 	}
-	//Getters y Setters
-
+	
+	
+	//-----------GETTERS Y SETTERS-----------
 	public String getAnotaciones() {
 		return anotaciones;
 	}
-
 	public void setAnotaciones(String anotaciones) {
 		this.anotaciones = anotaciones;
 	}
@@ -68,7 +64,6 @@ public class Cliente extends Persona implements Serializable {  //implements del
 	public ArrayList<Cita> getCitasGeneradas() {
 		return citasGeneradas;
 	}
-
 	public void setCitasGeneradas(ArrayList<Cita> citasGeneradas) {
 		this.citasGeneradas = citasGeneradas;
 	}
@@ -80,7 +75,6 @@ public class Cliente extends Persona implements Serializable {  //implements del
 	public ArrayList<Factura> getFacturas() {
 		return facturas;
 	}
-
 	public void setFacturas(ArrayList<Factura> facturas) {
 		this.facturas = facturas;
 	}
@@ -91,19 +85,13 @@ public class Cliente extends Persona implements Serializable {  //implements del
 	public boolean isClientePremiun() {
 		return ClientePremiun;
 	}
-
 	public void setClientePremiun(boolean clientePremiun) {
 		ClientePremiun = clientePremiun;
 	}
 
-	//toSring
+	//-----------OTROS METODOS-----------
 	@Override
 	public String toString() {
-		return "Cliente: "+ this.getNombre() +" "+ this.getApellido()+", anotaciones: "+ anotaciones;
-		
+		return "Cliente: "+ this.getNombre() +" "+ this.getApellido()+", anotaciones: "+ anotaciones;	
 	}
-	
-	
-	
-
 }

@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 
 public class Inventario {
-	
+	//-----------SERIALIZADOR-----------
 			private static final long serialVersionUID = 1L;
 			
 			private static HashMap<Producto, Integer> inventario;
@@ -20,14 +20,17 @@ public class Inventario {
 			public static HashMap<Producto, Integer> getInventario() {
 					return inventario;
 				}
-				
+	//-----------ATRIBUTOS-----------
 	private HashMap<Producto, Integer> listaProductos = new HashMap<Producto, Integer>();
 	
+	
+	//-----------CONSTRUCTOR-----------
 	public Inventario(HashMap<Producto, Integer> lista) {
 		this.listaProductos = lista;
 		Inventario.inventario = lista;
 	}
 	
+	//-----------GETTERS y SETTERS-----------
 	public HashMap<Producto, Integer> getListaProductos(){
 		return this.listaProductos;
 	}
@@ -35,6 +38,8 @@ public class Inventario {
 		this.listaProductos = listaProductos;
 	}
 	
+	
+	//-----------OTROS METODOS-----------
 	public void agregarProducto(Producto producto, int existencias) {
 		this.listaProductos.put(producto, existencias);
 		Inventario.inventario.put(producto, existencias);
@@ -45,12 +50,6 @@ public class Inventario {
 			total += set.getKey().getPrecioVenta()*set.getValue();
 		}
 		return total;
-		/*
-		for(Producto p: this.listaProductos) {
-			total += p.getPrecioVenta()*p.getValue();
-		}
-		return total;
-		*/
 	}
 	
 	public void actualizarExistencias(Producto producto, int cantidad) {
@@ -79,7 +78,10 @@ public class Inventario {
 		return texto;
 	}
 	
-	
+	public String toString() {
+		return "Cantidades= "+ this.listaProductos.values();
+		
+	}
 	// Caso de uso:
 	/*
 	public static void main(String[] args) {
@@ -95,10 +97,4 @@ public class Inventario {
 		System.out.println(inv.calcularPatrimonio());
 	}
 	*/
-	
-	public String toString() {
-		return "Cantidades= "+ this.listaProductos.values();
-		
-	}
-	
 }

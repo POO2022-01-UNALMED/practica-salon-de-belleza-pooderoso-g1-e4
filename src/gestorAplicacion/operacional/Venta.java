@@ -8,9 +8,9 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class Venta implements Serializable {  //implements del serializable
+public class Venta implements Serializable {  
 		
-		//todo esto es del serializador
+		//-----------SERIALIZADOR-----------
 		private static final long serialVersionUID = 1L;
 		
 		private static ArrayList<Venta> ventas;
@@ -28,10 +28,9 @@ public class Venta implements Serializable {  //implements del serializable
 			}
 		
 	
-		//también en cada constructor se debe poner el add al array
-		// ahora si el codigo
+		
 
-	
+	//-----------ATRIBUTOS-----------
 	private Producto productoVendido;
 	private int idVenta;
 	private int cantidadVendida;
@@ -43,7 +42,7 @@ public class Venta implements Serializable {  //implements del serializable
 	public static int numVenta;
 	
 	
-	
+	//-----------CONSTRUCTOR-----------
 	public Venta(Producto productoVendido, Empleado empleadoComision, LocalDateTime fechaVenta, int cantidadVendida, Inventario inventario) {
 		this.productoVendido = productoVendido;
 		this.empleadoComision = empleadoComision;
@@ -55,17 +54,12 @@ public class Venta implements Serializable {  //implements del serializable
 		this.inventario = inventario;
 		this.inventario.actualizarExistencias(productoVendido, cantidadVendida);
 		
-		ventas.add(this);
+		ventas.add(this); //del serializador
 	}
 	
-	//cálculo comisión
-	public double calcularComision(Producto productoVendido) {
-		comision= this.productoVendido.getPrecioVenta() * porcentajeComision;
-		
-		return comision;
-	}    //crear lista de comisiones de cada empleado, en la clase empleado
 	
 
+	//-----------GETTERS y SETTERS-----------
 	public Producto getProductoVendido() {
 		return productoVendido;
 	}
@@ -94,11 +88,15 @@ public class Venta implements Serializable {  //implements del serializable
 		return this.cantidadVendida;
 	}
 	
-	
+	//-----------OTROS METODOS-----------
 	public String toString() {
 		return "El empleado "+ empleadoComision.getNombre() +" "+empleadoComision.getApellido()+" "+""
 				+ " realiza una venta de "+ productoVendido.getNombreProducto() + " en la fecha "+ fechaVenta+" y recibe una comisi�n de: " 
 				+ calcularComision(productoVendido);
-		
 	}
+	public double calcularComision(Producto productoVendido) {
+		comision= this.productoVendido.getPrecioVenta() * porcentajeComision;
+		
+		return comision;
+	}    
 }
