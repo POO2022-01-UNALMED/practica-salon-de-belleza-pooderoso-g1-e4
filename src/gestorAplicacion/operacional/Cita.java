@@ -123,8 +123,8 @@ public class Cita implements Serializable {  //implements del serializable
 
 	@Override
 	public String toString() {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-		return "Cliente=" + cliente + ", fecha= " + fechaCita + ", duracion=" + duracion + ". Termina a las"+ fechaCita.plusMinutes(duracion).format(formatter);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+		return "Cliente=" + cliente + ", fecha= " + fechaCita + ", duracion=" + duracion + ". Termina a las "+ fechaCita.plusMinutes(duracion).format(formatter);
 	}
 	
 	

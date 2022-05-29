@@ -44,7 +44,7 @@ public class Interfaz {
 			
 			
 		
-		}while(opcion!=4);
+		}while(opcion!=5);
 		
 		
 		//entrada.close();

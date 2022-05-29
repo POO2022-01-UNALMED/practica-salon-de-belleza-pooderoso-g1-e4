@@ -92,7 +92,7 @@ public class Empleado extends Persona implements Serializable {  //implements de
 	
 	@Override
 	public String toString() {
-		return "nombre= " + super.getNombre() + ", especialista= " + this.getEspecialidad() + ", sueldo = "  + this.getSueldo() + ", productos vendidos= " + this.getProductosVendidos() + ", servicios realizados= " + this.getServiciosRealizados();
+		return "nombre= " + super.getNombre() + ", especialista= " + this.getEspecialidad()+ ", id: "+this.getId();
 	}
 	
 	public String getIdEmpleado() {
