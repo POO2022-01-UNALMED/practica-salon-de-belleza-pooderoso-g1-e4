@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.io.Serializable;
 import java.time.*;
 
-import gestorAplicacion.operacional.Factura;
-import gestorAplicacion.operacional.Producto;
+import gestorAplicacion.operacional.*;
+
 
 public class Empleado extends Persona implements Serializable {  //implements del serializable
 	
@@ -33,6 +33,7 @@ public class Empleado extends Persona implements Serializable {  //implements de
 	private String idEmpleado;
 	private String especialidad;
 	private ArrayList<Factura> serviciosRealizados = new ArrayList<Factura>();
+	private ArrayList<Cita> citasAsignadas = new ArrayList<Cita>();//---------------------------
 	private ArrayList<Producto> productosVendidos = new ArrayList<Producto>();
 	private double sueldo;
 	
@@ -90,9 +91,18 @@ public class Empleado extends Persona implements Serializable {  //implements de
 		this.sueldo = sueldo;
 	}
 	
+	
+	public ArrayList<Cita> getCitasAsignadas() {
+		return citasAsignadas;
+	}
+
+	public void setCitasAsignadas(ArrayList<Cita> citasAsignadas) {
+		this.citasAsignadas = citasAsignadas;
+	}
+
 	@Override
 	public String toString() {
-		return "nombre= " + super.getNombre() + ", especialista= " + this.getEspecialidad() + ", sueldo = "  + this.getSueldo() + ", productos vendidos= " + this.getProductosVendidos() + ", servicios realizados= " + this.getServiciosRealizados();
+		return "nombre= " + super.getNombre() + ", especialista= " + this.getEspecialidad()+ ", id: "+this.getId();
 	}
 	
 	public String getIdEmpleado() {

@@ -50,8 +50,11 @@ public class Cita implements Serializable {  //implements del serializable
 		this.idCita = Cita.NumCitas;
 		this.estado="Pendiente";
 		this.empleado = empleado; this.cliente = cliente; this.servicios = servicios;
-		this.fechaReserva = fechaReserva; this.fechaCita = fechaCita; this.duracion = duracion; 
-		cliente.addCita(this);
+		this.fechaReserva = fechaReserva; 
+		this.fechaCita = fechaCita; 
+		this.duracion = duracion; 
+		//cliente.addCita(this);
+		(empleado.getCitasAsignadas()).add(this);//Se le añade una a la lista de citas el empleado
 		citas.add(this);
 	}
 	
@@ -123,8 +126,8 @@ public class Cita implements Serializable {  //implements del serializable
 
 	@Override
 	public String toString() {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-		return "Cliente=" + cliente + ", fecha= " + fechaCita + ", duracion=" + duracion + ". Termina a las"+ fechaCita.plusMinutes(duracion).format(formatter);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+		return "Cliente=" + cliente + ", fecha= " + fechaReserva + ", duracion=" + duracion + ". Termina a las "+ fechaCita.plusMinutes(duracion).format(formatter);
 	}
 	
 	
