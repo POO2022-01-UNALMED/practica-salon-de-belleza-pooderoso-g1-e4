@@ -5,7 +5,7 @@ import java.util.ArrayList;
  
 public class Producto implements Serializable {  //implements del serializable
 	
-	//todo esto es del serializador
+	//Ajustes serializador
 	private static final long serialVersionUID = 1L;
 	
 	private static ArrayList<Producto> productos;
@@ -22,14 +22,13 @@ public class Producto implements Serializable {  //implements del serializable
 	}
 	
 	
-	// ahora si el codigo
+	//Atributos
 	public static int numProducto = 0;
 	private int productoId;
 	private String nombreProducto;
 	private float precioVenta;
 	
-	
-	
+	//Constructor
 	public Producto(String nombreProducto, float precioVenta){
 		this.productoId = Producto.numProducto;
 		//this.existencias = existencias;
@@ -45,15 +44,7 @@ public class Producto implements Serializable {  //implements del serializable
 	public void setProductoId(int productoId) {
 		this.productoId = productoId;
 	}
-	/*
-	public int getExistencias() {
-		return existencias;
-	}
 	
-	public void setExistencias(int existencias) {
-		this.existencias = existencias;
-	}
-	*/
 	public String getNombreProducto() {
 		return nombreProducto;
 	}
@@ -67,7 +58,6 @@ public class Producto implements Serializable {  //implements del serializable
 		this.precioVenta = precioVenta;
 	}
 	
-
 	
 	public String toString() {
 		return "El producto= "+ nombreProducto +" "+ "tiene un precio de venta de = " + precioVenta;

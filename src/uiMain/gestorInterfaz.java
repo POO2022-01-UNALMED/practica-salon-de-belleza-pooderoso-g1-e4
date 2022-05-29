@@ -62,6 +62,22 @@ public class gestorInterfaz {
      * Muestra al usuario un mensaje y luego retorna un dato colocado por el
      * usuario en la consola como entero
      *
+     * @return El dato colocado por el usuario en la consola como long
+     * @throws NumberFormatException si el dato ingresado no representa un
+     * entero.
+     */
+    public static long leerLong() {
+        return Long.parseLong((gestorInterfaz.leer()));
+    }    
+    
+    public static long leerLong(String mensaje) {
+        return Long.parseLong((gestorInterfaz.leer(mensaje)));
+    } 
+    
+    /**
+     * Muestra al usuario un mensaje y luego retorna un dato colocado por el
+     * usuario en la consola como entero
+     *
      * @param mensaje El mensaje que el usuario verá antes de ingresar un dato.
      * @return El dato colocado por el usuario en la consola como entero
      * @throws NumberFormatException si el dato ingresado no representa un

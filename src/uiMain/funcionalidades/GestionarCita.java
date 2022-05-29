@@ -1,6 +1,7 @@
 package uiMain.funcionalidades;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import gestorAplicacion.operacional.*;
 import gestorAplicacion.organizacional.*;
@@ -10,13 +11,14 @@ import uiMain.gestorInterfaz;
 public class GestionarCita {
 	
 	static {		
-		Empleado empleado1 =new Empleado("Marlon", "Nivia", 1000349061, 21, 32088456, "Uñas");
-		Empleado empleado2 =new Empleado("Julian", "Ospina", 525206530, 20, 3208844, "Pelo");//El numero no alcanza parce		
+		Empleado empleado1 =new Empleado("Marlon", "Nivia", 1000, 21, 32430847, "Uñas");		
+		Empleado empleado2 =new Empleado("Julian", "Ospina", 525206530, 20, 3208845, "Pelo");//El numero no alcanza parce poner l de Long		
 		//----------------------------
-		Cliente c1 =new Cliente("Luisa", "Palacio", 12, 23, 301623697 , "ninguna");
-		Cita Cita1= new Cita(empleado1, null, null, LocalDateTime.now() , LocalDateTime.of(2022, 5, 30, 14, 0) , 60);
-		Factura Factura1= new Factura(Cita1, LocalDateTime.now() ,"QR");
-		empleado1.getServiciosRealizados().add(Factura1);		
+		Cliente c1 =new Cliente("Luisa", "Palacio", 12, 23, 301623697 , "Ninguna");
+		Cita Cita1= new Cita(empleado1, c1, null, LocalDateTime.now() , LocalDateTime.of(2022, 5, 30, 14, 0) , 60);
+		
+		//Factura Factura1= new Factura(Cita1, LocalDateTime.now() ,"QR"); Yo no uso Facturas
+		//empleado1.getServiciosRealizados().add(Factura1);		
 	}
 	
 	public static void reservarCita() {
@@ -30,45 +32,45 @@ public class GestionarCita {
 		
 		int TipoCliente=gestorInterfaz.leerEntero();
 		
+		Cliente clienteaAsignar;
+		
 		if (TipoCliente==1){
 						
 			gestorInterfaz.escribir("");					
 
 			int cedulaCliente=gestorInterfaz.leerEntero("Digite la identificación del cliente");				
-			Cliente clienteaAsignar=devuelveCliente(cedulaCliente);
+			clienteaAsignar=devuelveCliente(cedulaCliente);
 			
 			while(clienteaAsignar==null) {					
 				cedulaCliente=gestorInterfaz.leerEntero("Cliente no encontrado, digite nuevamente");				
-				clienteaAsignar=devuelveCliente(cedulaCliente);										
+				clienteaAsignar=devuelveCliente(cedulaCliente);	//Cliente									
 			}
-			
-			gestorInterfaz.escribir(" ");
-			gestorInterfaz.escribir(clienteaAsignar);
-			gestorInterfaz.escribir(" ");				
-			mostrarEmpleados();
-			gestorInterfaz.escribir(" ");
-			int cedulaEmpleado=gestorInterfaz.leerEntero("Dijite la identificacion del empleado al cual se le asignará la cita: ");
-			gestorInterfaz.escribir(" ");
-			gestorInterfaz.escribir("---------------------------------------------");
-			Empleado e=GestionarCita.devuelveEmpleado(cedulaEmpleado);
-			gestorInterfaz.escribir(e);
-			gestorInterfaz.escribir(" ");
-			int mes=gestorInterfaz.leerEntero("Digite mes: ");
-			int dia=gestorInterfaz.leerEntero("Digite dia: ");
-			gestorInterfaz.escribir(" ");
-			GestionarCita.mostrarCitas(e,mes,dia);
-			//mostrar las citas de ese dia de ese empleado
-			//Ingresar fecha
-			//verificar disponibilida				 
-			//en esa fecha se muestra la disponibilidad horaria del empleado
-			//asignar cita si se puede 
-			//Interfaz.escogerServicios();
 		}
 		else {
-
-			Cliente nuevoCliente= crearNuevoCliente();
-			
+			clienteaAsignar=GestionarCita.crearNuevoCliente();
 		}
+			
+		gestorInterfaz.escribir(" ");
+		gestorInterfaz.escribir(clienteaAsignar);
+		gestorInterfaz.escribir(" ");				
+		mostrarEmpleados();
+		gestorInterfaz.escribir(" ");
+		int cedulaEmpleado=gestorInterfaz.leerEntero("Digite la identificacion del empleado al cual se le asignará la cita: ");
+		gestorInterfaz.escribir(" ");
+		gestorInterfaz.escribir("---------------------------------------------");
+		Empleado e=GestionarCita.devuelveEmpleado(cedulaEmpleado);//Empleado
+		gestorInterfaz.escribir(e);
+		gestorInterfaz.escribir(" ");
+		//Escoger Servicios
+		ArrayList<Servicio> servicios=GestionarCita.escogerServicios();//Servicio
+		gestorInterfaz.escribir(" ");
+		int mes=gestorInterfaz.leerEntero("Digite mes: ");
+		int dia=gestorInterfaz.leerEntero("Digite dia: ");
+		gestorInterfaz.escribir(" ");
+		boolean estado=GestionarCita.mostrarCitas(e,mes,dia);
+		LocalDateTime fechaCita=GestionarCita.gestionarFecha(estado,e, mes, dia,servicios);//fecha
+		GestionarCita.generarCita(e, clienteaAsignar, servicios, LocalDateTime.now() , fechaCita);
+				
 					
 	}
 	
@@ -96,6 +98,10 @@ public class GestionarCita {
 		String anotaciones=gestorInterfaz.leer("Por favor ingrese anotaciones del cliente: ");
 		
 		Cliente nuevoCliente = new Cliente(nombre, apellido, id, edad, numero, anotaciones);
+		
+		gestorInterfaz.escribir("");
+		gestorInterfaz.escribir("El nuevo cliente es: "+ nuevoCliente);
+		
 		return nuevoCliente;
 		
 	}
@@ -129,91 +135,129 @@ public class GestionarCita {
 	
 	//Mostrar una cita
 	
-	public static void mostrarCitas(Empleado p, int mes, int dia) {
+	public static boolean mostrarCitas(Empleado empleado, int mes, int dia) {
 		
 		gestorInterfaz.escribir("------- Citas Asignadas el dia: "+ dia+ " del mes: "+ mes+"----------");
 		gestorInterfaz.escribir(" ");
 		boolean citasAsignadas = false;
-		for(Factura factura : p.getServiciosRealizados()) {	//Recorrer citas del empleado
+		for(Cita cita : empleado.getCitasAsignadas()) {	//Recorrer citas del empleado
 			
-			int mesComparacion=factura.getCita().getFechaCita().getMonthValue(); //Mes cita
-			int diaComparacion=factura.getCita().getFechaCita().getDayOfMonth(); //Dia cita
+			int mesComparacion=cita.getFechaCita().getMonthValue(); //Mes cita
+			int diaComparacion=cita.getFechaCita().getDayOfMonth(); //Dia cita
 			
 			if((mes == mesComparacion)  && (dia == diaComparacion)) { //comparamos la cita
-				gestorInterfaz.escribir(factura.getCita());//Mostrar cita
+				gestorInterfaz.escribir(cita);//Mostrar cita
 			    gestorInterfaz.escribir(" ");
 			    citasAsignadas = true;
 			}							
 		}
 		
+		return citasAsignadas;
+		
+		
+	}
+
+	public static LocalDateTime gestionarFecha(boolean citasAsignadas,Empleado p, int mes, int dia, ArrayList<Servicio> servicios) {
+				
+		
 		if(citasAsignadas==false) {
 			
-			gestorInterfaz.escribir("No posee citas asignadas este día");
+			gestorInterfaz.escribir(p.getNombre()+" no sposee citas asignadas este día");
+			int cambioDia=gestorInterfaz.leerEntero("Digite 0 para escoger otro día, de lo contrario 1");//Escoger otro día
+			if (cambioDia==0){
+				gestorInterfaz.escribir(" ");
+				int NuevoMes=gestorInterfaz.leerEntero("Digite nuevo mes");//Escoger otro mes
+				int nuevoDia=gestorInterfaz.leerEntero("Digite nuevo dia");//Escoger otro mes
+				boolean estado = mostrarCitas(p, NuevoMes, nuevoDia);
+				gestionarFecha(estado,p, NuevoMes, nuevoDia,servicios);
+			}
+			else {
+				gestorInterfaz.escribir(" ");
+				boolean validar=false;
+				LocalDateTime citaFinal = null;
+				while(validar==false) {
+					int hora=gestorInterfaz.leerEntero("Digite la hora");
+					int minuto=gestorInterfaz.leerEntero("Digite los minutos");			
+					//devolver hora de la cita				
+					citaFinal=LocalDateTime.of(2022, mes, dia, hora, minuto); //crea la cita
+					validar=GestionarCita.validarHora(p, citaFinal, servicios);
+					
+				}
+				return citaFinal;
+				
+			}
+			
+			//Devolver hora de la cita
+		}
+		else {
+		
 			int cambioDia=gestorInterfaz.leerEntero("Digite 0 para escoger otro día, de lo contrario 1");//Escoger otro día
 			if (cambioDia==0){
 				gestorInterfaz.escribir(" ");
 				int NuevoMes=gestorInterfaz.leerEntero("Digite nuevo mes");//Escoger otro mes
 				int nuevoDia=gestorInterfaz.leerEntero("Digite nuevo dia");//Escoger otro mes				
-				mostrarCitas(p, NuevoMes, nuevoDia);
+				boolean estado = mostrarCitas(p, NuevoMes, nuevoDia);
+				LocalDateTime cita=gestionarFecha(estado,p, NuevoMes, nuevoDia,servicios);
 			}
 			else {
-				gestorInterfaz.escribir(" ");
 				//validar hora
-				int hora=gestorInterfaz.leerEntero("Digite la hora");
-				int minuto=gestorInterfaz.leerEntero("Digite los minutos");
-				LocalDateTime citaFinal=LocalDateTime.of(2022, mes, dia, hora, minuto); //crea la cita
+				boolean validar=false;
+				LocalDateTime citaFinal = null;
+				while(validar==false) {
+					int hora=gestorInterfaz.leerEntero("Digite la hora");
+					int minuto=gestorInterfaz.leerEntero("Digite los minutos");			
+					//devolver hora de la cita				
+					citaFinal=LocalDateTime.of(2022, mes, dia, hora, minuto); //crea la cita
+					validar=GestionarCita.validarHora(p, citaFinal, servicios);
+					
+				}
+				return citaFinal;
+				
+				
 			}
-			
-			//Devolver hora de la cita
 		}
 		
+		return null;
 		
-		int cambioDia=gestorInterfaz.leerEntero("Digite 0 para escoger otro día, de lo contrario 1");//Escoger otro día
-		if (cambioDia==0){
-			gestorInterfaz.escribir(" ");
-			int NuevoMes=gestorInterfaz.leerEntero("Digite nuevo mes");//Escoger otro mes
-			int nuevoDia=gestorInterfaz.leerEntero("Digite nuevo dia");//Escoger otro mes				
-			mostrarCitas(p, NuevoMes, nuevoDia);
-		}
-		else {
-			//validar hora
-			int hora=gestorInterfaz.leerEntero("Digite la hora");
-			int minuto=gestorInterfaz.leerEntero("Digite los minutos");	
-			//devolver hora de la cita				
-			LocalDateTime citaFinal=LocalDateTime.of(2022, mes, dia, hora, minuto); //crea la cita
-		}
-		
-		
-	}
-	
-	public void generarCita() {
-		//generar cita y generar factura
-		//una cita, tiene una factura
-		
-		
-		//private int idCita; por (defecto) 
-		//private String estado; se crea en proceso por (defecto)
-		//private Empleado empleado; Recibe el empleado devuelto arriba (melo) 
-		//private Cliente cliente; Recibe el cliente al que se le hace la cita (melo)
-		//private ArrayList<Servicio> servicios = new ArrayList<Servicio>(); Servicios por consola (Buscar lo del enum)
-		//private LocalDateTime fechaReserva; //aï¿½o, mes, dia, hora y minutos   get now() fecha de reserva
-		//private LocalDateTime fechaCita;  Por consola 
-		//private int duracion; //minutos Debe venir de la clase enum
-		//private Factura factura; Debe pensarse bien porque se depbe generar una _________
-		//public static int NumCitas=0; por defecto
-	}
+	}	
 	
 	
-	public static boolean  validarHora(LocalDateTime hora) {
-		if(hora.getHour() < Empleado.HoraInicio.getHour() || hora.getHour() > Empleado.HoraFinal.getHour() ) {
+	public static boolean  validarHora(Empleado p, LocalDateTime horaTentativa, ArrayList<Servicio> servicios) {
+		
+		boolean aceptada=false;
+		int duracion=GestionarCita.duracionCita(servicios);
+		LocalDateTime horaTentativaFin=horaTentativa.plusMinutes(duracion);
+		
+		if(horaTentativa.toLocalTime().isBefore(Empleado.HoraInicio)  || horaTentativa.toLocalTime().isAfter(Empleado.HoraFinal) ) {
 			gestorInterfaz.escribir("Recuer que los horaios de atención son de: 9 a 18 ");
 			return false;
 			
 		}
-		return false;
+		
+		for(Cita cita : p.getCitasAsignadas()) {	//Recorrer citas del empleado					
+			int mesComparacion=cita.getFechaCita().getMonthValue(); //Mes cita
+			int diaComparacion=cita.getFechaCita().getDayOfMonth(); //Dia cita
+			LocalDateTime existenteInicial=cita.getFechaCita();//hora Inicial
+			LocalDateTime existenteFinal=cita.getFechaCita().plusMinutes(cita.getDuracion());//hora Final
+			if((horaTentativa.getMonthValue() == mesComparacion)  && (horaTentativa.getDayOfMonth() == diaComparacion) && !cita.getEstado().equals("Cancelada")) { //comparamos la cita
+				if((horaTentativa.isBefore(existenteInicial) &&  horaTentativaFin.isBefore(existenteFinal)) || (horaTentativa.isAfter(existenteInicial) &&  horaTentativaFin.isAfter(horaTentativaFin))) {
+					gestorInterfaz.escribir(" ");
+					gestorInterfaz.escribir("Es posible generar la cita");
+					return true;
+				}
+				else {
+					gestorInterfaz.escribir("Existen horas trocadas con la cita: "+cita);
+					return false;
+				}
+
+			}							
+		}
+
+		
+		return true;
 	}
 	
-	public static void escogerServicios() {
+	public static ArrayList<Servicio> escogerServicios() {//Devuelve un arreglo de servicios
 		
 		gestorInterfaz.escribir("");
 		gestorInterfaz.escribir("Escoja separado por espacios los servicos que requiere");
@@ -228,18 +272,198 @@ public class GestionarCita {
 		gestorInterfaz.escribir("8. EXFOLIACION_FACIAL");
 		gestorInterfaz.escribir("9. CEJAS");
 		gestorInterfaz.escribir("10. DEPILACION_LASER");
+		gestorInterfaz.escribir("");
 		
-		String reservas =gestorInterfaz.leer("Ingrese los servicios requeridos");
+		String reservas =gestorInterfaz.leer("Ingrese separado por espacios los servicos que requiere"); //Ingresa los servicios
 		
-		String[] ArregloReservas = reservas.split(" ");
+		String[] ArregloReservas = reservas.split(" ");//convierte String en arreglo
 		
-		for (String servicio :ArregloReservas ) {
+		ArrayList<Servicio> serviciosEscogidos = new ArrayList<Servicio>();//Se crea un arreglo de servicios
+		
+		for (String servicio :ArregloReservas ) {//Se recorre el arreglo y se agregan a la lista de serviciosEscogidos
 			int ser=Integer.parseInt(servicio);
 			if (ser>=1 && ser<=10) {
-				
+				switch (ser) {
+				case 1:
+					if (!serviciosEscogidos.contains(Servicio.PEDICURE)){
+						serviciosEscogidos.add(Servicio.PEDICURE);
+					}
+										
+					break;
+					
+				case 2:
+					if (!serviciosEscogidos.contains(Servicio.MANICURE)){
+						serviciosEscogidos.add(Servicio.MANICURE);
+					}					
+					break;
+					
+				case 3:
+					if(!serviciosEscogidos.contains(Servicio.ALIZADO)) {
+						serviciosEscogidos.add(Servicio.ALIZADO);
+					}
+					
+					break;
+					
+				case 4:
+					if(!serviciosEscogidos.contains(Servicio.CEPILLADO)) {
+						serviciosEscogidos.add(Servicio.CEPILLADO);
+					}
+					
+					break;
+					
+				case 5:
+					if(!serviciosEscogidos.contains(Servicio.KERATINA)) {
+						serviciosEscogidos.add(Servicio.KERATINA);
+					}
+					
+					break;
+					
+				case 6:
+					if(!serviciosEscogidos.contains(Servicio.CORTE_CABALLERO)) {
+						serviciosEscogidos.add(Servicio.CORTE_CABALLERO);
+					}
+					break;
+					
+				case 7:
+					if(!serviciosEscogidos.contains(Servicio.CORTE_DAMA)) {
+						serviciosEscogidos.add(Servicio.CORTE_DAMA);
+					}
+					break;
+					
+				case 8:
+					if(!serviciosEscogidos.contains(Servicio.EXFOLIACION_FACIAL)) {
+						serviciosEscogidos.add(Servicio.EXFOLIACION_FACIAL);
+					}
+					
+					break;
+					
+				case 9:
+					if(!serviciosEscogidos.contains(Servicio.CEJAS)) {
+						serviciosEscogidos.add(Servicio.CEJAS);
+					}
+					
+					break;
+					
+				case 10:
+					if(!serviciosEscogidos.contains(Servicio.DEPILACION_LASER)) {
+						serviciosEscogidos.add(Servicio.DEPILACION_LASER);
+					}
+					break;
+
+				default:
+					break;
+				}
 			}
 		}
+		gestorInterfaz.escribir("");
+		gestorInterfaz.escribir("Servicios escogidos");
+		gestorInterfaz.escribir(serviciosEscogidos);
+		
+		return serviciosEscogidos;
 	}	
+	
+	public static int duracionCita (ArrayList <Servicio> servicios) {
+		
+		int duracion=0;
+		for(Servicio ser: servicios) {
+			duracion += ser.getDuracion();
+		}
+		return duracion;
+	}
+	
+	
+	public static void generarCita(Empleado empleado, Cliente cliente, ArrayList<Servicio> servicios, LocalDateTime fechaReserva, LocalDateTime fechaCita){
+	    int duracion= GestionarCita.duracionCita(servicios);
+		Cita nuevaCita=new Cita( empleado,  cliente, servicios,fechaReserva, fechaCita, duracion);
+		System.out.println(nuevaCita);
+		
+	}
+	
+	
+	public static void  gestionCancelar() {
+		int cedula =gestorInterfaz.leerEntero("Ingrese la identificación del cliente o del empleado al cual se le quiere cancelar la cita: ");
+		
+		
+		Persona persona =devolverPersona(cedula);
+		
+		while (persona==null) {
+			cedula=gestorInterfaz.leerEntero("Verfique la identificación de la persona");
+			gestorInterfaz.escribir(" ");
+			persona =devolverPersona(cedula);
+		}
+		
+		
+		if (persona instanceof Empleado) {
+			GestionarCita.cancelarCita(((Empleado)persona));
+			
+		}
+		else {
+			GestionarCita.cancelarCita(((Cliente)persona));
+		}		
+	}
+	
+	public static Persona devolverPersona(int cedula) {		
+		Persona persona;
+		for(Empleado empleado : Administrador.empleadosAsigandos ) {
+			if(empleado.getId()==cedula) {
+				gestorInterfaz.escribir("Empleado encontarado: " + empleado);
+				return empleado;
+			}
+		}
+		
+		for(Cliente cliente : Administrador.clientes) {
+			if(cliente.getId()==cedula) {
+				gestorInterfaz.escribir("Cliente encontarado: " + cliente);
+				return cliente;
+			}
+		}		
+		return null;						
+	}
+	
+	public static void cancelarCita(Empleado empleado) {
+		
+		for (Cita cita : empleado.getCitasAsignadas()) {
+			if(cita.getEstado()!="Cancelada") {
+				gestorInterfaz.escribir("id de la cita: "+cita.getId()+" - "+cita);
+				gestorInterfaz.escribir(" ");				
+			}
+			
+		}
+		
+		int id=gestorInterfaz.leerEntero("Digite el id de la cita que desea cancelar: ");
+		
+		for (Cita cita : empleado.getCitasAsignadas()) {
+			if(id==cita.getId()) {
+				cita.setEstado("Cancelada");
+				gestorInterfaz.escribir(cita+" estado de la cita:" + cita.getEstado());
+				break;
+			}					
+		}
+		
+	}
+	
+	public static void cancelarCita(Cliente cliente) {
+		
+		for (Cita cita : cliente.getCitasGeneradas()) {
+			if(cita.getEstado()!="Cancelada") {
+				gestorInterfaz.escribir("id de la cita: "+cita.getId()+" - "+cita);
+				gestorInterfaz.escribir(" ");
+			}
+
+		}
+		
+		int id=gestorInterfaz.leerEntero("Digite el id de la cita que desea cancelar: ");
+		
+		for (Cita cita : cliente.getCitasGeneradas()) {
+			if(id==cita.getId()) {
+				cita.setEstado("Cancelada");
+				gestorInterfaz.escribir(cita+". **Estado de la cita:" + cita.getEstado()+"**");
+				break;
+			}					
+		}
+		
+		
+	}
 	
 
 }

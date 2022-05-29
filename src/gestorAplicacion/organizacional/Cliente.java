@@ -41,7 +41,7 @@ public class Cliente extends Persona implements Serializable {  //implements del
 	public Cliente(String nombre, String apellido, int id, int edad, int numero, String anotaciones) {
 		super(nombre, apellido, id, edad, numero);
 		this.anotaciones = anotaciones;
-		this.citasGeneradas = null;
+		this.citasGeneradas = new ArrayList<Cita> ();
 		this.facturas = null;
 		ClientePremiun = false;
 		Administrador.clientes.add(this);

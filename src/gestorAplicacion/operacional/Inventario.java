@@ -8,10 +8,24 @@ import java.io.Serializable;
 
 
 public class Inventario {
+	
+			private static final long serialVersionUID = 1L;
+			
+			private static HashMap<Producto, Integer> inventario;
+			static {
+				inventario = new HashMap<Producto, Integer>();
+			}
+			
+
+			public static HashMap<Producto, Integer> getInventario() {
+					return inventario;
+				}
+				
 	private HashMap<Producto, Integer> listaProductos = new HashMap<Producto, Integer>();
 	
 	public Inventario(HashMap<Producto, Integer> lista) {
 		this.listaProductos = lista;
+		Inventario.inventario = lista;
 	}
 	
 	public HashMap<Producto, Integer> getListaProductos(){
@@ -23,6 +37,7 @@ public class Inventario {
 	
 	public void agregarProducto(Producto producto, int existencias) {
 		this.listaProductos.put(producto, existencias);
+		Inventario.inventario.put(producto, existencias);
 	}
 	public float calcularPatrimonio() {
 		float total = 0;
@@ -41,17 +56,29 @@ public class Inventario {
 	public void actualizarExistencias(Producto producto, int cantidad) {
 		if(sePuedeVender(producto, cantidad)) {
 			Integer oldValue = this.listaProductos.get(producto);
-			this.listaProductos.put(producto,  oldValue-cantidad);
+			this.listaProductos.put(producto,  oldValue - cantidad);
 		}		
 	}
 	
 	public boolean sePuedeVender(Producto producto, int cantidad) {
+		
 		if(this.listaProductos.get(producto) >= cantidad) {
 			return true;
 		}
 		
 		return false;
 	}
+	
+	public String mostrarExistencias() {
+		String texto = "";
+		for(Producto p: this.listaProductos.keySet()) {
+			
+			texto = texto + p.getNombreProducto() + " " + this.listaProductos.get(p) + " ";
+			
+		}
+		return texto;
+	}
+	
 	
 	// Caso de uso:
 	/*
@@ -68,5 +95,10 @@ public class Inventario {
 		System.out.println(inv.calcularPatrimonio());
 	}
 	*/
+	
+	public String toString() {
+		return "Cantidades= "+ this.listaProductos.values();
+		
+	}
 	
 }
