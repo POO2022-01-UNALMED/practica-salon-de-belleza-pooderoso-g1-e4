@@ -64,7 +64,7 @@ public class BalanceContable {
 		for (Venta venta: Venta.getVentas()) {
 			fechas.add(venta.getFechaVenta().get(ChronoField.MONTH_OF_YEAR));
 		}
-		System.out.println(fechas);
+		//System.out.println(fechas);
 		HashMap<Integer,String> meses = new HashMap<Integer,String>();
 		meses.put(1,"Enero"); meses.put(2,"Febrero"); meses.put(3, "Marzo"); meses.put(4, "Abril"); meses.put(5, "Mayo"); meses.put(6,"Junio");
 		meses.put(7, "Julio");meses.put(8, "Agosto"); meses.put(9, "Septiembre"); meses.put(10, "Octubre"); meses.put(11, "Noviembre"); meses.put(12, "Diciembre");
