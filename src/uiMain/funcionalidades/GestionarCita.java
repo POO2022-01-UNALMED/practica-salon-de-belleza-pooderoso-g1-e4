@@ -11,13 +11,14 @@ import uiMain.gestorInterfaz;
 public class GestionarCita {
 	
 	static {		
-		Empleado empleado1 =new Empleado("Marlon", "Nivia", 1000, 21, 32088456, "Uñas");
-		Empleado empleado2 =new Empleado("Julian", "Ospina", 525206530, 20, 3208844, "Pelo");//El numero no alcanza parce		
+		Empleado empleado1 =new Empleado("Marlon", "Nivia", 1000, 21, 32430847, "Uñas");		
+		Empleado empleado2 =new Empleado("Julian", "Ospina", 525206530, 20, 3208845, "Pelo");//El numero no alcanza parce poner l de Long		
 		//----------------------------
-		Cliente c1 =new Cliente("Luisa", "Palacio", 12, 23, 301623697 , "ninguna");
+		Cliente c1 =new Cliente("Luisa", "Palacio", 12, 23, 301623697 , "Ninguna");
 		Cita Cita1= new Cita(empleado1, null, null, LocalDateTime.now() , LocalDateTime.of(2022, 5, 30, 14, 0) , 60);
-		Factura Factura1= new Factura(Cita1, LocalDateTime.now() ,"QR");
-		empleado1.getServiciosRealizados().add(Factura1);		
+		
+		//Factura Factura1= new Factura(Cita1, LocalDateTime.now() ,"QR"); Yo no uso Facturas
+		//empleado1.getServiciosRealizados().add(Factura1);		
 	}
 	
 	public static void reservarCita() {
@@ -31,48 +32,45 @@ public class GestionarCita {
 		
 		int TipoCliente=gestorInterfaz.leerEntero();
 		
+		Cliente clienteaAsignar;
+		
 		if (TipoCliente==1){
 						
 			gestorInterfaz.escribir("");					
 
 			int cedulaCliente=gestorInterfaz.leerEntero("Digite la identificación del cliente");				
-			Cliente clienteaAsignar=devuelveCliente(cedulaCliente);
+			clienteaAsignar=devuelveCliente(cedulaCliente);
 			
 			while(clienteaAsignar==null) {					
 				cedulaCliente=gestorInterfaz.leerEntero("Cliente no encontrado, digite nuevamente");				
-				clienteaAsignar=devuelveCliente(cedulaCliente);										
+				clienteaAsignar=devuelveCliente(cedulaCliente);	//Cliente									
 			}
-			
-			gestorInterfaz.escribir(" ");
-			gestorInterfaz.escribir(clienteaAsignar);
-			gestorInterfaz.escribir(" ");				
-			mostrarEmpleados();
-			gestorInterfaz.escribir(" ");
-			int cedulaEmpleado=gestorInterfaz.leerEntero("Digite la identificacion del empleado al cual se le asignará la cita: ");
-			gestorInterfaz.escribir(" ");
-			gestorInterfaz.escribir("---------------------------------------------");
-			Empleado e=GestionarCita.devuelveEmpleado(cedulaEmpleado);
-			gestorInterfaz.escribir(e);
-			gestorInterfaz.escribir(" ");
-			//Escoger Servicios
-			ArrayList<Servicio> servicios=GestionarCita.escogerServicios();
-			gestorInterfaz.escribir(" ");
-			int mes=gestorInterfaz.leerEntero("Digite mes: ");
-			int dia=gestorInterfaz.leerEntero("Digite dia: ");
-			gestorInterfaz.escribir(" ");
-			GestionarCita.mostrarCitas(e,mes,dia,servicios);
-			//mostrar las citas de ese dia de ese empleado
-			//Ingresar fecha
-			//verificar disponibilida				 
-			//en esa fecha se muestra la disponibilidad horaria del empleado
-			//asignar cita si se puede 
-			//Interfaz.escogerServicios();
 		}
 		else {
-
-			Cliente nuevoCliente= crearNuevoCliente();
-			
+			clienteaAsignar=GestionarCita.crearNuevoCliente();
 		}
+			
+		gestorInterfaz.escribir(" ");
+		gestorInterfaz.escribir(clienteaAsignar);
+		gestorInterfaz.escribir(" ");				
+		mostrarEmpleados();
+		gestorInterfaz.escribir(" ");
+		int cedulaEmpleado=gestorInterfaz.leerEntero("Digite la identificacion del empleado al cual se le asignará la cita: ");
+		gestorInterfaz.escribir(" ");
+		gestorInterfaz.escribir("---------------------------------------------");
+		Empleado e=GestionarCita.devuelveEmpleado(cedulaEmpleado);//Empleado
+		gestorInterfaz.escribir(e);
+		gestorInterfaz.escribir(" ");
+		//Escoger Servicios
+		ArrayList<Servicio> servicios=GestionarCita.escogerServicios();//Servicio
+		gestorInterfaz.escribir(" ");
+		int mes=gestorInterfaz.leerEntero("Digite mes: ");
+		int dia=gestorInterfaz.leerEntero("Digite dia: ");
+		gestorInterfaz.escribir(" ");
+		boolean estado=GestionarCita.mostrarCitas(e,mes,dia);
+		LocalDateTime fechaCita=GestionarCita.gestionarFecha(estado,e, mes, dia,servicios);//fecha
+		GestionarCita.generarCita(e, clienteaAsignar, servicios, LocalDateTime.now() , fechaCita);
+				
 					
 	}
 	
@@ -100,6 +98,10 @@ public class GestionarCita {
 		String anotaciones=gestorInterfaz.leer("Por favor ingrese anotaciones del cliente: ");
 		
 		Cliente nuevoCliente = new Cliente(nombre, apellido, id, edad, numero, anotaciones);
+		
+		gestorInterfaz.escribir("");
+		gestorInterfaz.escribir("El nuevo cliente es: "+ nuevoCliente);
+		
 		return nuevoCliente;
 		
 	}
@@ -133,22 +135,30 @@ public class GestionarCita {
 	
 	//Mostrar una cita
 	
-	public static void mostrarCitas(Empleado p, int mes, int dia, ArrayList<Servicio> servicios) {
+	public static boolean mostrarCitas(Empleado empleado, int mes, int dia) {
 		
 		gestorInterfaz.escribir("------- Citas Asignadas el dia: "+ dia+ " del mes: "+ mes+"----------");
 		gestorInterfaz.escribir(" ");
 		boolean citasAsignadas = false;
-		for(Factura factura : p.getServiciosRealizados()) {	//Recorrer citas del empleado
+		for(Cita cita : empleado.getCitasAsignadas()) {	//Recorrer citas del empleado
 			
-			int mesComparacion=factura.getCita().getFechaCita().getMonthValue(); //Mes cita
-			int diaComparacion=factura.getCita().getFechaCita().getDayOfMonth(); //Dia cita
+			int mesComparacion=cita.getFechaCita().getMonthValue(); //Mes cita
+			int diaComparacion=cita.getFechaCita().getDayOfMonth(); //Dia cita
 			
 			if((mes == mesComparacion)  && (dia == diaComparacion)) { //comparamos la cita
-				gestorInterfaz.escribir(factura.getCita());//Mostrar cita
+				gestorInterfaz.escribir(cita);//Mostrar cita
 			    gestorInterfaz.escribir(" ");
 			    citasAsignadas = true;
 			}							
 		}
+		
+		return citasAsignadas;
+		
+		
+	}
+
+	public static LocalDateTime gestionarFecha(boolean citasAsignadas,Empleado p, int mes, int dia, ArrayList<Servicio> servicios) {
+				
 		
 		if(citasAsignadas==false) {
 			
@@ -157,8 +167,9 @@ public class GestionarCita {
 			if (cambioDia==0){
 				gestorInterfaz.escribir(" ");
 				int NuevoMes=gestorInterfaz.leerEntero("Digite nuevo mes");//Escoger otro mes
-				int nuevoDia=gestorInterfaz.leerEntero("Digite nuevo dia");//Escoger otro mes				
-				mostrarCitas(p, NuevoMes, nuevoDia,servicios);
+				int nuevoDia=gestorInterfaz.leerEntero("Digite nuevo dia");//Escoger otro mes
+				boolean estado = mostrarCitas(p, NuevoMes, nuevoDia);
+				gestionarFecha(estado,p, NuevoMes, nuevoDia,servicios);
 			}
 			else {
 				gestorInterfaz.escribir(" ");
@@ -169,6 +180,7 @@ public class GestionarCita {
 					//devolver hora de la cita				
 					LocalDateTime citaFinal=LocalDateTime.of(2022, mes, dia, hora, minuto); //crea la cita
 					validar=GestionarCita.validarHora(p, citaFinal, servicios);
+					return citaFinal;
 				}
 				
 			}
@@ -182,7 +194,8 @@ public class GestionarCita {
 				gestorInterfaz.escribir(" ");
 				int NuevoMes=gestorInterfaz.leerEntero("Digite nuevo mes");//Escoger otro mes
 				int nuevoDia=gestorInterfaz.leerEntero("Digite nuevo dia");//Escoger otro mes				
-				mostrarCitas(p, NuevoMes, nuevoDia,servicios);
+				boolean estado = mostrarCitas(p, NuevoMes, nuevoDia);
+				LocalDateTime cita=gestionarFecha(estado,p, NuevoMes, nuevoDia,servicios);
 			}
 			else {
 				//validar hora
@@ -193,31 +206,16 @@ public class GestionarCita {
 					//devolver hora de la cita				
 					LocalDateTime citaFinal=LocalDateTime.of(2022, mes, dia, hora, minuto); //crea la cita
 					validar=GestionarCita.validarHora(p, citaFinal, servicios);
+					return citaFinal;
 				}
 				
 				
 			}
 		}
 		
+		return null;
 		
-	}
-	
-	public void generarCita() {
-		//generar cita y generar factura
-		//una cita, tiene una factura
-		
-		
-		//private int idCita; por (defecto) 
-		//private String estado; se crea en proceso por (defecto)
-		//private Empleado empleado; Recibe el empleado devuelto arriba (melo) 
-		//private Cliente cliente; Recibe el cliente al que se le hace la cita (melo)
-		//private ArrayList<Servicio> servicios = new ArrayList<Servicio>(); Servicios por consola (Buscar lo del enum)
-		//private LocalDateTime fechaReserva; //aï¿½o, mes, dia, hora y minutos   get now() fecha de reserva
-		//private LocalDateTime fechaCita;  Por consola 
-		//private int duracion; //minutos Debe venir de la clase enum
-		//private Factura factura; Debe pensarse bien porque se depbe generar una _________
-		//public static int NumCitas=0; por defecto
-	}
+	}	
 	
 	
 	public static boolean  validarHora(Empleado p, LocalDateTime horaTentativa, ArrayList<Servicio> servicios) {
@@ -369,5 +367,12 @@ public class GestionarCita {
 		return duracion;
 	}
 	
+	
+	public static void generarCita(Empleado empleado, Cliente cliente, ArrayList<Servicio> servicios, LocalDateTime fechaReserva, LocalDateTime fechaCita){
+	    int duracion= GestionarCita.duracionCita(servicios);
+		Cita nuevaCita=new Cita( empleado,  cliente, servicios,fechaReserva, fechaCita, duracion);
+		System.out.println(nuevaCita);
+		
+	}	
 
 }

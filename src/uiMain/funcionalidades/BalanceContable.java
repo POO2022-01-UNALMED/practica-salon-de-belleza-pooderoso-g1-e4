@@ -13,13 +13,13 @@ import gestorAplicacion.operacional.*;
 import java.time.temporal.ChronoField;  
 
 public class BalanceContable {
-<<<<<<< Updated upstream
 
-	public static void main(String[] args) {
+
+	//public static void main(String[] args) {
 		
-		// Creacion de objetos para ensayar la funcionalidad
-		Empleado empleado1 =new Empleado("Marlon", "Nivia", 1000349061, 21, 32088456, "U�as");
-=======
+	// Creacion de objetos para ensayar la funcionalidad
+	//Empleado empleado1 =new Empleado("Marlon", "Nivia", 1000349061, 21, 32088456, "U�as");
+
 	public static String calcularBalance(){
 		return "Aqui iria";
 	}
@@ -154,4 +154,5 @@ public class BalanceContable {
 		return s;
 	}
 	*/
+	//}
 }

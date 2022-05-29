@@ -4,10 +4,8 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 
-import gestorAplicacion.operacional.Producto;
-import gestorAplicacion.organizacional.Administrador;
-import gestorAplicacion.organizacional.Cliente;
-import gestorAplicacion.organizacional.Empleado;
+
+import gestorAplicacion.organizacional.*;
 import gestorAplicacion.operacional.*;
 import uiMain.funcionalidades.*;
 
@@ -20,15 +18,18 @@ public class Interfaz {
 		int opcion = 0;
 		do {
 			
-			System.out.println("    Que desea realizar?");
-			System.out.println("                       ");
-			System.out.println("1.Reservar cita");
-			System.out.println("2.Cancelar cita");
-			System.out.println("3.Facturar");
-			System.out.println("4. Balance Contable");
-			System.out.println("5.Terminar");
-			System.out.println("                       ");
-			System.out.print("Digite Opcion: ");
+			
+			
+			gestorInterfaz.escribir("    Que desea realizar?");
+			
+			gestorInterfaz.escribir("                       ");
+			gestorInterfaz.escribir("1.Reservar cita");
+			gestorInterfaz.escribir("2.Cancelar cita");
+			gestorInterfaz.escribir("3.Facturar");
+			gestorInterfaz.escribir("4. Balance Contable");
+			gestorInterfaz.escribir("5.Terminar");
+			gestorInterfaz.escribir("                       ");
+			gestorInterfaz.escribir("Digite Opcion: ");
 			opcion = Integer.parseInt(entrada.nextLine());
 			
 			
