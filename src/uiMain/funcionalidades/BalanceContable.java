@@ -15,16 +15,9 @@ import java.time.temporal.ChronoField;
 public class BalanceContable {
 
 
-	//public static void main(String[] args) {
-		
-	// Creacion de objetos para ensayar la funcionalidad
-	//Empleado empleado1 =new Empleado("Marlon", "Nivia", 1000349061, 21, 32088456, "Uï¿½as");
-
-	public static String calcularBalance(){
-		return "Aqui iria";
-	}
-	/*
-	public static void main(String[] args) {
+	
+	
+		/*
 		Empleado empleado1 =new Empleado("Marlon", "Nivia", 1000349061, 21, 32088456, "Uñas");
 
 		Empleado empleado2 =new Empleado("Julian", "Ospina", 525206530, 20, 3208844, "Pelo");//El numero no alcanza parce
@@ -59,9 +52,10 @@ public class BalanceContable {
 		Venta venta1 = new Venta(gomina, empleado1, LocalDateTime.of(2022, 5,10,12,0),5, inv);
 		Venta venta2 = new Venta(keratina, empleado2, LocalDateTime.of(2022, 8,14,12,0),5, inv);
 		
-		
+		*/
 		
 		// Comienza la interaccion con el usuario
+	public static void calcularBalance() {
 		System.out.println("Bienvenido al menu para calcular el balance contable!\n");
 		System.out.println("A continuacion podra ver de cuales meses se tienen registros para el calculo:");
 		
@@ -104,11 +98,11 @@ public class BalanceContable {
 		
 		
 		//Buscamos las Citas y Ventas que aplican al mes seleccionado
-		System.out.println(BalanceContable.calcularBalance(mes_escogido, meses));
+		System.out.println(BalanceContable.calcularMes(mes_escogido, meses));
 
 	}
 	
-	public static String calcularBalance(int mes_escogido, HashMap<Integer,String> meses){
+	public static String calcularMes(int mes_escogido, HashMap<Integer,String> meses){
 		ArrayList<Cita> citasMes = new ArrayList<Cita>();
 		ArrayList<Venta> ventasMes = new ArrayList<Venta>();
 		for(Cita cita: Cita.getCitas()) {
@@ -153,6 +147,6 @@ public class BalanceContable {
 		
 		return s;
 	}
-	*/
-	//}
+	
+	
 }

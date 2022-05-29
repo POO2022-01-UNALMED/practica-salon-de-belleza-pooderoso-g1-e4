@@ -71,7 +71,7 @@ public class Interfaz {
 			case 3 : Facturacion.facturar(); break;
 			case 2: GestionarCita.gestionCancelar(); break;
 			case 4: BalanceContable.calcularBalance();
-			case 5: System.out.println("!!Gracias por usar nuestra aplicaciï¿½n!!");break;
+			case 5: System.out.println("¡¡Gracias por usar nuestra aplicacion!!");break;
 			case 6: Serializador.serializarTodo();		
 			}
 			
