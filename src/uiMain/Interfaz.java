@@ -48,41 +48,49 @@ public class Interfaz {
 		Venta venta2 = new Venta(keratina, empleado2, LocalDateTime.of(2022, 8,14,12,0),5, inv);
 		
 		int opcion = 0;
+		
 		do {
 			
+			try {			
+			
+				gestorInterfaz.escribir("    Que desea realizar?");
+				
+				gestorInterfaz.escribir("                       ");
+				gestorInterfaz.escribir("1.Reservar cita");
+				gestorInterfaz.escribir("2.Cancelar cita");
+				gestorInterfaz.escribir("3.Facturar");
+				gestorInterfaz.escribir("4.Balance Contable");
+				gestorInterfaz.escribir("5.Terminar");
+				gestorInterfaz.escribir("6.Guardar y salir");
+				gestorInterfaz.escribir("                       ");
+				gestorInterfaz.escribir("Digite Opcion: ");
+				opcion = Integer.parseInt(entrada.nextLine());
 			
 			
-			gestorInterfaz.escribir("    Que desea realizar?");
-			
-			gestorInterfaz.escribir("                       ");
-			gestorInterfaz.escribir("1.Reservar cita");
-			gestorInterfaz.escribir("2.Cancelar cita");
-			gestorInterfaz.escribir("3.Facturar");
-			gestorInterfaz.escribir("4.Balance Contable");
-			gestorInterfaz.escribir("5.Terminar");
-			gestorInterfaz.escribir("6.Guardar y salir");
-			gestorInterfaz.escribir("                       ");
-			gestorInterfaz.escribir("Digite Opcion: ");
-			opcion = Integer.parseInt(entrada.nextLine());
-			
-			
-			switch(opcion) {
-			case 1: GestionarCita.reservarCita(); break;
-			case 3 : Facturacion.facturar(); break;
-			case 2: GestionarCita.gestionCancelar(); break;
-			case 4: BalanceContable.calcularBalance();
-			case 5: System.out.println("!!Gracias por usar nuestra aplicaciï¿½n!!");break;
-			case 6: Serializador.serializarTodo();		
+				switch(opcion) {
+				case 1: GestionarCita.reservarCita(); break;
+				case 3 : Facturacion.facturar(); break;
+				case 2: GestionarCita.gestionCancelar(); break;
+				case 4: BalanceContable.calcularBalance();
+				case 5: System.out.println("¡¡Gracias por usar nuestra aplicacion!!");break;
+				case 6: Serializador.serializarTodo();	
+				}
+
 			}
+			catch(Exception e) {
+				
+				gestorInterfaz.escribir("----Upps, hemos vuelto al menu principal----");
+				gestorInterfaz.escribir(" ");
+				opcion=5555;
+			}
+
 			
-			
-		
 		}while(opcion!=5);
 		
-		
-		//entrada.close();
+
 	}
-	
-	
+
 }
+
+
 

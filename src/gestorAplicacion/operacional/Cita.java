@@ -11,9 +11,9 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
-public class Cita implements Serializable {  //implements del serializable
+public class Cita implements Serializable {  
 	
-	//todo esto es del serializador
+	//-----------SERIALIZADOR-----------
 	private static final long serialVersionUID = 1L;
 	
 	private static ArrayList<Cita> citas;
@@ -30,9 +30,9 @@ public class Cita implements Serializable {  //implements del serializable
 		Cita.citas = citas;
 		
 	}
-	//también en cada constructor se debe poner el add al array
-	// ahora si el codigo
 	
+	
+	//-----------ATRIBUTOS-----------
 	private int idCita;
 	private String estado;
 	private Empleado empleado;
@@ -45,7 +45,7 @@ public class Cita implements Serializable {  //implements del serializable
 	public static int NumCitas=0;
 	
 	
-	
+	//-----------CONSTRUCTOR-----------
 	public Cita(Empleado empleado, Cliente cliente, ArrayList<Servicio> servicios, LocalDateTime fechaReserva, LocalDateTime fechaCita, int duracion) {
 		Cita.NumCitas ++;
 		this.idCita = Cita.NumCitas;
@@ -55,13 +55,16 @@ public class Cita implements Serializable {  //implements del serializable
 		this.fechaCita = fechaCita; 
 		this.duracion = duracion; 
 		cliente.addCita(this);
-		empleado.getCitasAsignadas().add(this);//Se le a�ade una a la lista de citas el empleado
+
+		empleado.getCitasAsignadas().add(this);//Se le anade una a la lista de citas el empleado
+
 		
-		citas.add(this);
+		
+		citas.add(this);//del Serializador
 	}
 	
 	
-	//Metodos get y set:
+	//-----------GETTERS Y SETTERS-----------
 	public int getId() {
 		return this.idCita;
 	}
@@ -125,14 +128,14 @@ public class Cita implements Serializable {  //implements del serializable
 		this.factura = factura;
 	}
 
-
+	
+	
+	//-----------OTROS METODOS-----------
 	@Override
 	public String toString() {
-		
-		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");	
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");	
-		return "Cliente=" + cliente + ", fecha de la cita= " + fechaCita.format(format) + ", duracion=" + duracion + ". Termina a las "+ fechaCita.plusMinutes(duracion).format(formatter);
+		return  cliente + ", fecha de la cita: " + fechaCita.format(format) + ", duracion:" + duracion + ". Termina a las "+ fechaCita.plusMinutes(duracion).format(formatter)+". "+ estado;
 	}
 	
 	
