@@ -23,10 +23,10 @@ public class BalanceContable {
 	public static String calcularBalance(){
 		return "Aqui iria";
 	}
-	/*
+
 	public static void main(String[] args) {
-		Empleado empleado1 =new Empleado("Marlon", "Nivia", 1000349061, 21, 32088456, "Uñas");
->>>>>>> Stashed changes
+		Empleado empleado1 =new Empleado("Marlon", "Nivia", 1000349061, 21, 32088456, "Uï¿½as");
+/*>>>>>>> Stashed changes*/
 		Empleado empleado2 =new Empleado("Julian", "Ospina", 525206530, 20, 3208844, "Pelo");//El numero no alcanza parce
 		Administrador SuperAdministador =new Administrador("Juan","Cuadrado",123,21,444444,"12-2",2222);
 		
@@ -153,6 +153,6 @@ public class BalanceContable {
 		
 		return s;
 	}
-	*/
+	
 	//}
 }
