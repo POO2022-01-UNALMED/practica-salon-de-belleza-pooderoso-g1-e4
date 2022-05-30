@@ -163,6 +163,7 @@ public class Nómina {
 			for(Venta venta: ventasMes) {
 				System.out.println("  --> "+venta.getProductoVendido().getNombreProducto()+ " $ "+venta.getProductoVendido().getPrecioVenta());
 				}
+			System.out.println(" ");
 			System.out.println("Por lo que recibe una comisión del 20% de cada producto, es decir: "+totalComi);
 		
 			System.out.println(" ");
