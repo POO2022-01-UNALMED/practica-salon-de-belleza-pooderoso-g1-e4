@@ -135,7 +135,7 @@ public class Cita implements Serializable {
 	public String toString() {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");	
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");	
-		return "Cliente=" + cliente + ", fecha de la cita= " + fechaCita.format(format) + ", duracion=" + duracion + ". Termina a las "+ fechaCita.plusMinutes(duracion).format(formatter);
+		return  cliente + ", fecha de la cita: " + fechaCita.format(format) + ", duracion:" + duracion + ". Termina a las "+ fechaCita.plusMinutes(duracion).format(formatter)+". "+ estado;
 	}
 	
 	

@@ -10,18 +10,20 @@ import uiMain.gestorInterfaz;
 
 public class GestionarCita {
 	
+	/*
 	static {		
+		
 		Empleado empleado1 =new Empleado("Marlon", "Nivia", 1000, 21, 32430847, "Uñas");		
 		Empleado empleado2 =new Empleado("Julian", "Ospina", 525206530, 20, 3208845, "Pelo");//El numero no alcanza parce poner l de Long		
 		//----------------------------
 		Cliente c1 =new Cliente("Luisa", "Palacio", 12, 23, 301623697 , "Ninguna");
 		Cita Cita1= new Cita(empleado1, c1, null, LocalDateTime.now() , LocalDateTime.of(2022, 5, 30, 14, 0) , 60);
 		
-		//Factura Factura1= new Factura(Cita1, LocalDateTime.now() ,"QR"); Yo no uso Facturas
-		//empleado1.getServiciosRealizados().add(Factura1);		
-	}
+
+	}	
+	 */
 	
-	public static void reservarCita() {
+	public static void reservarCita() throws Exception {
 		
 		//Es un nuevo Cliente?
 		gestorInterfaz.escribir("                         ");
@@ -86,7 +88,7 @@ public class GestionarCita {
 	
 	//Devuelve un nuevo Cliente
 	
-	public static Cliente crearNuevoCliente() {
+	public static Cliente crearNuevoCliente() throws Exception {
 		
 		gestorInterfaz.escribir("Por favor ingrese los datos del cliente");
 		gestorInterfaz.escribir("");
@@ -137,7 +139,7 @@ public class GestionarCita {
 	
 	public static boolean mostrarCitas(Empleado empleado, int mes, int dia) {
 		
-		gestorInterfaz.escribir("------- Citas Asignadas el dia: "+ dia+ " del mes: "+ mes+"----------");
+		gestorInterfaz.escribir("------- Citas asignadas al empleado "+ empleado.getNombre() +" el dia: "+ dia+ " del mes: "+ mes+"----------");
 		gestorInterfaz.escribir(" ");
 		boolean citasAsignadas = false;
 		for(Cita cita : empleado.getCitasAsignadas()) {	//Recorrer citas del empleado
@@ -145,7 +147,7 @@ public class GestionarCita {
 			int mesComparacion=cita.getFechaCita().getMonthValue(); //Mes cita
 			int diaComparacion=cita.getFechaCita().getDayOfMonth(); //Dia cita
 			
-			if((mes == mesComparacion)  && (dia == diaComparacion)) { //comparamos la cita
+			if((mes == mesComparacion)  && (dia == diaComparacion) && cita.getEstado()!="Cancelada") { //comparamos la cita
 				gestorInterfaz.escribir(cita);//Mostrar cita
 			    gestorInterfaz.escribir(" ");
 			    citasAsignadas = true;
@@ -157,7 +159,7 @@ public class GestionarCita {
 		
 	}
 
-	public static LocalDateTime gestionarFecha(boolean citasAsignadas,Empleado p, int mes, int dia, ArrayList<Servicio> servicios) {
+	public static LocalDateTime gestionarFecha(boolean citasAsignadas,Empleado p, int mes, int dia, ArrayList<Servicio> servicios) throws Exception {
 				
 		
 		if(citasAsignadas==false) {
@@ -239,8 +241,8 @@ public class GestionarCita {
 			int diaComparacion=cita.getFechaCita().getDayOfMonth(); //Dia cita
 			LocalDateTime existenteInicial=cita.getFechaCita();//hora Inicial
 			LocalDateTime existenteFinal=cita.getFechaCita().plusMinutes(cita.getDuracion());//hora Final
-			if((horaTentativa.getMonthValue() == mesComparacion)  && (horaTentativa.getDayOfMonth() == diaComparacion) && !cita.getEstado().equals("Cancelada")) { //comparamos la cita
-				if((horaTentativa.isBefore(existenteInicial) &&  horaTentativaFin.isBefore(existenteFinal)) || (horaTentativa.isAfter(existenteInicial) &&  horaTentativaFin.isAfter(horaTentativaFin))) {
+			if((horaTentativa.getMonthValue() == mesComparacion)  && (horaTentativa.getDayOfMonth() == diaComparacion) && cita.getEstado()!="Cancelada") { //comparamos la cita
+				if((horaTentativa.isBefore(existenteInicial) &&  horaTentativaFin.isBefore(existenteFinal)) || (horaTentativa.isAfter(existenteInicial) &&  horaTentativaFin.isAfter(existenteFinal))) {
 					gestorInterfaz.escribir(" ");
 					gestorInterfaz.escribir("Es posible generar la cita");
 					return true;
@@ -380,7 +382,7 @@ public class GestionarCita {
 	}
 	
 	
-	public static void  gestionCancelar() {
+	public static void  gestionCancelar() throws Exception {
 		int cedula =gestorInterfaz.leerEntero("Ingrese la identificación del cliente o del empleado al cual se le quiere cancelar la cita: ");
 		
 		
@@ -435,7 +437,7 @@ public class GestionarCita {
 		for (Cita cita : empleado.getCitasAsignadas()) {
 			if(id==cita.getId()) {
 				cita.setEstado("Cancelada");
-				gestorInterfaz.escribir(cita+" estado de la cita:" + cita.getEstado());
+				gestorInterfaz.escribir(cita+". **Estado de la cita:" + cita.getEstado()+"**");
 				break;
 			}					
 		}
