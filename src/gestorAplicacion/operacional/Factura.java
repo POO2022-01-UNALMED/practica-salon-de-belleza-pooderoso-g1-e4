@@ -8,9 +8,9 @@ import java.io.Serializable;
 import java.time.*;
 
 
-public class Factura implements Serializable {  //implements del serializable
+public class Factura implements Serializable {  
 	
-	//todo esto es del serializador
+	//-----------SERIALIZADOR-----------
 	private static final long serialVersionUID = 1L;
 	
 	private static ArrayList<Factura> facturas;
@@ -26,10 +26,8 @@ public class Factura implements Serializable {  //implements del serializable
 		Factura.facturas = facturas;
 	}
 	
-	//también en cada constructor se debe poner el add al array
-	// ahora si el codigo
 	
-
+	//-----------ATRIBUTOS-----------
 	private int idFactura;
 	private Cita cita;
 	private double precioTotal;
@@ -38,6 +36,9 @@ public class Factura implements Serializable {  //implements del serializable
 	public static int NumFacturas=0;
 	private HashMap<Producto, Integer> productosVendidos = new HashMap<Producto, Integer>(); // Dict con producto y cantidad
 	
+	
+	//-----------CONSTRUCTORES-----------
+	//-----------1. Para facturar una cita -----------
 	public Factura(Cita cita, LocalDateTime fecha, String metodoPago) {
 		Factura.NumFacturas++;
 		this.idFactura = Factura.NumFacturas;
@@ -48,6 +49,7 @@ public class Factura implements Serializable {  //implements del serializable
 		facturas.add(this);
 	}
 	
+	//-----------2. Para facturar productos -----------
 	public Factura( HashMap<Producto, Integer> productosVendidos, LocalDateTime fechaCompra, String metodoPago) {
 		Factura.NumFacturas++;
 		this.idFactura = Factura.NumFacturas;
@@ -58,7 +60,7 @@ public class Factura implements Serializable {  //implements del serializable
 		facturas.add(this);
 	}
 	
-	//Metodos get y set:
+	//-----------GETTERS Y SETTERS-----------
 	public int getIdFactura() {
 		return this.idFactura;
 	}
@@ -93,7 +95,16 @@ public class Factura implements Serializable {  //implements del serializable
 	public void setMetodoPago(String metodoPago) {
 		this.metodoPago = metodoPago;
 	}
+	public HashMap<Producto, Integer> getProductosVendidos(){
+		return this.productosVendidos;
+	}
+	public void setProductosVendidos(HashMap<Producto, Integer> productosVendidos) {
+		this.productosVendidos = productosVendidos;
+	}
 	
+	
+	
+	//-----------OTROS METODOS -----------
 	public float precioTotalProductos() {
 		float totalPagar = 0;
 		for(Producto p : this.productosVendidos.keySet()) {
@@ -127,9 +138,7 @@ public class Factura implements Serializable {  //implements del serializable
 		return ans;
 	}
 	
-	public HashMap<Producto, Integer> getProductosVendidos(){
-		return this.productosVendidos;
-	}
+	
 	
 	
 }

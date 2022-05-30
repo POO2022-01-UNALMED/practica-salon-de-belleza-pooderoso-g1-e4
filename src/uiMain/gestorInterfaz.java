@@ -80,6 +80,7 @@ public class gestorInterfaz {
      *
      * @param mensaje El mensaje que el usuario verá antes de ingresar un dato.
      * @return El dato colocado por el usuario en la consola como entero
+     * @throws Exception 
      * @throws NumberFormatException si el dato ingresado no representa un
      * entero.
      */

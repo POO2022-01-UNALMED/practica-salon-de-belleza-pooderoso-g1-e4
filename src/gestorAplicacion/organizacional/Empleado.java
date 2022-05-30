@@ -35,9 +35,9 @@ public class Empleado extends Persona implements Serializable {  //implements de
 	private ArrayList<Factura> serviciosRealizados = new ArrayList<Factura>();
 	private ArrayList<Cita> citasAsignadas = new ArrayList<Cita>();//---------------------------
 	private ArrayList<Producto> productosVendidos = new ArrayList<Producto>();
-	private double sueldo;
+	public final static double sueldo =100;
 	
-	//Constantes de tiempos de atención de los empleados (9 am - 6 pm)
+	//Constantes de tiempos de atenciï¿½n de los empleados (9 am - 6 pm)
 	
 	public final static LocalTime HoraInicio = LocalTime.of(9, 0,0,0);
 	public final static LocalTime HoraFinal = LocalTime.of(18, 0,0,0);
@@ -50,14 +50,7 @@ public class Empleado extends Persona implements Serializable {  //implements de
 		empleados.add(this);
 	}
 	
-	public void calcularSueldo() {//poner metodo en nomina
-		double montoServicios = 0;
-		for(Factura factura : serviciosRealizados) {
-			montoServicios = montoServicios + factura.getPrecioTotal();
-		}
-		
-		this.sueldo = montoServicios;
-	}
+
 	
 	public String getEspecialidad() {
 		return especialidad;
@@ -85,10 +78,6 @@ public class Empleado extends Persona implements Serializable {  //implements de
 
 	public double getSueldo() {
 		return sueldo;
-	}
-
-	public void setSueldo(double sueldo) {
-		this.sueldo = sueldo;
 	}
 	
 	

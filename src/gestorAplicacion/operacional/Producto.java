@@ -3,9 +3,9 @@ package gestorAplicacion.operacional;
  import java.io.Serializable;
 import java.util.ArrayList;
  
-public class Producto implements Serializable {  //implements del serializable
+public class Producto implements Serializable {  
 	
-	//Ajustes serializador
+	//-----------SERIALIZADOR-----------
 	private static final long serialVersionUID = 1L;
 	
 	private static ArrayList<Producto> productos;
@@ -22,13 +22,13 @@ public class Producto implements Serializable {  //implements del serializable
 	}
 	
 	
-	//Atributos
+	//-----------ATRIBUTOS-----------
 	public static int numProducto = 0;
 	private int productoId;
 	private String nombreProducto;
 	private float precioVenta;
 	
-	//Constructor
+	//-----------CONSTRUCTOR-----------
 	public Producto(String nombreProducto, float precioVenta){
 		this.productoId = Producto.numProducto;
 		//this.existencias = existencias;
@@ -38,6 +38,7 @@ public class Producto implements Serializable {  //implements del serializable
 		productos.add(this);
 	}
 	
+	//-----------GETTERS y SETTERS-----------
 	public int getProductoId() {
 		return productoId;
 	}
@@ -58,7 +59,7 @@ public class Producto implements Serializable {  //implements del serializable
 		this.precioVenta = precioVenta;
 	}
 	
-	
+	//-----------OTROS METODOS-----------
 	public String toString() {
 		return "El producto= "+ nombreProducto +" "+ "tiene un precio de venta de = " + precioVenta;
 		

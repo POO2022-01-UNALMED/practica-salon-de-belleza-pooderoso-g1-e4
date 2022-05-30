@@ -23,10 +23,10 @@ public class BalanceContable {
 	public static String calcularBalance(){
 		return "Aqui iria";
 	}
-	/*
+
 	public static void main(String[] args) {
-		Empleado empleado1 =new Empleado("Marlon", "Nivia", 1000349061, 21, 32088456, "Uñas");
->>>>>>> Stashed changes
+		Empleado empleado1 =new Empleado("Marlon", "Nivia", 1000349061, 21, 32088456, "Uï¿½as");
+/*>>>>>>> Stashed changes*/
 		Empleado empleado2 =new Empleado("Julian", "Ospina", 525206530, 20, 3208844, "Pelo");//El numero no alcanza parce
 		Administrador SuperAdministador =new Administrador("Juan","Cuadrado",123,21,444444,"12-2",2222);
 		
@@ -73,7 +73,7 @@ public class BalanceContable {
 		for (Venta venta: Venta.getVentas()) {
 			fechas.add(venta.getFechaVenta().get(ChronoField.MONTH_OF_YEAR));
 		}
-		System.out.println(fechas);
+		//System.out.println(fechas);
 		HashMap<Integer,String> meses = new HashMap<Integer,String>();
 		meses.put(1,"Enero"); meses.put(2,"Febrero"); meses.put(3, "Marzo"); meses.put(4, "Abril"); meses.put(5, "Mayo"); meses.put(6,"Junio");
 		meses.put(7, "Julio");meses.put(8, "Agosto"); meses.put(9, "Septiembre"); meses.put(10, "Octubre"); meses.put(11, "Noviembre"); meses.put(12, "Diciembre");
@@ -153,6 +153,6 @@ public class BalanceContable {
 		
 		return s;
 	}
-	*/
+	
 	//}
 }

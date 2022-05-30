@@ -48,7 +48,6 @@ public class Serializador {
 	//OJO EN CADA CLASE SERIALIZABLE TENEMOS QUE ESCRIBIR LAS INSTRUCCIONES DE SERIALIZAR
 	public static void serializarTodo() {
 		Serializador.serializar(Cita.getCitas(), "citas");
-		Serializador.serializar(CuentadeAhorro.getCuentasdeAhorro(), "cuentasdeahorro");
 		Serializador.serializar(Factura.getFacturas(), "facturas");
 		Serializador.serializar(Producto.getProductos(), "productos");
 		Serializador.serializar(Venta.getVentas(), "ventas");
