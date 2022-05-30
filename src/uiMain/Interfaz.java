@@ -50,7 +50,6 @@ public class Interfaz {
 			
 			
 			gestorInterfaz.escribir("    Que desea realizar?");
-			
 			gestorInterfaz.escribir("                       ");
 			gestorInterfaz.escribir("1.Reservar cita");
 			gestorInterfaz.escribir("2.Cancelar cita");
