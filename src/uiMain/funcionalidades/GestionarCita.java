@@ -23,12 +23,18 @@ public class GestionarCita {
 	}	
 	 */
 	
-	public static void reservarCita() throws Exception {
+	
+    /**
+     * Reune todos los parametros para poder generar una cita de manera correcta.
+     *
+     * @return Diferentes preguntas de confirmacion
+     */	
+	public static void reservarCita() {
 		
 		//Es un nuevo Cliente?
 		gestorInterfaz.escribir("                         ");
-		gestorInterfaz.escribir("1.Cliente ya existente");
-		gestorInterfaz.escribir("2.Nuevo Cliente");
+		gestorInterfaz.escribir("1. Cliente ya existente");
+		gestorInterfaz.escribir("2. Nuevo Cliente");
 		gestorInterfaz.escribir("Digite Opcion: ");
 		
 		
@@ -40,7 +46,7 @@ public class GestionarCita {
 						
 			gestorInterfaz.escribir("");					
 
-			int cedulaCliente=gestorInterfaz.leerEntero("Digite la identificación del cliente");				
+			int cedulaCliente=gestorInterfaz.leerEntero("Digite la identificacion del cliente");				
 			clienteaAsignar=devuelveCliente(cedulaCliente);
 			
 			while(clienteaAsignar==null) {					
@@ -57,7 +63,7 @@ public class GestionarCita {
 		gestorInterfaz.escribir(" ");				
 		mostrarEmpleados();
 		gestorInterfaz.escribir(" ");
-		int cedulaEmpleado=gestorInterfaz.leerEntero("Digite la identificacion del empleado al cual se le asignará la cita: ");
+		int cedulaEmpleado=gestorInterfaz.leerEntero("Digite la identificacion del empleado al cual se le asignara la cita: ");
 		gestorInterfaz.escribir(" ");
 		gestorInterfaz.escribir("---------------------------------------------");
 		Empleado e=GestionarCita.devuelveEmpleado(cedulaEmpleado);//Empleado
@@ -66,8 +72,8 @@ public class GestionarCita {
 		//Escoger Servicios
 		ArrayList<Servicio> servicios=GestionarCita.escogerServicios();//Servicio
 		gestorInterfaz.escribir(" ");
-		int mes=gestorInterfaz.leerEntero("Digite mes: ");
-		int dia=gestorInterfaz.leerEntero("Digite dia: ");
+		int mes=GestionarCita.ingresarMes();
+		int dia=GestionarCita.ingresarDia();
 		gestorInterfaz.escribir(" ");
 		boolean estado=GestionarCita.mostrarCitas(e,mes,dia);
 		LocalDateTime fechaCita=GestionarCita.gestionarFecha(estado,e, mes, dia,servicios);//fecha
@@ -77,7 +83,12 @@ public class GestionarCita {
 	}
 	
 
-	//Muestra la lista de empleados asignados al administrador
+    /**
+     * Muestra la lista de empleados actuales del salon de belleza
+     * 
+     *
+     * @return Muestra por consola los empleados
+     */
 	public static void mostrarEmpleados() {		
 		gestorInterfaz.escribir("------ Lista de empleados ------");
 		gestorInterfaz.escribir(" ");
@@ -86,15 +97,26 @@ public class GestionarCita {
 		}
 	}
 	
-	//Devuelve un nuevo Cliente
-	
-	public static Cliente crearNuevoCliente() throws Exception {
+    /**
+     * Crea un nuevo cliente
+     * 
+     *
+     * @return Nuevo cliente del salon de belleza, verifica si ya existe otro igual.
+     */
+	public static Cliente crearNuevoCliente() {
 		
 		gestorInterfaz.escribir("Por favor ingrese los datos del cliente");
 		gestorInterfaz.escribir("");
 		String nombre=gestorInterfaz.leer("Por favor ingrese nombre del cliente: ");	
 		String apellido=gestorInterfaz.leer("Por favor ingrese apellido del cliente: ");
 		int id=gestorInterfaz.leerEntero("Por favor ingrese identificaión del cliente: ");
+		for(Cliente cliente: Administrador.clientes) {
+			if(cliente.getId()==id) {
+				gestorInterfaz.escribir("");
+				gestorInterfaz.escribir("----Cliente ya existente, verifique nuevamente la informacion----");
+				GestionarCita.crearNuevoCliente();
+			}
+		}
 		int edad=gestorInterfaz.leerEntero("Por favor ingrese edad del cliente: ");
 		int numero=gestorInterfaz.leerEntero("Por favor ingrese numero del cliente: ");
 		String anotaciones=gestorInterfaz.leer("Por favor ingrese anotaciones del cliente: ");
@@ -108,22 +130,34 @@ public class GestionarCita {
 		
 	}
 	
-	//Traer un empleado segun su cedula
-	
+
+    /**
+     * Devuelve un empleado 
+     *
+     * @param cedula, se ingresa la identificacion del empleado.
+     * @return El empleado encontrado, a partir de la cedula
+     */
 	public static Empleado devuelveEmpleado(int cedula) {
 					
 		
 		for(Empleado e: Administrador.empleadosAsigandos) {
 			if (e.getId()==cedula) {
 				return e;
-			}
-			
+			}			
 		}
-		return null;
+		
+		int nuevaCedula=gestorInterfaz.leerEntero("Empledo no encontrado, por favor ingrese nuevamente la identificación del empleado:");
+		return GestionarCita.devuelveEmpleado(nuevaCedula);
+		
+		 
 	}
 	
-	//Traer un cliente segun su cedula
-	
+    /**
+     * Devuelve un cliente 
+     *
+     * @param cedula, se ingresa la identificacion del cliente.
+     * @return El cliente encontrado, a partir de la cedula
+     */	
 	public static Cliente devuelveCliente(int cedula) {
 		
 		for(Cliente c: Administrador.clientes) {
@@ -135,8 +169,15 @@ public class GestionarCita {
 		return null;
 	}
 	
-	//Mostrar una cita
-	
+    /**
+     * Muestra las citas de un empleado 
+     *
+     * @param empleado: El empleado al cual se le buscan las citas
+     * 		  mes: mes de las citas
+     * 		  dia: dia de las citas	
+     * @return imprime por consola las citas del empleado  y
+     * 		  devulve true or false si tiene o no citas
+     */	
 	public static boolean mostrarCitas(Empleado empleado, int mes, int dia) {
 		
 		gestorInterfaz.escribir("------- Citas asignadas al empleado "+ empleado.getNombre() +" el dia: "+ dia+ " del mes: "+ mes+"----------");
@@ -147,6 +188,7 @@ public class GestionarCita {
 			int mesComparacion=cita.getFechaCita().getMonthValue(); //Mes cita
 			int diaComparacion=cita.getFechaCita().getDayOfMonth(); //Dia cita
 			
+			Cita citaBandera;
 			if((mes == mesComparacion)  && (dia == diaComparacion) && cita.getEstado()!="Cancelada") { //comparamos la cita
 				gestorInterfaz.escribir(cita);//Mostrar cita
 			    gestorInterfaz.escribir(" ");
@@ -159,7 +201,17 @@ public class GestionarCita {
 		
 	}
 
-	public static LocalDateTime gestionarFecha(boolean citasAsignadas,Empleado p, int mes, int dia, ArrayList<Servicio> servicios) throws Exception {
+	   /**
+     * Devuelve un fecha 
+     *
+     * @param citasAsigndas: si el empleado tine o no citas
+     * 		  Empleado: empleado para verificar las citas
+     * 		  mes: mes de las citas
+     * 		  dia: dia de las citas
+     * 		  servicios: los servicios que se quieren de una cita	
+     * @return la fecha de la cita
+     */	
+	public static LocalDateTime gestionarFecha(boolean citasAsignadas,Empleado p, int mes, int dia, ArrayList<Servicio> servicios)  {
 				
 		
 		if(citasAsignadas==false) {
@@ -168,8 +220,8 @@ public class GestionarCita {
 			int cambioDia=gestorInterfaz.leerEntero("Digite 0 para escoger otro día, de lo contrario 1");//Escoger otro día
 			if (cambioDia==0){
 				gestorInterfaz.escribir(" ");
-				int NuevoMes=gestorInterfaz.leerEntero("Digite nuevo mes");//Escoger otro mes
-				int nuevoDia=gestorInterfaz.leerEntero("Digite nuevo dia");//Escoger otro mes
+				int NuevoMes=GestionarCita.ingresarMes();//Escoger otro mes
+				int nuevoDia=GestionarCita.ingresarDia();//Escoger otro mes
 				boolean estado = mostrarCitas(p, NuevoMes, nuevoDia);
 				gestionarFecha(estado,p, NuevoMes, nuevoDia,servicios);
 			}
@@ -178,8 +230,8 @@ public class GestionarCita {
 				boolean validar=false;
 				LocalDateTime citaFinal = null;
 				while(validar==false) {
-					int hora=gestorInterfaz.leerEntero("Digite la hora");
-					int minuto=gestorInterfaz.leerEntero("Digite los minutos");			
+					int hora=GestionarCita.ingresarHora();
+					int minuto=GestionarCita.ingresarMinutos();			
 					//devolver hora de la cita				
 					citaFinal=LocalDateTime.of(2022, mes, dia, hora, minuto); //crea la cita
 					validar=GestionarCita.validarHora(p, citaFinal, servicios);
@@ -193,11 +245,11 @@ public class GestionarCita {
 		}
 		else {
 		
-			int cambioDia=gestorInterfaz.leerEntero("Digite 0 para escoger otro día, de lo contrario 1");//Escoger otro día
+			int cambioDia=gestorInterfaz.leerEntero("Digite 0 para escoger otro dia, de lo contrario 1");//Escoger otro día
 			if (cambioDia==0){
 				gestorInterfaz.escribir(" ");
-				int NuevoMes=gestorInterfaz.leerEntero("Digite nuevo mes");//Escoger otro mes
-				int nuevoDia=gestorInterfaz.leerEntero("Digite nuevo dia");//Escoger otro mes				
+				int NuevoMes=GestionarCita.ingresarMes();//Escoger otro mes
+				int nuevoDia=GestionarCita.ingresarDia();//Escoger otro mes				
 				boolean estado = mostrarCitas(p, NuevoMes, nuevoDia);
 				LocalDateTime cita=gestionarFecha(estado,p, NuevoMes, nuevoDia,servicios);
 			}
@@ -206,8 +258,8 @@ public class GestionarCita {
 				boolean validar=false;
 				LocalDateTime citaFinal = null;
 				while(validar==false) {
-					int hora=gestorInterfaz.leerEntero("Digite la hora");
-					int minuto=gestorInterfaz.leerEntero("Digite los minutos");			
+					int hora=GestionarCita.ingresarHora();
+					int minuto=GestionarCita.ingresarMinutos();			
 					//devolver hora de la cita				
 					citaFinal=LocalDateTime.of(2022, mes, dia, hora, minuto); //crea la cita
 					validar=GestionarCita.validarHora(p, citaFinal, servicios);
@@ -223,6 +275,15 @@ public class GestionarCita {
 		
 	}	
 	
+	  /**
+     * Verifica que una cita se pueda llevar a cabo 
+     *
+     * @param 
+     * 		  Empleado: empleado para verificar las citas
+     * 		  horaTentativa: posible hora a validar
+     * 		  servicios: los servicios que se quieren de una cita	
+     * @return true en caso de que se pueda generar una cita false de lo contrario
+     */
 	
 	public static boolean  validarHora(Empleado p, LocalDateTime horaTentativa, ArrayList<Servicio> servicios) {
 		
@@ -231,7 +292,7 @@ public class GestionarCita {
 		LocalDateTime horaTentativaFin=horaTentativa.plusMinutes(duracion);
 		
 		if(horaTentativa.toLocalTime().isBefore(Empleado.HoraInicio)  || horaTentativa.toLocalTime().isAfter(Empleado.HoraFinal) ) {
-			gestorInterfaz.escribir("Recuer que los horaios de atención son de: 9 a 18 ");
+			gestorInterfaz.escribir("Recuerde que los horarios de atencion son de: 9 a 18 ");
 			return false;
 			
 		}
@@ -258,8 +319,13 @@ public class GestionarCita {
 		
 		return true;
 	}
-	
-	public static ArrayList<Servicio> escogerServicios() {//Devuelve un arreglo de servicios
+
+	  /**
+     * Muestra y permite seleccionar los servicios que una persona quiere seleccionar
+     *	
+     * @return evuelve un arreglo de servicios escogidos por el cliente
+     */
+	public static ArrayList<Servicio> escogerServicios() {
 		
 		gestorInterfaz.escribir("");
 		gestorInterfaz.escribir("Escoja separado por espacios los servicos que requiere");
@@ -363,7 +429,13 @@ public class GestionarCita {
 		
 		return serviciosEscogidos;
 	}	
-	
+
+	 /**     
+	 * Devuelve la duracion de una cita a partir una cita	
+     * @param servicios: lista de servicios 
+     * 
+     * @return la duracion de una cita a partir de los servicios escogidos
+     */
 	public static int duracionCita (ArrayList <Servicio> servicios) {
 		
 		int duracion=0;
@@ -373,7 +445,17 @@ public class GestionarCita {
 		return duracion;
 	}
 	
-	
+
+	/**     
+	* Genera una cita
+     * @param Empleado: empleado al cual se le va a asignar una cita 
+    *         cliente: cliente al cual se le va a gnerar una cita
+    *         servicios: lista de servicios escogidos
+    *         fechaReserva: fecha en la que se agendo la cita
+    *         fechaCita: fecha en la cual se realizara la cita 
+    *
+    * @return la duracion de una cita a partir de los servicios escogidos
+    */
 	public static void generarCita(Empleado empleado, Cliente cliente, ArrayList<Servicio> servicios, LocalDateTime fechaReserva, LocalDateTime fechaCita){
 	    int duracion= GestionarCita.duracionCita(servicios);
 		Cita nuevaCita=new Cita( empleado,  cliente, servicios,fechaReserva, fechaCita, duracion);
@@ -381,15 +463,21 @@ public class GestionarCita {
 		
 	}
 	
-	
-	public static void  gestionCancelar() throws Exception {
+
+	/**     
+	* Gestiona la cancelacion de una cita
+	* 
+	* verifica si se desea cancelar a partir de un empleado o de un cliente 
+	* hace una casteo a partir de lo que recibe de otros metodos
+    */
+	public static void  gestionCancelar() {
 		int cedula =gestorInterfaz.leerEntero("Ingrese la identificación del cliente o del empleado al cual se le quiere cancelar la cita: ");
 		
 		
 		Persona persona =devolverPersona(cedula);
 		
 		while (persona==null) {
-			cedula=gestorInterfaz.leerEntero("Verfique la identificación de la persona");
+			cedula=gestorInterfaz.leerEntero("Verifique la identificacion de la persona");
 			gestorInterfaz.escribir(" ");
 			persona =devolverPersona(cedula);
 		}
@@ -403,25 +491,37 @@ public class GestionarCita {
 			GestionarCita.cancelarCita(((Cliente)persona));
 		}		
 	}
-	
+
+	/**     
+	* Devuelve una persona a partir de su cedula
+    * @param cedula: cedula de la persona a la cual se le quiere cancelar la cita  
+    *
+    * @return La persona a la cual se le quiere cancelar la cita
+    */
 	public static Persona devolverPersona(int cedula) {		
 		Persona persona;
 		for(Empleado empleado : Administrador.empleadosAsigandos ) {
 			if(empleado.getId()==cedula) {
-				gestorInterfaz.escribir("Empleado encontarado: " + empleado);
+				gestorInterfaz.escribir("Empleado encontrado: " + empleado);
 				return empleado;
 			}
 		}
 		
 		for(Cliente cliente : Administrador.clientes) {
 			if(cliente.getId()==cedula) {
-				gestorInterfaz.escribir("Cliente encontarado: " + cliente);
+				gestorInterfaz.escribir("Cliente encontrado: " + cliente);
 				return cliente;
 			}
 		}		
 		return null;						
 	}
 	
+	/**     
+	* Se cancela la cita de un Empleado
+    * @param Emplead: objeto de tipo empleado  
+    *
+    * @return un mensaje consola de la cita del empleado cancelada 
+    */	
 	public static void cancelarCita(Empleado empleado) {
 		
 		for (Cita cita : empleado.getCitasAsignadas()) {
@@ -443,7 +543,13 @@ public class GestionarCita {
 		}
 		
 	}
-	
+
+	/**     
+	* Se cancela la cita de un Cliente
+    * @param cliento: objeto de tipo cliente  
+    *
+    * @return un mensaje consola de la cita del cliente cancelada 
+    */		
 	public static void cancelarCita(Cliente cliente) {
 		
 		for (Cita cita : cliente.getCitasGeneradas()) {
@@ -466,6 +572,85 @@ public class GestionarCita {
 		
 		
 	}
-	
 
+	/**     
+	* Verifica que se pueda escoger un mes  
+    *
+    * @return un entero con un mes correcto 
+    */
+	public static int ingresarMes() {
+		
+		int mes=gestorInterfaz.leerEntero("Digite el mes de la cita:");
+		if(mes<LocalDateTime.now().getMonthValue()) {
+			gestorInterfaz.escribir("El mes debe ser mayor o igual al actual");
+			return GestionarCita.ingresarMes();
+		}
+		else if(mes<=0 || mes >12){
+			gestorInterfaz.escribir("El mes debe estar entre 0 y 12");
+			return GestionarCita.ingresarMes();
+		}
+		else {
+			return mes;
+		}
+				
+	}
+
+	/**     
+	* Verifica que se pueda escoger un dia  
+    *
+    * @return un entero con un dia correcto 
+    */	
+	public static int ingresarDia() {
+		
+		int dia=gestorInterfaz.leerEntero("Digite el dia de la cita:");
+		if(dia<LocalDateTime.now().getDayOfMonth()) {
+			gestorInterfaz.escribir("El dia debe ser mayor o igual al actual");
+			return GestionarCita.ingresarDia();
+		}
+		else if(dia<=0 || dia >31){
+			gestorInterfaz.escribir("El dia debe estar entre 0 y 31");
+			return GestionarCita.ingresarDia();
+		}
+		else {
+			return dia;
+		}
+
+	}
+	
+	/**     
+	* Verifica que se pueda escoger una hora  
+    *
+    * @return un entero con una hora correcta 
+    */	
+	public static int ingresarHora() {		
+		int hora=gestorInterfaz.leerEntero("Digite la hora de la cita:");		
+		if(hora<=0 || hora >24){
+			gestorInterfaz.escribir("La hora debe estar entre 0 y 24");
+			return GestionarCita.ingresarHora();
+		}
+		else {
+			return hora;
+		}
+		
+	}
+
+	/**     
+	* Verifica que se puedan escoger unos minutos  
+    *
+    * @return un entero con los minutos correctos 
+    */	
+	public static int ingresarMinutos() {		
+
+		int minutos=gestorInterfaz.leerEntero("Digite los minutos de la cita:");		
+		if(minutos<=0 || minutos >60){
+			gestorInterfaz.escribir("Los minutos deben estar entre 0 y 60");
+			return GestionarCita.ingresarMinutos();
+		}
+		else {
+			return minutos;
+		}
+		
+	}	
+	
+	
 }
