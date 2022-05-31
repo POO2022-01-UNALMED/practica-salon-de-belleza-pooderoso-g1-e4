@@ -1,5 +1,6 @@
 package uiMain.funcionalidades;
 import java.util.Map;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Iterator;
@@ -21,6 +22,18 @@ public class Otras {
 			System.out.println("|" + nombreProducto + ch.repeat(28 - nombreProducto.length()) +  "|" + productos.getValue() + "    |");
 		}
 		System.out.println("|----------------------------|------|");
+		
+	}
+	
+	public static void gestionarSeguros() {
+		
+		ArrayList<Persona> listaPersonas = Persona.getPersonas();
+		
+		for(Persona p: listaPersonas) {
+			
+			System.out.println(p.mostrarVigenciaSeguro());
+			
+		}
 		
 	}
 	

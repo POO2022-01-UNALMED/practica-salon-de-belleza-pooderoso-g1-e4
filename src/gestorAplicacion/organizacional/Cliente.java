@@ -1,5 +1,7 @@
 package gestorAplicacion.organizacional;
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import gestorAplicacion.operacional.Cita;
@@ -43,6 +45,7 @@ public class Cliente extends Persona implements Serializable {
 		ClientePremiun = false;
 		Administrador.clientes.add(this);
 		clientes.add(this);
+		Persona.personas.add(this);
 	}
 	
 	public Cliente(String nombre, String apellido, int id, int edad, int numero, String anotaciones, boolean clientePremiun) {
@@ -51,6 +54,27 @@ public class Cliente extends Persona implements Serializable {
 		ClientePremiun = clientePremiun;
 		Administrador.clientes.add(this);
 		clientes.add(this);
+		Persona.personas.add(this);
+	}
+	
+	//----------METODO ABSTRACTO-----------
+	public String mostrarVigenciaSeguro() {
+		
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		
+		ArrayList<Cita> citasCliente = this.getCitasGeneradas();
+		String cadena = "";
+		
+		for(Cita c : citasCliente ) {
+			
+			LocalDateTime fechaCita = c.getFechaCita();
+			int duracion = c.getDuracion();
+			
+			cadena = cadena + "El cliente está asegurado de " + fechaCita.format(formato) + " a " + fechaCita.plusMinutes(duracion).format(formato) + "\n";
+		}
+		
+		return cadena;
+		
 	}
 	
 	

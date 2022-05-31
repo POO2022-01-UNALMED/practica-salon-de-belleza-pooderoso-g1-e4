@@ -93,6 +93,8 @@ public class Interfaz {
 				gestorInterfaz.escribir("6.Guardar y salir");
 				gestorInterfaz.escribir("7.Guardar y continuar");
 				gestorInterfaz.escribir("8.Mostrar clientes");
+				gestorInterfaz.escribir("9.Gestionar seguros");
+				gestorInterfaz.escribir("10.Mostrar inventario");
 				
 				//gestorInterfaz.escribir("5.Terminar");
 				//gestorInterfaz.escribir("6.Nómina");
@@ -114,6 +116,8 @@ public class Interfaz {
 				case 6: Serializador.serializarTodo();break;
 				case 7: Serializador.serializarTodo();break;
 				case 8: mostrarClientes();break;
+				case 9: Otras.gestionarSeguros();
+				case 10: Otras.mostrarInventario();break;
 
 				}
 

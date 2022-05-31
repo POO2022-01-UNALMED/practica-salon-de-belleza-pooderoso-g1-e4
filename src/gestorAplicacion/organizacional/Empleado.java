@@ -1,5 +1,7 @@
 package gestorAplicacion.organizacional;
-
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 import java.util.ArrayList;
 import java.io.Serializable;
 import java.time.*;
@@ -38,6 +40,8 @@ public class Empleado extends Persona implements Serializable,Comparable<Emplead
 	private ArrayList<Cita> citasAsignadas = new ArrayList<Cita>();//---------------------------
 	private ArrayList<Producto> productosVendidos = new ArrayList<Producto>();
 	private double sueldo;
+	private final int duracionMesesSeguro = 6;
+	private final String nivelARL = "III"; 
 	
 	//Constantes de tiempos de atenci�n de los empleados (9 am - 6 pm)
 	
@@ -52,7 +56,18 @@ public class Empleado extends Persona implements Serializable,Comparable<Emplead
 		
 		Administrador.empleadosAsigandos.add(this);//Cardinalidad de clases
 		empleados.add(this);
+		Persona.personas.add(this);
 	}
+	
+	
+	//-----------METODO ABSTRACTOS-----------
+		public String mostrarVigenciaSeguro() {
+			
+			DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			
+			return "Empleado con ARL " + this.nivelARL + " est� asegurado de " + this.fechaRegistro.format(formato) + " a " + this.fechaRegistro.plusMonths(this.duracionMesesSeguro).format(formato);
+			
+		}
 	
 
 	

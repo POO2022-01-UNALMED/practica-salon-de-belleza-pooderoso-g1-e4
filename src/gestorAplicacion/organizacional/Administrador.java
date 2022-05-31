@@ -1,7 +1,9 @@
 package gestorAplicacion.organizacional;
 import java.io.Serializable;
 import java.util.ArrayList;
-
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.*;
 
 
 public class Administrador extends Persona implements Serializable, Salario {  
@@ -29,6 +31,8 @@ public class Administrador extends Persona implements Serializable, Salario {
 	private String horarioLaboral;
 	private int nomina;
 	private double sueldo;
+	private final int duracionMesesSeguro = 1;
+	private final String nivelARL = "II"; 
 	
 	
 	//-----------ATRIBUTOS DE CLASE-----------
@@ -43,7 +47,7 @@ public class Administrador extends Persona implements Serializable, Salario {
 		this.nomina=nomina;
 		this.empleadosAsigandos=empleadosAsigandos;	
 		this.sueldo = Salario.SALARIO_BASE * 3;
-		
+		Persona.personas.add(this);
 		administradores.add(this);
 	}
 	
@@ -79,6 +83,15 @@ public class Administrador extends Persona implements Serializable, Salario {
 	public void aumentarSueldo(double porcentaje) {
 		setSueldo(this.sueldo*(1+porcentaje));
 	}
+	
+	//-----------METODO ABSTRACTOS-----------
+		public String mostrarVigenciaSeguro() {
+			
+			DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			
+			return "El administrador " + this.getNombre() + " con ARL " + this.nivelARL +  " est� asegurado de " + this.fechaRegistro.format(formato) + " a " + this.fechaRegistro.plusMonths(this.duracionMesesSeguro).format(formato);
+			
+		}
 
 	
 	//-----------OTROS METODOS-----------
@@ -113,6 +126,7 @@ public class Administrador extends Persona implements Serializable, Salario {
 		//Empleados
 		System.out.println("nomina Pagada");		
 	}
+	
 	
 	public void ventaProductos() {
 		System.out.println("venta Productos");		

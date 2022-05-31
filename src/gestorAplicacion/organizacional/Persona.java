@@ -1,13 +1,14 @@
 package gestorAplicacion.organizacional;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class Persona implements Serializable {  
+public abstract class Persona implements Serializable {  
 	
 	//-----------SERIALIZADOR-----------
 	private static final long serialVersionUID = 1L;
 	
-	private static ArrayList<Persona> personas;
+	public static ArrayList<Persona> personas;
 	static {
 		personas = new ArrayList<Persona>();
 	}
@@ -28,6 +29,7 @@ public class Persona implements Serializable {
 	private int id;
 	private int Edad;
 	private int Numero;
+	protected LocalDateTime fechaRegistro;
 
 	//-----------CONSTRUCTOR-----------
 	public Persona(String nombre, String apellido, int id, int edad, int numero) {
@@ -38,6 +40,7 @@ public class Persona implements Serializable {
 		Edad = edad;
 		Numero = numero;
 		personas.add(this);
+		fechaRegistro = LocalDateTime.now();
 	}
 
 	
@@ -76,6 +79,10 @@ public class Persona implements Serializable {
 	public void setNumero(int numero) {
 		Numero = numero;
 	}
+	
+	//-----------METODO ABSTRACTOS-----------
+	
+	public abstract String mostrarVigenciaSeguro();
 
 	//-----------OTROS METODOS-----------
 	@Override
