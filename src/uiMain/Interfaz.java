@@ -62,7 +62,6 @@ public class Interfaz {
 		
 		Venta venta1 = new Venta(gomina, empleado1, LocalDateTime.of(2022, 5,10,12,0),5, inv);
 		Venta venta2 = new Venta(keratina, empleado2, LocalDateTime.of(2022, 8,14,12,0),5, inv);
-		}
 		
 		HashMap<Producto, Integer> stockInicial = new HashMap<Producto, Integer>();
 		stockInicial.put(gomina, 23);
@@ -73,6 +72,9 @@ public class Interfaz {
 		
 		//Inventario
 		Inventario inventario = new Inventario(stockInicial);
+		}
+		
+
 		
 		int opcion = 0;
 		
