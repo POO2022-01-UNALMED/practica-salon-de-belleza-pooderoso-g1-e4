@@ -20,6 +20,8 @@ public class Inventario {
 			public static HashMap<Producto, Integer> getInventario() {
 					return inventario;
 				}
+			
+			
 	//-----------ATRIBUTOS-----------
 	private HashMap<Producto, Integer> listaProductos = new HashMap<Producto, Integer>();
 	

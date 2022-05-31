@@ -22,6 +22,7 @@ public class Cliente extends Persona implements Serializable {
 
 	public static void setClientes(ArrayList<Cliente> clientes) {
 		Cliente.clientes = clientes;
+		Administrador.clientes=clientes;
 	}
 	
 	
