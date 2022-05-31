@@ -23,7 +23,7 @@ public class Venta implements Serializable {
 				return ventas;
 			}
 
-			public static void setVentas(ArrayList<Venta> ventas) {
+		public static void setVentas(ArrayList<Venta> ventas) {
 				Venta.ventas = ventas;
 			}
 		
@@ -53,8 +53,7 @@ public class Venta implements Serializable {
 		this.idVenta = Venta.numVenta;
 		this.inventario = inventario;
 		this.inventario.actualizarExistencias(productoVendido, cantidadVendida);
-		
-		ventas.add(this); //del serializador
+		ventas.add(this);
 	}
 	
 	
@@ -96,7 +95,7 @@ public class Venta implements Serializable {
 	}
 	public double calcularComision(Producto productoVendido) {
 		comision= this.productoVendido.getPrecioVenta() * porcentajeComision;
-		
+	
 		return comision;
 	}    
 }
