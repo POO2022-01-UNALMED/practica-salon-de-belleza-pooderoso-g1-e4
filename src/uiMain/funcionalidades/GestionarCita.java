@@ -2,6 +2,7 @@ package uiMain.funcionalidades;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import gestorAplicacion.operacional.*;
 import gestorAplicacion.organizacional.*;
@@ -73,7 +74,7 @@ public class GestionarCita {
 		ArrayList<Servicio> servicios=GestionarCita.escogerServicios();//Servicio
 		gestorInterfaz.escribir(" ");
 		int mes=GestionarCita.ingresarMes();
-		int dia=GestionarCita.ingresarDia();
+		int dia=GestionarCita.ingresarDia(mes);
 		gestorInterfaz.escribir(" ");
 		boolean estado=GestionarCita.mostrarCitas(e,mes,dia);
 		LocalDateTime fechaCita=GestionarCita.gestionarFecha(estado,e, mes, dia,servicios);//fecha
@@ -92,7 +93,7 @@ public class GestionarCita {
 	public static void mostrarEmpleados() {		
 		gestorInterfaz.escribir("------ Lista de empleados ------");
 		gestorInterfaz.escribir(" ");
-		for(Empleado e : Administrador.empleadosAsigandos) {
+		for(Empleado e : Empleado.getEmpleados()) {
 			gestorInterfaz.escribir(e);
 		}
 	}
@@ -110,7 +111,7 @@ public class GestionarCita {
 		String nombre=gestorInterfaz.leer("Por favor ingrese nombre del cliente: ");	
 		String apellido=gestorInterfaz.leer("Por favor ingrese apellido del cliente: ");
 		int id=gestorInterfaz.leerEntero("Por favor ingrese identificaión del cliente: ");
-		for(Cliente cliente: Administrador.clientes) {
+		for(Cliente cliente: Cliente.getClientes()) {
 			if(cliente.getId()==id) {
 				gestorInterfaz.escribir("");
 				gestorInterfaz.escribir("----Cliente ya existente, verifique nuevamente la informacion----");
@@ -140,7 +141,7 @@ public class GestionarCita {
 	public static Empleado devuelveEmpleado(int cedula) {
 					
 		
-		for(Empleado e: Administrador.empleadosAsigandos) {
+		for(Empleado e: Empleado.getEmpleados()) {
 			if (e.getId()==cedula) {
 				return e;
 			}			
@@ -160,7 +161,7 @@ public class GestionarCita {
      */	
 	public static Cliente devuelveCliente(int cedula) {
 		
-		for(Cliente c: Administrador.clientes) {
+		for(Cliente c: Cliente.getClientes()) {
 			if (c.getId()==cedula) {
 				return c;
 			}
@@ -183,17 +184,28 @@ public class GestionarCita {
 		gestorInterfaz.escribir("------- Citas asignadas al empleado "+ empleado.getNombre() +" el dia: "+ dia+ " del mes: "+ mes+"----------");
 		gestorInterfaz.escribir(" ");
 		boolean citasAsignadas = false;
+		
+		ArrayList<Cita> citasDelDia = new ArrayList<Cita> ();
+		
 		for(Cita cita : empleado.getCitasAsignadas()) {	//Recorrer citas del empleado
 			
 			int mesComparacion=cita.getFechaCita().getMonthValue(); //Mes cita
 			int diaComparacion=cita.getFechaCita().getDayOfMonth(); //Dia cita
 			
-			Cita citaBandera;
 			if((mes == mesComparacion)  && (dia == diaComparacion) && cita.getEstado()!="Cancelada") { //comparamos la cita
-				gestorInterfaz.escribir(cita);//Mostrar cita
-			    gestorInterfaz.escribir(" ");
+				//gestorInterfaz.escribir(cita);//Mostrar cita
+			    //gestorInterfaz.escribir(" ");
+			    citasDelDia.add(cita);
+			    
 			    citasAsignadas = true;
 			}							
+		}
+		
+		Collections.sort(citasDelDia);
+		for(Cita cita: citasDelDia) {
+			gestorInterfaz.escribir(cita);//Mostrar cita
+		    gestorInterfaz.escribir(" ");
+			
 		}
 		
 		return citasAsignadas;
@@ -221,7 +233,7 @@ public class GestionarCita {
 			if (cambioDia==0){
 				gestorInterfaz.escribir(" ");
 				int NuevoMes=GestionarCita.ingresarMes();//Escoger otro mes
-				int nuevoDia=GestionarCita.ingresarDia();//Escoger otro mes
+				int nuevoDia=GestionarCita.ingresarDia(NuevoMes);//Escoger otro mes
 				boolean estado = mostrarCitas(p, NuevoMes, nuevoDia);
 				gestionarFecha(estado,p, NuevoMes, nuevoDia,servicios);
 			}
@@ -249,7 +261,7 @@ public class GestionarCita {
 			if (cambioDia==0){
 				gestorInterfaz.escribir(" ");
 				int NuevoMes=GestionarCita.ingresarMes();//Escoger otro mes
-				int nuevoDia=GestionarCita.ingresarDia();//Escoger otro mes				
+				int nuevoDia=GestionarCita.ingresarDia(NuevoMes);//Escoger otro mes				
 				boolean estado = mostrarCitas(p, NuevoMes, nuevoDia);
 				LocalDateTime cita=gestionarFecha(estado,p, NuevoMes, nuevoDia,servicios);
 			}
@@ -500,14 +512,14 @@ public class GestionarCita {
     */
 	public static Persona devolverPersona(int cedula) {		
 		Persona persona;
-		for(Empleado empleado : Administrador.empleadosAsigandos ) {
+		for(Empleado empleado : Empleado.getEmpleados() ) {
 			if(empleado.getId()==cedula) {
 				gestorInterfaz.escribir("Empleado encontrado: " + empleado);
 				return empleado;
 			}
 		}
 		
-		for(Cliente cliente : Administrador.clientes) {
+		for(Cliente cliente : Cliente.getClientes()) {
 			if(cliente.getId()==cedula) {
 				gestorInterfaz.escribir("Cliente encontrado: " + cliente);
 				return cliente;
@@ -524,6 +536,10 @@ public class GestionarCita {
     */	
 	public static void cancelarCita(Empleado empleado) {
 		
+		gestorInterfaz.escribir(" ");
+		gestorInterfaz.escribir("=== Se muestra las citas ordenadas por fecha ===");
+		gestorInterfaz.escribir(" ");
+		Collections.sort(empleado.getCitasAsignadas());
 		for (Cita cita : empleado.getCitasAsignadas()) {
 			if(cita.getEstado()!="Cancelada") {
 				gestorInterfaz.escribir("id de la cita: "+cita.getId()+" - "+cita);
@@ -552,6 +568,10 @@ public class GestionarCita {
     */		
 	public static void cancelarCita(Cliente cliente) {
 		
+		gestorInterfaz.escribir(" ");
+		gestorInterfaz.escribir("=== Se muestra las citas ordenadas por fecha ===");
+		gestorInterfaz.escribir(" ");
+		Collections.sort(cliente.getCitasGeneradas());
 		for (Cita cita : cliente.getCitasGeneradas()) {
 			if(cita.getEstado()!="Cancelada") {
 				gestorInterfaz.escribir("id de la cita: "+cita.getId()+" - "+cita);
@@ -600,16 +620,19 @@ public class GestionarCita {
     *
     * @return un entero con un dia correcto 
     */	
-	public static int ingresarDia() {
+	public static int ingresarDia(int mes) {
 		
 		int dia=gestorInterfaz.leerEntero("Digite el dia de la cita:");
-		if(dia<LocalDateTime.now().getDayOfMonth()) {
-			gestorInterfaz.escribir("El dia debe ser mayor o igual al actual");
-			return GestionarCita.ingresarDia();
+		int diaActual= LocalDateTime.now().getDayOfMonth();
+		int mesActual= LocalDateTime.now().getMonthValue();
+		
+		if( dia< diaActual  && mes <= mesActual ) {
+			gestorInterfaz.escribir("El dia debe estar ser mayor al actuañ");
+			return GestionarCita.ingresarDia(mes);
 		}
 		else if(dia<=0 || dia >31){
 			gestorInterfaz.escribir("El dia debe estar entre 0 y 31");
-			return GestionarCita.ingresarDia();
+			return GestionarCita.ingresarDia(mes);
 		}
 		else {
 			return dia;
@@ -642,7 +665,7 @@ public class GestionarCita {
 	public static int ingresarMinutos() {		
 
 		int minutos=gestorInterfaz.leerEntero("Digite los minutos de la cita:");		
-		if(minutos<=0 || minutos >60){
+		if(minutos<0 || minutos >60){
 			gestorInterfaz.escribir("Los minutos deben estar entre 0 y 60");
 			return GestionarCita.ingresarMinutos();
 		}

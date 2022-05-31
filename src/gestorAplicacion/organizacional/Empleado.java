@@ -7,7 +7,7 @@ import java.time.*;
 import gestorAplicacion.operacional.*;
 
 
-public class Empleado extends Persona implements Serializable {  //implements del serializable
+public class Empleado extends Persona implements Serializable,Comparable<Empleado> {  //implements del serializable
 	
 	//todo esto es del serializador
 	private static final long serialVersionUID = 1L;
@@ -96,6 +96,12 @@ public class Empleado extends Persona implements Serializable {  //implements de
 	
 	public String getIdEmpleado() {
 		return idEmpleado;
+	}
+
+	@Override
+	public int compareTo(Empleado o) {
+		
+		return 0;
 	}
 	
 }
