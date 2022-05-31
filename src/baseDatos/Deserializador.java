@@ -109,6 +109,6 @@ public class Deserializador {
 		Deserializador.deserializador(Cliente.getClientes(), "clientes");
 		Deserializador.deserializador(Empleado.getEmpleados(), "empleados");
 		Deserializador.deserializador(Persona.getPersonas(), "personas");
-		Deserializador.deserializador(Inventario.getInventario(), "invenario");
+		Deserializador.deserializador(Inventario.getInventario(), "inventario");
 	}
 }
