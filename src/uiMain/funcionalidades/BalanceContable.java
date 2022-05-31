@@ -86,8 +86,10 @@ public class BalanceContable {
 		
 		double totalCitas = 0;
 		for(Cita cita: citasMes) {
-			for (Servicio servicio: cita.getServicios()) {
-				totalCitas += servicio.getPrecio();
+			if(cita.getEstado().equals("Pendiente") || cita.getEstado().equals("Exitosa")){
+				for (Servicio servicio: cita.getServicios()) {
+					totalCitas += servicio.getPrecio();
+				}
 			}
 		}
 		double totalVentas = 0;
@@ -101,8 +103,9 @@ public class BalanceContable {
 		double pagoComisionesProductos = totalVentas*Venta.porcentajeComision;
 		//Faltaria lo del patrimonio... 
 		double valorNeto = totalCitas+totalVentas - pagoEmpleados-pagoComisionesProductos;
-		String s = "Balance Contable para el mes "+meses.get(mes_escogido)+" del 2022:"
-				+ "\nValor total por Citas: "+totalCitas+
+		String s = "Balance Contable para el mes "+meses.get(mes_escogido)+" del 2022:" +
+				"\n-------------------------------"+
+				"\nValor total por Citas: "+totalCitas+
 				"\nValor total por Ventas: "+totalVentas+
 				"\nPago Comisiones de Productos: -"+pagoComisionesProductos+
 				"\nPago mensual a Empleados: -"+pagoEmpleados+
