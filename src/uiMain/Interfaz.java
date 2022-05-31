@@ -69,15 +69,16 @@ public class Interfaz {
 			
 				switch(opcion) {
 				case 1: GestionarCita.reservarCita(); break;
-				case 3 : Facturacion.facturar(); break;
 				case 2: GestionarCita.gestionCancelar(); break;
-				case 4: BalanceContable.calcularBalance();
+				case 3: Facturacion.facturar(); break;				
+				case 4: BalanceContable.calcularBalance();break;
 				case 5: System.out.println("¡¡Gracias por usar nuestra aplicacion!!");break;
 				case 6: Serializador.serializarTodo();	
 				}
 
 			}
 			catch(Exception e) {
+				
 				
 				gestorInterfaz.escribir("----Upps, hemos vuelto al menu principal----");
 				gestorInterfaz.escribir(" ");

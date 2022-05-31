@@ -23,7 +23,7 @@ import gestorAplicacion.organizacional.Cliente;
 import gestorAplicacion.organizacional.Empleado;
 
 
-public class NÃ³mina {
+public class Nómina {
 	
 
 	public static void main(String[] args) {
