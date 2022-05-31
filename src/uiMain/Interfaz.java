@@ -21,7 +21,7 @@ public class Interfaz {
 		Deserializador.deserializarTodo();
 			
 		Scanner entrada =new Scanner(System.in);
-
+		
 		if (Administrador.getAdministradores().isEmpty()) {
 			
 			

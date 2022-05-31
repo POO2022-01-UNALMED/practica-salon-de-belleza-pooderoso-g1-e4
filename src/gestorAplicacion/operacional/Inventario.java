@@ -29,7 +29,7 @@ public class Inventario implements Serializable {
 	//-----------CONSTRUCTOR-----------
 	public Inventario(HashMap<Producto, Integer> lista) {
 		this.listaProductos = lista;
-		Inventario.inventario = lista;
+		Inventario.inventario = lista;	
 	}
 	
 	//-----------GETTERS y SETTERS-----------
