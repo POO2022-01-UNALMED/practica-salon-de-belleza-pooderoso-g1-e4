@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 
 
-public class Administrador extends Persona implements Serializable {  
+public class Administrador extends Persona implements Serializable, Salario {  
 	
 	//-----------SERIALIZADOR-----------
 	private static final long serialVersionUID = 1L;
@@ -28,6 +28,7 @@ public class Administrador extends Persona implements Serializable {
 	//-----------ATRIBUTOS DE INSTANCIA-----------
 	private String horarioLaboral;
 	private int nomina;
+	private double sueldo;
 	
 	
 	//-----------ATRIBUTOS DE CLASE-----------
@@ -41,6 +42,8 @@ public class Administrador extends Persona implements Serializable {
 		this.horarioLaboral=horarioLaboral;
 		this.nomina=nomina;
 		this.empleadosAsigandos=empleadosAsigandos;	
+		this.sueldo = Salario.SALARIO_BASE * 3;
+		
 		administradores.add(this);
 	}
 	
@@ -65,6 +68,16 @@ public class Administrador extends Persona implements Serializable {
 	}
 	public void setEmpleadosAsigandos(ArrayList<Empleado> empleadosAsigandos) {
 		Administrador.empleadosAsigandos = empleadosAsigandos;
+	}
+	
+	public double getSueldo(){
+		return this.sueldo;
+	}
+	public void setSueldo(double sueldo) {
+		this.sueldo = sueldo;
+	}
+	public void aumentarSueldo(double porcentaje) {
+		setSueldo(this.sueldo*(1+porcentaje));
 	}
 
 	

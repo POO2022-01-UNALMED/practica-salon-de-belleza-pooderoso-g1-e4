@@ -71,7 +71,7 @@ System.out.println("");
 System.out.println("Seleccione el empleado a liquidar:");
 
 for (Empleado emp : Empleado.getEmpleados()) {
-System.out.println(emp);
+	System.out.println(emp);
 }
 
 System.out.print("Nombre: ");
@@ -79,12 +79,22 @@ Scanner nombre = new Scanner(System.in);
 String empleado = nombre.next();
 
 //Citas que atendió el empleado
+Empleado empleadoEscogido=null;
+for(Empleado emp: Empleado.getEmpleados()){
+	if (emp.getNombre().equals(empleado)){
+		empleadoEscogido = emp;
+		
+		break;
+	}
+}
 ArrayList<Cita> citasMes = new ArrayList<Cita>();
 for (Cita cita : Cita.getCitas()) {
 if (cita.getFechaCita().get(ChronoField.MONTH_OF_YEAR) == mes_escogido) {
 
+
 if (cita.getEmpleado().getNombre().equals(empleado)) {
 citasMes.add(cita);
+
 }
 }
 }
@@ -106,9 +116,9 @@ totalComi += (venta.getProductoVendido().getPrecioVenta() * Venta.porcentajeComi
 System.out.println(" ");
 System.out.println(" ");
 System.out.println(" ================================================================== ");
-
+System.out.println(empleadoEscogido.getSueldo());
 System.out.println("El empleado " + empleado + " atendió " + citasMes.size() + " citas en el mes");
-System.out.println("Tiene un sueldo base de:  " + Empleado.sueldo);
+System.out.println("Tiene un sueldo base de:  " + empleadoEscogido.getSueldo());
 System.out.println(" ");
 
 System.out.println("Y vendió: " + ventasMes.size() + " producto(s) en el mes, correspondientes a:");
@@ -121,7 +131,7 @@ System.out.println(" ");
 System.out.println("Por lo que recibe una comisión del 20% de cada producto, es decir: " + totalComi);
 
 System.out.println(" ");
-double totalTodo = Empleado.sueldo + totalComi;
+double totalTodo = empleadoEscogido.getSueldo() + totalComi;
 System.out.println("Confirmación:");
 System.out.println("El sueldo total a pagar debe ser: " + totalTodo);
 

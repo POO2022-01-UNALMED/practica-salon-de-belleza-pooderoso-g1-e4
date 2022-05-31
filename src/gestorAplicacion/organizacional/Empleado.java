@@ -7,7 +7,7 @@ import java.time.*;
 import gestorAplicacion.operacional.*;
 
 
-public class Empleado extends Persona implements Serializable {  //implements del serializable
+public class Empleado extends Persona implements Serializable, Salario {  //implements del serializable
 	
 	//todo esto es del serializador
 	private static final long serialVersionUID = 1L;
@@ -35,7 +35,7 @@ public class Empleado extends Persona implements Serializable {  //implements de
 	private ArrayList<Factura> serviciosRealizados = new ArrayList<Factura>();
 	private ArrayList<Cita> citasAsignadas = new ArrayList<Cita>();//---------------------------
 	private ArrayList<Producto> productosVendidos = new ArrayList<Producto>();
-	public final static double sueldo =100;
+	private double sueldo;
 	
 	//Constantes de tiempos de atenci�n de los empleados (9 am - 6 pm)
 	
@@ -46,6 +46,8 @@ public class Empleado extends Persona implements Serializable {  //implements de
 	public Empleado(String nombre, String apellido, int id, int edad, int numero, String especialidad) {
 		super(nombre, apellido, id, edad, numero);		
 		this.especialidad = especialidad;
+		this.sueldo =  Salario.SALARIO_BASE;
+		
 		Administrador.empleadosAsigandos.add(this);//Cardinalidad de clases
 		empleados.add(this);
 	}
@@ -77,7 +79,13 @@ public class Empleado extends Persona implements Serializable {  //implements de
 	}
 
 	public double getSueldo() {
-		return sueldo;
+		return this.sueldo;
+	}
+	public void setSueldo(double sueldo) {
+		this.sueldo = sueldo;
+	}
+	public void aumentarSueldo(double porcentaje) {
+		setSueldo(this.sueldo*(1+porcentaje));
 	}
 	
 	
