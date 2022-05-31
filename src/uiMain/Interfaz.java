@@ -64,6 +64,16 @@ public class Interfaz {
 		Venta venta2 = new Venta(keratina, empleado2, LocalDateTime.of(2022, 8,14,12,0),5, inv);
 		}
 		
+		HashMap<Producto, Integer> stockInicial = new HashMap<Producto, Integer>();
+		stockInicial.put(gomina, 23);
+		stockInicial.put(keratina, 11);
+		stockInicial.put(colagenoCapilar, 34);
+		stockInicial.put(balsamo, 21);
+		stockInicial.put(esmalte, 34);
+		
+		//Inventario
+		Inventario inventario = new Inventario(stockInicial);
+		
 		int opcion = 0;
 		
 		do {
@@ -78,9 +88,12 @@ public class Interfaz {
 				gestorInterfaz.escribir("3.Facturar");
 				gestorInterfaz.escribir("4.Balance Contable");
 				gestorInterfaz.escribir("5.Terminar");
+
 				gestorInterfaz.escribir("6.Nómina");
 				gestorInterfaz.escribir("7.Guardar y salir");
 				gestorInterfaz.escribir("8.Mostrar clientes");
+
+
 				gestorInterfaz.escribir("                       ");
 				gestorInterfaz.escribir("Digite Opcion: ");
 				opcion = Integer.parseInt(entrada.nextLine());
@@ -94,6 +107,7 @@ public class Interfaz {
 				case 6: Nomina.calcularNomina();break;
 				case 7: Serializador.serializarTodo();
 				case 8: mostrarClientes();break;
+
 				}
 
 			}

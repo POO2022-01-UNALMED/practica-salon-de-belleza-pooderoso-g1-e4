@@ -7,7 +7,7 @@ import java.util.*;
 import java.io.Serializable;
 
 
-public class Inventario {
+public class Inventario implements Serializable {
 	//-----------SERIALIZADOR-----------
 			private static final long serialVersionUID = 1L;
 			
@@ -58,6 +58,7 @@ public class Inventario {
 		if(sePuedeVender(producto, cantidad)) {
 			Integer oldValue = this.listaProductos.get(producto);
 			this.listaProductos.put(producto,  oldValue - cantidad);
+			Inventario.inventario.put(producto, oldValue - cantidad);
 		}		
 	}
 	

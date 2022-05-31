@@ -45,6 +45,7 @@ public class Factura implements Serializable {
 		this.cita = cita;
 		this.fecha = fecha;
 		this.metodoPago = metodoPago;
+		this.cita.setFactura(this);
 		facturas.add(this);
 	}
 	
