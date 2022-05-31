@@ -89,11 +89,15 @@ public class Interfaz {
 				gestorInterfaz.escribir("2.Cancelar cita");
 				gestorInterfaz.escribir("3.Facturar");
 				gestorInterfaz.escribir("4.Balance Contable");
-				gestorInterfaz.escribir("5.Terminar");
-
-				gestorInterfaz.escribir("6.Nómina");
-				gestorInterfaz.escribir("7.Guardar y salir");
+				gestorInterfaz.escribir("5.Nomina");
+				gestorInterfaz.escribir("6.Guardar y salir");
+				gestorInterfaz.escribir("7.Guardar y continuar");
 				gestorInterfaz.escribir("8.Mostrar clientes");
+				
+				//gestorInterfaz.escribir("5.Terminar");
+				//gestorInterfaz.escribir("6.Nómina");
+				//gestorInterfaz.escribir("7.Guardar y salir");
+				//gestorInterfaz.escribir("8.Mostrar clientes");
 
 
 				gestorInterfaz.escribir("                       ");
@@ -106,8 +110,9 @@ public class Interfaz {
 				case 2: GestionarCita.gestionCancelar(); break;
 				case 3: Facturacion.facturar(); break;				
 				case 4: BalanceContable.calcularBalance();break;
-				case 6: Nomina.calcularNomina();break;
-				case 7: Serializador.serializarTodo();
+				case 5: Nomina.calcularNomina();break;
+				case 6: Serializador.serializarTodo();break;
+				case 7: Serializador.serializarTodo();break;
 				case 8: mostrarClientes();break;
 
 				}
@@ -122,37 +127,65 @@ public class Interfaz {
 			}
 
 			
-		}while(opcion!=7);
+		}while(opcion!=6 );
 		
 
 	}
 	
 	public static void mostrarClientes() {
+		
+		gestorInterfaz.escribir("=========================================");
+		gestorInterfaz.escribir("=============== Clientes ===============");
+		gestorInterfaz.escribir("=========================================");
+		
 		for (Cliente clientes: Cliente.getClientes()) {
 			
 			System.out.println(clientes);
 			
 		}
+		
+		gestorInterfaz.escribir("=========================================");
+		gestorInterfaz.escribir("=============== Empleados ===============");
+		gestorInterfaz.escribir("=========================================");
 		for (Empleado clientes: Empleado.getEmpleados()) {
 			
 			System.out.println(clientes);
 			
 		}
+		gestorInterfaz.escribir("=========================================");
+		gestorInterfaz.escribir("================= Citas =================");
+		gestorInterfaz.escribir("=========================================");
 		for (Cita clientes: Cita.getCitas()) {
 			
 			System.out.println(clientes);
 			
 		}
- for (Venta ventas: Venta.getVentas()) {
+		
+		gestorInterfaz.escribir("=========================================");
+		gestorInterfaz.escribir("================= Ventas =================");
+		gestorInterfaz.escribir("=========================================");
+		
+		for (Venta ventas: Venta.getVentas()) {
 			
 			System.out.println(ventas);
 			
 		}
- for (Producto productos: Producto.getProductos()) {
+		
+		gestorInterfaz.escribir("=========================================");
+		gestorInterfaz.escribir("================ Producto ================");
+		gestorInterfaz.escribir("=========================================");
+		
+		for (Producto productos: Producto.getProductos()) {
 		
 		System.out.println(productos);
 		
-	}
+		}
+		
+		gestorInterfaz.escribir("=========================================");
+		gestorInterfaz.escribir("================ Factura ================");
+		gestorInterfaz.escribir("=========================================");		
+		
+		
  	for (Factura fac: Factura.getFacturas()) {
 		
 		System.out.println(fac);

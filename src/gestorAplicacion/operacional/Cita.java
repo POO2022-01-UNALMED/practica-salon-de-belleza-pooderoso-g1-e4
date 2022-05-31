@@ -11,7 +11,7 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
-public class Cita implements Serializable {  
+public class Cita implements Serializable,Comparable<Cita> {  
 	
 	//-----------SERIALIZADOR-----------
 	private static final long serialVersionUID = 1L;
@@ -136,6 +136,13 @@ public class Cita implements Serializable {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");	
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");	
 		return  cliente + ", fecha de la cita: " + fechaCita.format(format) + ", duracion:" + duracion + ". Termina a las "+ fechaCita.plusMinutes(duracion).format(formatter)+". "+ estado;
+	}
+
+
+	@Override
+	public int compareTo(Cita o) {
+		// TODO Auto-generated method stub
+		return fechaCita.compareTo(o.getFechaCita());
 	}
 	
 	
