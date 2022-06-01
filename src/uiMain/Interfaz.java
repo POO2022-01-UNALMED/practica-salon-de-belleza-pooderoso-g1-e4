@@ -116,7 +116,7 @@ public class Interfaz {
 				case 6: Serializador.serializarTodo();break;
 				case 7: Serializador.serializarTodo();break;
 				case 8: mostrarClientes();break;
-				case 9: Otras.gestionarSeguros();
+				case 9: Otras.gestionarSeguros();break;
 				case 10: Otras.mostrarInventario();break;
 
 				}
@@ -126,6 +126,8 @@ public class Interfaz {
 				
 				
 				gestorInterfaz.escribir("----Upps, hemos vuelto al menu principal----");
+				System.out.println(e);
+				e.printStackTrace();
 				gestorInterfaz.escribir(" ");
 				opcion=5555;
 			}
@@ -152,6 +154,8 @@ public class Interfaz {
 		gestorInterfaz.escribir("=============== Empleados ===============");
 		gestorInterfaz.escribir("=========================================");
 		for (Empleado clientes: Empleado.getEmpleados()) {
+			
+			
 			
 			System.out.println(clientes);
 			

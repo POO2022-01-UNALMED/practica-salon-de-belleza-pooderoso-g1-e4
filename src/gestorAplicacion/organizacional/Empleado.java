@@ -53,7 +53,6 @@ public class Empleado extends Persona implements Serializable,Comparable<Emplead
 		super(nombre, apellido, id, edad, numero);		
 		this.especialidad = especialidad;
 		this.sueldo =  Salario.SALARIO_BASE;
-		
 		Administrador.empleadosAsigandos.add(this);//Cardinalidad de clases
 		empleados.add(this);
 		Persona.personas.add(this);
@@ -65,7 +64,7 @@ public class Empleado extends Persona implements Serializable,Comparable<Emplead
 			
 			DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			
-			return "Empleado con ARL " + this.nivelARL + " est� asegurado de " + this.fechaRegistro.format(formato) + " a " + this.fechaRegistro.plusMonths(this.duracionMesesSeguro).format(formato);
+			return "Empleado con ARL " + this.nivelARL + " esta asegurado de " + super.getInicioVinculacion().format(formato) + " a " + super.getInicioVinculacion().plusMonths(this.duracionMesesSeguro).format(formato);
 			
 		}
 	
@@ -116,12 +115,14 @@ public class Empleado extends Persona implements Serializable,Comparable<Emplead
 
 	@Override
 	public String toString() {
-		return "nombre= " + super.getNombre() + ", especialista= " + this.getEspecialidad()+ ", id: "+this.getId();
+		return "nombre= " + super.getNombre() + ", especialista= " + this.getEspecialidad()+ ", id: "+this.getId() + "fecha registro: " + super.getInicioVinculacion();
 	}
 	
 	public String getIdEmpleado() {
 		return idEmpleado;
 	}
+	
+
 
 	@Override
 	public int compareTo(Empleado o) {

@@ -29,7 +29,7 @@ public abstract class Persona implements Serializable {
 	private int id;
 	private int Edad;
 	private int Numero;
-	protected LocalDateTime fechaRegistro;
+	private LocalDateTime fechaRegistro;
 
 	//-----------CONSTRUCTOR-----------
 	public Persona(String nombre, String apellido, int id, int edad, int numero) {
@@ -37,10 +37,11 @@ public abstract class Persona implements Serializable {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.id = id;
+		this.fechaRegistro = LocalDateTime.now();
 		Edad = edad;
 		Numero = numero;
 		personas.add(this);
-		fechaRegistro = LocalDateTime.now();
+		
 	}
 
 	
@@ -78,6 +79,10 @@ public abstract class Persona implements Serializable {
 	}
 	public void setNumero(int numero) {
 		Numero = numero;
+	}
+	
+	public LocalDateTime getInicioVinculacion() {
+		return this.fechaRegistro;
 	}
 	
 	//-----------METODO ABSTRACTOS-----------

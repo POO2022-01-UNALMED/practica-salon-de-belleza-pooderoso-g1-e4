@@ -28,14 +28,19 @@ public class Otras {
 	public static void gestionarSeguros() {
 		
 		ArrayList<Persona> listaPersonas = Persona.getPersonas();
+		/*
+		
 		
 		for(Persona p: listaPersonas) {
 			
 			System.out.println(p.mostrarVigenciaSeguro());
 			
 		}
+		*/
 		
+		System.out.println(listaPersonas);
 	}
+	
 	
 
 }

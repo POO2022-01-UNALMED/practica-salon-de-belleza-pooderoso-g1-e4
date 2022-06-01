@@ -45,7 +45,7 @@ public class Administrador extends Persona implements Serializable, Salario {
 		super(nombre, apellido, id, edad, numero);
 		this.horarioLaboral=horarioLaboral;
 		this.nomina=nomina;
-		this.empleadosAsigandos=empleadosAsigandos;	
+		this.empleadosAsigandos = empleadosAsigandos;	
 		this.sueldo = Salario.SALARIO_BASE * 3;
 		Persona.personas.add(this);
 		administradores.add(this);
@@ -84,21 +84,24 @@ public class Administrador extends Persona implements Serializable, Salario {
 		setSueldo(this.sueldo*(1+porcentaje));
 	}
 	
+	
+	
+	
 	//-----------METODO ABSTRACTOS-----------
-		public String mostrarVigenciaSeguro() {
+	public String mostrarVigenciaSeguro() {
 			
-			DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		
+		return "El administrador " + this.getNombre() + " con ARL " + this.nivelARL +  " esta asegurado de " + super.getInicioVinculacion().format(formato) + " a " + super.getInicioVinculacion().plusMonths(this.duracionMesesSeguro).format(formato);
 			
-			return "El administrador " + this.getNombre() + " con ARL " + this.nivelARL +  " est� asegurado de " + this.fechaRegistro.format(formato) + " a " + this.fechaRegistro.plusMonths(this.duracionMesesSeguro).format(formato);
-			
-		}
+	}
 
 	
 	//-----------OTROS METODOS-----------
 	@Override
 	public String toString() {
 		return "Administrador [horarioLaboral=" + horarioLaboral + ", nomina=" + nomina + ", empleadosAsigandos="
-				+ empleadosAsigandos + "]";
+				+ empleadosAsigandos + "fecha registro " + super.getInicioVinculacion() +"]";
 	}
 
 	public void venderProducto() {
