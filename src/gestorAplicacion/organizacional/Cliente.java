@@ -58,6 +58,10 @@ public class Cliente extends Persona implements Serializable {
 		Persona.personas.add(this);
 	}
 	
+	public Cliente(String nombre, String apellido, int id) {
+		this(nombre,apellido,id,0,0," No posee anotaciones");
+	}
+	
 	//----------METODO ABSTRACTO-----------
 	public String mostrarVigenciaSeguro() {
 		

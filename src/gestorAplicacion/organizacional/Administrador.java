@@ -110,8 +110,13 @@ public class Administrador extends Persona implements Serializable, Salario {
 		return new Cliente(nombre, apellido, id, edad, numero, anotaciones);
 	}
 	
+	//Metodo para crear nuevo cliente desde administrador solo para datos obligatorios
+	public static Cliente NuevoCliente(String nombre, String apellido, int id) {
+		return new Cliente(nombre, apellido, id);
+	}
 	
-	//Metodo para consilidar una nueva cita
+	
+	//Metodo para consilidar una nueva cita-
 	public static Cita consolidarCita(Empleado empleado, Cliente cliente, ArrayList<Servicio> servicios, LocalDateTime fechaReserva, LocalDateTime fechaCita){
 	    int duracion= Cita.duracionCita(servicios);
 		Cita nuevaCita=new Cita( empleado,  cliente, servicios,fechaReserva, fechaCita, duracion);

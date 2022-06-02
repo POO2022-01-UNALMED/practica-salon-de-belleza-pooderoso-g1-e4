@@ -106,26 +106,62 @@ public class GestionarCita {
 		
 		gestorInterfaz.escribir("Por favor ingrese los datos del cliente");
 		gestorInterfaz.escribir("");
-		String nombre=gestorInterfaz.leer("Por favor ingrese nombre del cliente: ");	
-		String apellido=gestorInterfaz.leer("Por favor ingrese apellido del cliente: ");
-		int id=gestorInterfaz.leerEntero("Por favor ingrese identificaión del cliente: ");
-		for(Cliente cliente: Cliente.getClientes()) {
-			if(cliente.getId()==id) {
-				gestorInterfaz.escribir("");
-				gestorInterfaz.escribir("----Cliente ya existente, verifique nuevamente la informacion----");
-				GestionarCita.crearNuevoCliente();
-			}
-		}
-		int edad=gestorInterfaz.leerEntero("Por favor ingrese edad del cliente: ");
-		int numero=gestorInterfaz.leerEntero("Por favor ingrese numero del cliente: ");
-		String anotaciones=gestorInterfaz.leer("Por favor ingrese anotaciones del cliente: ");
-		
-		Cliente nuevoCliente = Administrador.NuevoCliente(nombre, apellido, id, edad, numero, anotaciones);
-		
+		gestorInterfaz.escribir("1. para ingresar solo datos obligatorios");
+		gestorInterfaz.escribir("2. para ingresar todos los datos");
 		gestorInterfaz.escribir("");
-		gestorInterfaz.escribir("El nuevo cliente es: "+ nuevoCliente);
+		int obligatorio=gestorInterfaz.leerEntero();
 		
-		return nuevoCliente;
+		Cliente nuevoCliente;
+		
+		if(obligatorio==1) {
+			
+			String nombre=gestorInterfaz.leer("Por favor ingrese nombre del cliente: ");	
+			String apellido=gestorInterfaz.leer("Por favor ingrese apellido del cliente: ");
+			int id=gestorInterfaz.leerEntero("Por favor ingrese identificaión del cliente: ");
+			for(Cliente cliente: Cliente.getClientes()) {
+				if(cliente.getId()==id) {
+					gestorInterfaz.escribir("");
+					gestorInterfaz.escribir("----Cliente ya existente, verifique nuevamente la informacion----");
+					GestionarCita.crearNuevoCliente();
+				}
+			}
+			
+			nuevoCliente = Administrador.NuevoCliente(nombre, apellido, id);
+			
+			gestorInterfaz.escribir("");
+			gestorInterfaz.escribir("El nuevo cliente es: "+ nuevoCliente);
+			
+			return nuevoCliente;
+			
+		}
+		else {
+			
+			String nombre=gestorInterfaz.leer("Por favor ingrese nombre del cliente: ");	
+			String apellido=gestorInterfaz.leer("Por favor ingrese apellido del cliente: ");
+			int id=gestorInterfaz.leerEntero("Por favor ingrese identificaión del cliente: ");
+			for(Cliente cliente: Cliente.getClientes()) {
+				if(cliente.getId()==id) {
+					gestorInterfaz.escribir("");
+					gestorInterfaz.escribir("----Cliente ya existente, verifique nuevamente la informacion----");
+					GestionarCita.crearNuevoCliente();
+				}
+			}
+			
+			int edad=gestorInterfaz.leerEntero("Por favor ingrese edad del cliente: ");
+			int numero=gestorInterfaz.leerEntero("Por favor ingrese numero del cliente: ");
+			String anotaciones=gestorInterfaz.leer("Por favor ingrese anotaciones del cliente: ");
+			
+			nuevoCliente = Administrador.NuevoCliente(nombre, apellido, id, edad, numero, anotaciones);
+			
+			gestorInterfaz.escribir("");
+			gestorInterfaz.escribir("El nuevo cliente es: "+ nuevoCliente);
+			
+			return nuevoCliente;
+			
+		}
+				
+		
+		
 		
 	}
 	
@@ -161,6 +197,7 @@ public class GestionarCita {
 		
 		for(Cliente c: Cliente.getClientes()) {
 			if (c.getId()==cedula) {
+				gestorInterfaz.escribir(c);
 				return c;
 			}
 			
