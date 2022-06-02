@@ -48,7 +48,7 @@ public class Cita implements Serializable,Comparable<Cita> {
 	
 	//-----------CONSTRUCTOR-----------
 	public Cita(Empleado empleado, Cliente cliente, ArrayList<Servicio> servicios, LocalDateTime fechaReserva, LocalDateTime fechaCita, int duracion) {
-		Cita.NumCitas ++;
+		Cita.NumCitas = Cita.getCitas().size() +1;
 		this.idCita = Cita.NumCitas;
 		this.estado="Pendiente";
 		this.empleado = empleado; this.cliente = cliente; this.servicios = servicios;

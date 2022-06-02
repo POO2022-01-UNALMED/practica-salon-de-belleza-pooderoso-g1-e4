@@ -448,7 +448,14 @@ public class GestionarCita {
     */
 	public static void generarCita(Empleado empleado, Cliente cliente, ArrayList<Servicio> servicios, LocalDateTime fechaReserva, LocalDateTime fechaCita){
 		Cita nuevaCita=Administrador.consolidarCita(empleado, cliente, servicios, fechaReserva, fechaCita);
-		System.out.println(nuevaCita);
+		gestorInterfaz.escribir(" ");
+		gestorInterfaz.escribir("================== Cita Generada exitosamente ==================");
+		gestorInterfaz.escribir(" ");
+		gestorInterfaz.escribir("Empleado: " +empleado.getNombre() + " "+ empleado.getApellido());
+		gestorInterfaz.escribir("Cliente: " +cliente.getNombre()+ " "+ cliente.getApellido());
+		gestorInterfaz.escribir("Fecha de la cita: " +fechaCita);
+		gestorInterfaz.escribir("Estado de la cita: " +nuevaCita.getEstado());
+		gestorInterfaz.escribir(" ");
 		
 	}
 	
@@ -530,7 +537,14 @@ public class GestionarCita {
 		for (Cita cita : empleado.getCitasAsignadas()) {
 			if(id==cita.getId()) {
 				Administrador.consolidarCancelacion(cita);//Se pone la cita cancelada
-				gestorInterfaz.escribir(cita+". **Estado de la cita:" + cita.getEstado()+"**");
+				gestorInterfaz.escribir(" ");
+				gestorInterfaz.escribir("================== Cita Cancelada exitosamente ==================");
+				gestorInterfaz.escribir(" ");
+				gestorInterfaz.escribir("Empleado: " +empleado.getNombre() + " "+ empleado.getApellido());
+				gestorInterfaz.escribir("Cliente: " +cita.getCliente().getNombre()+ " "+ cita.getCliente().getApellido());
+				gestorInterfaz.escribir("Fecha de la cita: " + cita.getFechaCita());
+				gestorInterfaz.escribir("Estado de la cita: " +cita.getEstado());
+				gestorInterfaz.escribir(" ");
 				break;
 			}					
 		}
@@ -562,7 +576,14 @@ public class GestionarCita {
 		for (Cita cita : cliente.getCitasGeneradas()) {
 			if(id==cita.getId()) {
 				Administrador.consolidarCancelacion(cita);//Se pone la cita cancelada
-				gestorInterfaz.escribir(cita+". **Estado de la cita:" + cita.getEstado()+"**");
+				gestorInterfaz.escribir(" ");
+				gestorInterfaz.escribir("================== Cita Cancelada exitosamente ==================");
+				gestorInterfaz.escribir(" ");
+				gestorInterfaz.escribir("Empleado: " + cita.getEmpleado().getNombre() + " "+ cita.getEmpleado().getApellido());
+				gestorInterfaz.escribir("Cliente: " +cita.getCliente().getNombre()+ " "+ cita.getCliente().getApellido());
+				gestorInterfaz.escribir("Fecha de la cita: " + cita.getFechaCita());
+				gestorInterfaz.escribir("Estado de la cita: " +cita.getEstado());
+				gestorInterfaz.escribir(" ");
 				break;
 			}					
 		}
