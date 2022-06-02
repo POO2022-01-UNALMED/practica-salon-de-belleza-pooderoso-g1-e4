@@ -85,17 +85,17 @@ public class Interfaz {
 				gestorInterfaz.escribir("              ");
 				gestorInterfaz.escribir("              ");
 				gestorInterfaz.escribir("    ========== BIENVENIDO A EL SOFTWARE ADMINISTRADOR ========== ");
-				gestorInterfaz.escribir("          ✂️ ✂️ ✂️ SALÓN DE BELLEZA POODEROSO ✂️ ✂️ ✂️  ");
+				gestorInterfaz.escribir("                     SALON DE BELLEZA POODEROSO   ");
 				gestorInterfaz.escribir("    ===========================================================");
 				gestorInterfaz.escribir("              ");
-				gestorInterfaz.escribir(" ¿Qué desea realizar?");
+				gestorInterfaz.escribir(" Que desea realizar?");
 				gestorInterfaz.escribir(" =====================");
 				gestorInterfaz.escribir("                       ");
 				gestorInterfaz.escribir("1.Reservar cita");
 				gestorInterfaz.escribir("2.Cancelar cita");
 				gestorInterfaz.escribir("3.Facturar");
 				gestorInterfaz.escribir("4.Balance Contable");
-				gestorInterfaz.escribir("5.Pagar nómina");
+				gestorInterfaz.escribir("5.Pagar nomina");
 				gestorInterfaz.escribir("6.Guardar y salir");
 				gestorInterfaz.escribir("7.Guardar y continuar");
 				gestorInterfaz.escribir("8.Mostrar clientes");
@@ -105,7 +105,7 @@ public class Interfaz {
 
 
 				gestorInterfaz.escribir("                       ");
-				gestorInterfaz.escribir(" ▨ ▨ Digite Opcion: ");
+				gestorInterfaz.escribir(" Digite Opcion: ");
 				opcion = Integer.parseInt(entrada.nextLine());
 			
 			
