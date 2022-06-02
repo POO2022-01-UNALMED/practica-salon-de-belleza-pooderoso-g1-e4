@@ -6,6 +6,7 @@ import java.util.*;
 
 import gestorAplicacion.operacional.Cita;
 import gestorAplicacion.operacional.Factura;
+import uiMain.gestorInterfaz;
 
 
 public class Cliente extends Persona implements Serializable {  
@@ -118,5 +119,10 @@ public class Cliente extends Persona implements Serializable {
 	@Override
 	public String toString() {
 		return "Cliente: "+ this.getNombre() +" "+ this.getApellido()+", anotaciones: "+ anotaciones;	
+	}
+	
+	public static String digitarServicio() {
+		return gestorInterfaz.leer();
+		
 	}
 }

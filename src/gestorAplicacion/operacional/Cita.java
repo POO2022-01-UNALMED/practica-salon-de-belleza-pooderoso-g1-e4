@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import gestorAplicacion.organizacional.Cliente;
 import gestorAplicacion.organizacional.Empleado;
+import uiMain.gestorInterfaz;
 
 import java.io.Serializable;
 import java.time.*;
@@ -143,6 +144,66 @@ public class Cita implements Serializable,Comparable<Cita> {
 	public int compareTo(Cita o) {
 		// TODO Auto-generated method stub
 		return fechaCita.compareTo(o.getFechaCita());
+	}
+	
+	 /**     
+	 * Devuelve la duracion de una cita a partir una cita	
+    * @param servicios: lista de servicios 
+    * 
+    * @return la duracion de una cita a partir de los servicios escogidos
+    */
+	public static int duracionCita (ArrayList <Servicio> servicios) {
+		
+		int duracion=0;
+		for(Servicio ser: servicios) {
+			duracion += ser.getDuracion();
+		}
+		return duracion;
+	}
+	
+	  /**
+     * Verifica que una cita se pueda llevar a cabo 
+     *
+     * @param 
+     * 		  Empleado: empleado para verificar las citas
+     * 		  horaTentativa: posible hora a validar
+     * 		  servicios: los servicios que se quieren de una cita	
+     * @return true en caso de que se pueda generar una cita false de lo contrario
+     */
+	
+	public static boolean  validarHora(Empleado p, LocalDateTime horaTentativa, ArrayList<Servicio> servicios) {
+		
+		boolean aceptada=false;
+		int duracion=Cita.duracionCita(servicios);
+		LocalDateTime horaTentativaFin=horaTentativa.plusMinutes(duracion);
+		
+		if(horaTentativa.toLocalTime().isBefore(Empleado.HoraInicio)  || horaTentativa.toLocalTime().isAfter(Empleado.HoraFinal) ) {
+			gestorInterfaz.escribir("Recuerde que los horarios de atencion son de: 9 a 18 ");
+			return false;
+			
+		}
+		
+		for(Cita cita : p.getCitasAsignadas()) {	//Recorrer citas del empleado					
+			int mesComparacion=cita.getFechaCita().getMonthValue(); //Mes cita
+			int diaComparacion=cita.getFechaCita().getDayOfMonth(); //Dia cita
+			LocalDateTime existenteInicial=cita.getFechaCita();//hora Inicial
+			LocalDateTime existenteFinal=cita.getFechaCita().plusMinutes(cita.getDuracion());//hora Final
+			if((horaTentativa.getMonthValue() == mesComparacion)  && (horaTentativa.getDayOfMonth() == diaComparacion) && cita.getEstado()!="Cancelada") { //comparamos la cita
+				if((horaTentativa.isBefore(existenteInicial) &&  horaTentativaFin.isBefore(existenteFinal)) || (horaTentativa.isAfter(existenteInicial) &&  horaTentativaFin.isAfter(existenteFinal))) {
+					gestorInterfaz.escribir(" ");
+					gestorInterfaz.escribir("Es posible generar la cita");
+					return true;
+				}
+				else {
+					gestorInterfaz.escribir("Existen horas trocadas con la cita: "+cita);
+					return false;
+				}
+
+			}							
+		}
+
+		
+		return true;
 	}
 	
 	
