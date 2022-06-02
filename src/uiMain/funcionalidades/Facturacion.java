@@ -117,7 +117,7 @@ public class Facturacion {
 							
 						}
 						
-						System.out.println("Ingrese la cantidad " + productoAVender.getNombreProducto() + " producto a vender");
+						System.out.println("Ingrese la cantidad de " + productoAVender.getNombreProducto() + " a vender");
 						int cantidadProducto = entradaFacturacion.nextInt();
 						
 						//Obtener el empleado que venderá el producto
