@@ -16,7 +16,7 @@ public class Nomina {
 ////////////////////////////FUNCIONALIDAD NÓMINA ////////////////////////////////////////////////////////	
 
 public static void calcularNomina() {
-System.out.println("=============Pago nómina mes vencido=============");
+System.out.println("=============Pago nOmina mes vencido=============");
 
 SortedSet<Integer> fechas = new TreeSet<Integer>();
 for (Cita cita : Cita.getCitas()) {
@@ -49,7 +49,7 @@ System.out.println(i + " " + meses.get(value.next()));
 i++;
 }
 
-System.out.print("▨ ▨ Opción: ");
+System.out.print("Opción: ");
 Scanner texto = new Scanner(System.in);
 int opcion = texto.nextInt();
 
@@ -74,7 +74,7 @@ for (Empleado emp : Empleado.getEmpleados()) {
 	System.out.println(emp);
 }
 
-System.out.print("▨ ▨ Nombre: ");
+System.out.print("Nombre: ");
 Scanner nombre = new Scanner(System.in);
 String empleado = nombre.next();
 

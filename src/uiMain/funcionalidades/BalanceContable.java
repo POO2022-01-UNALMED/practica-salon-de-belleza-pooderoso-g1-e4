@@ -52,7 +52,7 @@ public class BalanceContable {
 		}
 		
 		//Tras mostrarle los meses disponibles, se le solicita al usuario que ingrese una opcion
-		System.out.print("▨ ▨  Por favor seleccione una opcion: ");
+		System.out.print("Por favor seleccione una opcion: ");
 		Scanner entrada =new Scanner(System.in);
 		int opcion = entrada.nextInt();
 		

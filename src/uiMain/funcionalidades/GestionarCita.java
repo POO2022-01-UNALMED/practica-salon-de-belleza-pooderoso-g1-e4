@@ -36,7 +36,7 @@ public class GestionarCita {
 		gestorInterfaz.escribir("                         ");
 		gestorInterfaz.escribir("[1] Cliente ya existente");
 		gestorInterfaz.escribir("[2] Nuevo Cliente");
-		gestorInterfaz.escribir("▨ ▨ Digite Opcion: ");
+		gestorInterfaz.escribir("Digite Opcion: ");
 		
 		
 		int TipoCliente=gestorInterfaz.leerEntero();
@@ -47,7 +47,7 @@ public class GestionarCita {
 						
 			gestorInterfaz.escribir("");					
 
-			int cedulaCliente=gestorInterfaz.leerEntero("▨ ▨ Digite la identificacion del cliente:");				
+			int cedulaCliente=gestorInterfaz.leerEntero("Digite la identificacion del cliente:");				
 			clienteaAsignar=devuelveCliente(cedulaCliente);
 			
 			while(clienteaAsignar==null) {					
@@ -62,7 +62,7 @@ public class GestionarCita {
 		gestorInterfaz.escribir(" ");			
 		mostrarEmpleados();
 		gestorInterfaz.escribir(" ");
-		int cedulaEmpleado=gestorInterfaz.leerEntero("▨ ▨ Digite la identificacion del empleado al cual se le asignara la cita: ");
+		int cedulaEmpleado=gestorInterfaz.leerEntero("Digite la identificacion del empleado al cual se le asignara la cita: ");
 		gestorInterfaz.escribir(" ");
 		gestorInterfaz.escribir("---------------------------------------------");
 		Empleado e=GestionarCita.devuelveEmpleado(cedulaEmpleado);//Empleado
@@ -104,7 +104,7 @@ public class GestionarCita {
      */
 	public static Cliente crearNuevoCliente() {
 		
-		gestorInterfaz.escribir("▨ ▨ Por favor ingrese los datos del cliente:");
+		gestorInterfaz.escribir("Por favor ingrese los datos del cliente:");
 		gestorInterfaz.escribir("");
 		gestorInterfaz.escribir("1. para ingresar solo datos obligatorios");
 		gestorInterfaz.escribir("2. para ingresar todos los datos");
@@ -115,9 +115,9 @@ public class GestionarCita {
 		
 		if(obligatorio==1) {
 			
-			String nombre=gestorInterfaz.leer("▨ ▨ Por favor ingrese nombre del cliente: ");	
-			String apellido=gestorInterfaz.leer("▨ ▨ Por favor ingrese apellido del cliente: ");
-			int id=gestorInterfaz.leerEntero("▨ ▨ Por favor ingrese identificaión del cliente: ");
+			String nombre=gestorInterfaz.leer("Por favor ingrese nombre del cliente: ");	
+			String apellido=gestorInterfaz.leer("Por favor ingrese apellido del cliente: ");
+			int id=gestorInterfaz.leerEntero("Por favor ingrese identificaión del cliente: ");
 			for(Cliente cliente: Cliente.getClientes()) {
 				if(cliente.getId()==id) {
 					gestorInterfaz.escribir("");
@@ -136,9 +136,9 @@ public class GestionarCita {
 		}
 		else {
 			
-			String nombre=gestorInterfaz.leer("▨ ▨ Por favor ingrese nombre del cliente: ");	
-			String apellido=gestorInterfaz.leer("▨ ▨ Por favor ingrese apellido del cliente: ");
-			int id=gestorInterfaz.leerEntero("▨ ▨ Por favor ingrese identificaión del cliente: ");
+			String nombre=gestorInterfaz.leer("Por favor ingrese nombre del cliente: ");	
+			String apellido=gestorInterfaz.leer("Por favor ingrese apellido del cliente: ");
+			int id=gestorInterfaz.leerEntero("Por favor ingrese identificaión del cliente: ");
 			for(Cliente cliente: Cliente.getClientes()) {
 				if(cliente.getId()==id) {
 					gestorInterfaz.escribir("");
@@ -147,9 +147,9 @@ public class GestionarCita {
 				}
 			}
 			
-			int edad=gestorInterfaz.leerEntero("▨ ▨ Por favor ingrese edad del cliente: ");
-			int numero=gestorInterfaz.leerEntero("▨ ▨ Por favor ingrese numero del cliente: ");
-			String anotaciones=gestorInterfaz.leer("▨ ▨ Por favor ingrese anotaciones del cliente: ");
+			int edad=gestorInterfaz.leerEntero("Por favor ingrese edad del cliente: ");
+			int numero=gestorInterfaz.leerEntero("Por favor ingrese numero del cliente: ");
+			String anotaciones=gestorInterfaz.leer("Por favor ingrese anotaciones del cliente: ");
 			
 			nuevoCliente = Administrador.NuevoCliente(nombre, apellido, id, edad, numero, anotaciones);
 			
