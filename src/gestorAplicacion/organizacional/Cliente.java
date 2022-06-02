@@ -6,6 +6,7 @@ import java.util.*;
 
 import gestorAplicacion.operacional.Cita;
 import gestorAplicacion.operacional.Factura;
+import uiMain.gestorInterfaz;
 
 
 public class Cliente extends Persona implements Serializable {  
@@ -54,6 +55,10 @@ public class Cliente extends Persona implements Serializable {
 		Administrador.clientes.add(this);
 		clientes.add(this);
 	
+	}
+	
+	public Cliente(String nombre, String apellido, int id) {
+		this(nombre,apellido,id,0,0," No posee anotaciones");
 	}
 	
 	//----------METODO ABSTRACTO-----------
@@ -123,5 +128,10 @@ public class Cliente extends Persona implements Serializable {
 	@Override
 	public String toString() {
 		return "Cliente: "+ this.getNombre() +" "+ this.getApellido()+", anotaciones: "+ anotaciones;	
+	}
+	
+	public static String digitarServicio() {
+		return gestorInterfaz.leer();
+		
 	}
 }

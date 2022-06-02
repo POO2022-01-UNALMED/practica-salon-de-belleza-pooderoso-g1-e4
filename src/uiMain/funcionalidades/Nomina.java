@@ -16,7 +16,7 @@ public class Nomina {
 ////////////////////////////FUNCIONALIDAD NÓMINA ////////////////////////////////////////////////////////	
 
 public static void calcularNomina() {
-System.out.println("Pago nómina mes vencido");
+System.out.println("=============Pago nOmina mes vencido=============");
 
 SortedSet<Integer> fechas = new TreeSet<Integer>();
 for (Cita cita : Cita.getCitas()) {
@@ -116,12 +116,15 @@ totalComi += (venta.getProductoVendido().getPrecioVenta() * Venta.porcentajeComi
 System.out.println(" ");
 System.out.println(" ");
 System.out.println(" ================================================================== ");
-System.out.println(empleadoEscogido.getSueldo());
+System.out.println("                     Pago al empleado " + empleado);
+System.out.println(" ================================================================== ");
+System.out.println("  ");
+
 System.out.println("El empleado " + empleado + " atendió " + citasMes.size() + " citas en el mes");
 System.out.println("Tiene un sueldo base de:  " + empleadoEscogido.getSueldo());
 System.out.println(" ");
 
-System.out.println("Y vendió: " + ventasMes.size() + " producto(s) en el mes, correspondientes a:");
+System.out.println("Vendió: " + ventasMes.size() + " producto(s) en el mes, correspondientes a:");
 System.out.println(" ");
 for (Venta venta : ventasMes) {
 System.out.println("  --> " + venta.getProductoVendido().getNombreProducto() + " $ "

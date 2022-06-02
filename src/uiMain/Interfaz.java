@@ -24,8 +24,8 @@ public class Interfaz {
 		
 		if (Administrador.getAdministradores().isEmpty()) {
 			
-	
-		Administrador SuperAdministador =new Administrador("Juan","Cuadrado",123,21,444444,"12-2",2222);
+			
+		Administrador superAdministador =new Administrador("Juan","Cuadrado",123,21,444444,"12-2",2222);
 	
 		
 		Producto gomina = new Producto("Gomina", 2500);
@@ -83,29 +83,31 @@ public class Interfaz {
 		
 		do {
 			
-			try {			
-				gestorInterfaz.escribir("    Que desea realizar?");
-				
+			try {		
+				gestorInterfaz.escribir("              ");
+				gestorInterfaz.escribir("              ");
+				gestorInterfaz.escribir("    ========== BIENVENIDO A EL SOFTWARE ADMINISTRADOR ========== ");
+				gestorInterfaz.escribir("                     SALON DE BELLEZA POODEROSO   ");
+				gestorInterfaz.escribir("    ===========================================================");
+				gestorInterfaz.escribir("              ");
+				gestorInterfaz.escribir(" Que desea realizar?");
+				gestorInterfaz.escribir(" =====================");
 				gestorInterfaz.escribir("                       ");
 				gestorInterfaz.escribir("1.Reservar cita");
 				gestorInterfaz.escribir("2.Cancelar cita");
 				gestorInterfaz.escribir("3.Facturar");
 				gestorInterfaz.escribir("4.Balance Contable");
-				gestorInterfaz.escribir("5.Nomina");
+				gestorInterfaz.escribir("5.Pagar nomina");
 				gestorInterfaz.escribir("6.Guardar y salir");
 				gestorInterfaz.escribir("7.Guardar y continuar");
 				gestorInterfaz.escribir("8.Mostrar clientes");
 				gestorInterfaz.escribir("9.Gestionar seguros");
 				gestorInterfaz.escribir("10.Mostrar inventario");
 				
-				//gestorInterfaz.escribir("5.Terminar");
-				//gestorInterfaz.escribir("6.Nómina");
-				//gestorInterfaz.escribir("7.Guardar y salir");
-				//gestorInterfaz.escribir("8.Mostrar clientes");
 
 
 				gestorInterfaz.escribir("                       ");
-				gestorInterfaz.escribir("Digite Opcion: ");
+				gestorInterfaz.escribir(" Digite Opcion: ");
 				opcion = Integer.parseInt(entrada.nextLine());
 			
 			
@@ -165,6 +167,7 @@ public class Interfaz {
 		gestorInterfaz.escribir("=========================================");
 		gestorInterfaz.escribir("================= Citas =================");
 		gestorInterfaz.escribir("=========================================");
+		gestorInterfaz.escribir(Cita.getCitas().size());
 		for (Cita clientes: Cita.getCitas()) {
 			
 			System.out.println(clientes);

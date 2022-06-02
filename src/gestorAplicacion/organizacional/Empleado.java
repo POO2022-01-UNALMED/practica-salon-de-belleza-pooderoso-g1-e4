@@ -111,6 +111,9 @@ public class Empleado extends Persona implements Serializable,Comparable<Emplead
 	public void aumentarSueldo(double porcentaje) {
 		setSueldo(this.sueldo*(1+porcentaje));
 	}
+	public double calcularPrima() {
+		return this.sueldo*0.5;
+	}
 	
 	
 	public ArrayList<Cita> getCitasAsignadas() {

@@ -9,6 +9,7 @@ import gestorAplicacion.operacional.Producto;
 import gestorAplicacion.organizacional.Administrador;
 import gestorAplicacion.organizacional.Cliente;
 import gestorAplicacion.organizacional.Empleado;
+import gestorAplicacion.organizacional.Salario;
 import gestorAplicacion.operacional.*;
 import java.time.temporal.ChronoField;  
 
@@ -24,7 +25,11 @@ public class BalanceContable {
 		
 		
 		// Comienza la interaccion con el usuario
-		System.out.println("Bienvenido al menu para calcular el balance contable!\n");
+
+		System.out.println("=========================================================");
+		System.out.println("¡Bienvenido al menu para calcular el balance contable!");
+		System.out.println("=========================================================");
+
 		System.out.println("A continuacion podra ver de cuales meses se tienen registros para el calculo:");
 		
 		//Aqui se buscan los meses de los cuales se tiene informacion en citas o productos vendidos
@@ -100,8 +105,12 @@ public class BalanceContable {
 		for(Empleado empleado: Empleado.getEmpleados()) {
 			pagoEmpleados += empleado.getSueldo();
 		}
+		double pagoAdministrador = 0;
+		for(Administrador admn: Administrador.getAdministradores()) {
+			pagoAdministrador += admn.getSueldo();
+		}
 		double pagoComisionesProductos = totalVentas*Venta.porcentajeComision;
-		//Faltaria lo del patrimonio... 
+		
 		double valorNeto = totalCitas+totalVentas - pagoEmpleados-pagoComisionesProductos;
 		String s = "Balance Contable para el mes "+meses.get(mes_escogido)+" del 2022:" +
 				"\n-------------------------------"+
@@ -109,13 +118,37 @@ public class BalanceContable {
 				"\nValor total por Ventas: "+totalVentas+
 				"\nPago Comisiones de Productos: -"+pagoComisionesProductos+
 				"\nPago mensual a Empleados: -"+pagoEmpleados+
-				"\n-------------------------------"+
+				"\nPago mensual a Administrador: -"+pagoAdministrador;
+		
+		
+		//--------------------En caso de que haya que calcular la prima--------------------
+		double pagoPrimaEmpleados=0, pagoPrimaAdministrador=0;
+		ArrayList<Salario> trabajadores = new ArrayList<Salario>();
+		for(Empleado emp: Empleado.getEmpleados()) {
+			trabajadores.add(emp);
+		}
+		for(Administrador adm: Administrador.getAdministradores()) {
+			trabajadores.add(adm);
+		}
+		if(meses.get(mes_escogido)=="Junio" || meses.get(mes_escogido)=="Diciembre") {
+			for(Salario sal: trabajadores) {
+				if(sal instanceof Empleado) {
+					pagoPrimaEmpleados += sal.calcularPrima();
+				}
+				else if(sal instanceof Administrador) {
+					pagoPrimaAdministrador += sal.calcularPrima();
+				}
+			}
+			valorNeto -= (pagoPrimaEmpleados+pagoPrimaAdministrador);
+			s += "\nPago de Prima a Empleados: -"+pagoPrimaEmpleados+
+					"\nPago de Prima a Administrador: -"+pagoPrimaAdministrador;
+		}
+		
+		
+				
+	//Finalizando 
+		s += "\n-------------------------------"+
 				"\n\nValor neto de este mes: "+valorNeto;
-		
-		
-		
-		
-		
 		return s;
 	}
 	

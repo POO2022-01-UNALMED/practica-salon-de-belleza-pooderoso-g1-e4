@@ -1,6 +1,10 @@
 package gestorAplicacion.organizacional;
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import gestorAplicacion.operacional.Cita;
+import gestorAplicacion.operacional.Servicio;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.*;
@@ -82,6 +86,9 @@ public class Administrador extends Persona implements Serializable, Salario {
 	public void aumentarSueldo(double porcentaje) {
 		setSueldo(this.sueldo*(1+porcentaje));
 	}
+	public double calcularPrima() {
+		return this.sueldo*0.5;
+	}
 	
 	
 	
@@ -103,6 +110,28 @@ public class Administrador extends Persona implements Serializable, Salario {
 				+ empleadosAsigandos + "fecha registro " + super.getInicioVinculacion() +"]";
 	}
 
+	//Metodo para crear nuevo cliente desde administrador
+	public static Cliente NuevoCliente(String nombre, String apellido, int id, int edad, int numero, String anotaciones) {
+		return new Cliente(nombre, apellido, id, edad, numero, anotaciones);
+	}
+	
+	//Metodo para crear nuevo cliente desde administrador solo para datos obligatorios
+	public static Cliente NuevoCliente(String nombre, String apellido, int id) {
+		return new Cliente(nombre, apellido, id);
+	}
+	
+	
+	//Metodo para consilidar una nueva cita-
+	public static Cita consolidarCita(Empleado empleado, Cliente cliente, ArrayList<Servicio> servicios, LocalDateTime fechaReserva, LocalDateTime fechaCita){
+	    int duracion= Cita.duracionCita(servicios);
+		Cita nuevaCita=new Cita( empleado,  cliente, servicios,fechaReserva, fechaCita, duracion);
+		return nuevaCita;
+	}
+	
+	public static void consolidarCancelacion(Cita cita) {
+		cita.setEstado("Cancelada");
+		
+	}
 	public void venderProducto() {
 	}
 	
