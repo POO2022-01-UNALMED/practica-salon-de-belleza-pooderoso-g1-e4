@@ -87,6 +87,9 @@ public class Administrador extends Persona implements Serializable, Salario {
 	public void aumentarSueldo(double porcentaje) {
 		setSueldo(this.sueldo*(1+porcentaje));
 	}
+	public double calcularPrima() {
+		return this.sueldo*0.5;
+	}
 	
 	//-----------METODO ABSTRACTOS-----------
 		public String mostrarVigenciaSeguro() {
