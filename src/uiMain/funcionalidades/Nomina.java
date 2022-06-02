@@ -16,7 +16,7 @@ public class Nomina {
 ////////////////////////////FUNCIONALIDAD NÓMINA ////////////////////////////////////////////////////////	
 
 public static void calcularNomina() {
-System.out.println("Pago nómina mes vencido");
+System.out.println("=============Pago nómina mes vencido=============");
 
 SortedSet<Integer> fechas = new TreeSet<Integer>();
 for (Cita cita : Cita.getCitas()) {
@@ -49,7 +49,7 @@ System.out.println(i + " " + meses.get(value.next()));
 i++;
 }
 
-System.out.print("Opción: ");
+System.out.print("▨ ▨ Opción: ");
 Scanner texto = new Scanner(System.in);
 int opcion = texto.nextInt();
 
@@ -74,7 +74,7 @@ for (Empleado emp : Empleado.getEmpleados()) {
 	System.out.println(emp);
 }
 
-System.out.print("Nombre: ");
+System.out.print("▨ ▨ Nombre: ");
 Scanner nombre = new Scanner(System.in);
 String empleado = nombre.next();
 
@@ -116,12 +116,15 @@ totalComi += (venta.getProductoVendido().getPrecioVenta() * Venta.porcentajeComi
 System.out.println(" ");
 System.out.println(" ");
 System.out.println(" ================================================================== ");
-System.out.println(empleadoEscogido.getSueldo());
+System.out.println("                     Pago al empleado " + empleado);
+System.out.println(" ================================================================== ");
+System.out.println("  ");
+
 System.out.println("El empleado " + empleado + " atendió " + citasMes.size() + " citas en el mes");
 System.out.println("Tiene un sueldo base de:  " + empleadoEscogido.getSueldo());
 System.out.println(" ");
 
-System.out.println("Y vendió: " + ventasMes.size() + " producto(s) en el mes, correspondientes a:");
+System.out.println("Vendió: " + ventasMes.size() + " producto(s) en el mes, correspondientes a:");
 System.out.println(" ");
 for (Venta venta : ventasMes) {
 System.out.println("  --> " + venta.getProductoVendido().getNombreProducto() + " $ "
