@@ -159,6 +159,7 @@ public class Interfaz {
 		gestorInterfaz.escribir("=========================================");
 		gestorInterfaz.escribir("================= Citas =================");
 		gestorInterfaz.escribir("=========================================");
+		gestorInterfaz.escribir(Cita.getCitas().size());
 		for (Cita clientes: Cita.getCitas()) {
 			
 			System.out.println(clientes);
