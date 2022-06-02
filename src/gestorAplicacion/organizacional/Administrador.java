@@ -47,7 +47,6 @@ public class Administrador extends Persona implements Serializable, Salario {
 		this.nomina=nomina;
 		this.empleadosAsigandos = empleadosAsigandos;	
 		this.sueldo = Salario.SALARIO_BASE * 3;
-		Persona.personas.add(this);
 		administradores.add(this);
 	}
 	
@@ -88,11 +87,11 @@ public class Administrador extends Persona implements Serializable, Salario {
 	
 	
 	//-----------METODO ABSTRACTOS-----------
-	public String mostrarVigenciaSeguro() {
+	public String gestionSeguros() {
 			
 		DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		
-		return "El administrador " + this.getNombre() + " con ARL " + this.nivelARL +  " esta asegurado de " + super.getInicioVinculacion().format(formato) + " a " + super.getInicioVinculacion().plusMonths(this.duracionMesesSeguro).format(formato);
+		return "El administrador " + this.getNombre() + " " + this.getApellido() +  " con ARL " + this.nivelARL +  " esta asegurado de " + super.getInicioVinculacion().format(formato) + " a " + super.getInicioVinculacion().plusMonths(this.duracionMesesSeguro).format(formato);
 			
 	}
 

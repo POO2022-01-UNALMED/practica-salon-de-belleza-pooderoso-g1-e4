@@ -19,12 +19,12 @@ public class Interfaz {
 
 		// Deserializar todos los objetos.
 		Deserializador.deserializarTodo();
-			
+		
 		Scanner entrada =new Scanner(System.in);
 		
 		if (Administrador.getAdministradores().isEmpty()) {
 			
-			
+	
 		Administrador SuperAdministador =new Administrador("Juan","Cuadrado",123,21,444444,"12-2",2222);
 	
 		
@@ -53,7 +53,9 @@ public class Interfaz {
 		
 		Empleado empleado1 =new Empleado("Marlon", "Nivia", 1000349061, 21, 32088456, "U�as");
 		Empleado empleado2 =new Empleado("Julian", "Ospina", 525206530, 20, 3208844, "Pelo");
-	
+		
+		LocalDateTime fechaPrueba = LocalDateTime.of(2021, 5,1,12,0);
+		empleado2.setFechaRegistro(fechaPrueba);
 		
 		Cita cita1 = new Cita(empleado1, c1, s1,  LocalDateTime.of(2022, 5,1,12,0), LocalDateTime.of(2022, 5,30,14,0),60);
 		Cita cita2 = new Cita(empleado2, c1, s2,  LocalDateTime.of(2022, 5,10,12,0), LocalDateTime.of(2022, 5,31,14,0),60);

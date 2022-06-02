@@ -85,9 +85,15 @@ public abstract class Persona implements Serializable {
 		return this.fechaRegistro;
 	}
 	
+	public void setFechaRegistro(LocalDateTime nuevaFechaRegistro) {
+		
+		this.fechaRegistro = nuevaFechaRegistro;
+		
+	}
+	
 	//-----------METODO ABSTRACTOS-----------
 	
-	public abstract String mostrarVigenciaSeguro();
+	public abstract String gestionSeguros();
 
 	//-----------OTROS METODOS-----------
 	@Override

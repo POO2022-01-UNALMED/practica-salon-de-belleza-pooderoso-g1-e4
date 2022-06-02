@@ -45,7 +45,6 @@ public class Cliente extends Persona implements Serializable {
 		ClientePremiun = false;
 		Administrador.clientes.add(this);
 		clientes.add(this);
-		Persona.personas.add(this);
 	}
 	
 	public Cliente(String nombre, String apellido, int id, int edad, int numero, String anotaciones, boolean clientePremiun) {
@@ -54,11 +53,11 @@ public class Cliente extends Persona implements Serializable {
 		ClientePremiun = clientePremiun;
 		Administrador.clientes.add(this);
 		clientes.add(this);
-		Persona.personas.add(this);
+	
 	}
 	
 	//----------METODO ABSTRACTO-----------
-	public String mostrarVigenciaSeguro() {
+	public String gestionSeguros() {
 		
 		DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		
@@ -68,9 +67,15 @@ public class Cliente extends Persona implements Serializable {
 		for(Cita c : citasCliente ) {
 			
 			LocalDateTime fechaCita = c.getFechaCita();
-			int duracion = c.getDuracion();
+			LocalDateTime fechaFinalizacionCita = c.getFechaCita().plusMinutes(c.getDuracion());
 			
-			cadena = cadena + "El cliente está asegurado de " + fechaCita.format(formato) + " a " + fechaCita.plusMinutes(duracion).format(formato) + "\n";
+			if( LocalDateTime.now().isAfter(fechaFinalizacionCita)) {
+				
+				cadena = cadena + "El cliente " + super.getNombre() + " " + super.getApellido() + " estuvo asegurado en la cita No. " + c.getId() +  " del "  + fechaCita.format(formato) + " a " + fechaFinalizacionCita.format(formato) + "\n";
+			}else {
+				
+				cadena = cadena + "El cliente " + super.getNombre() + " " + super.getApellido() + " estará asegurado en la cita No. " + c.getId() +  " del "  + fechaCita.format(formato) + " a " + fechaFinalizacionCita.format(formato) + "\n";
+			}
 		}
 		
 		return cadena;

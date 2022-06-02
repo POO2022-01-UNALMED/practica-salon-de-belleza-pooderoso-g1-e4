@@ -55,17 +55,25 @@ public class Empleado extends Persona implements Serializable,Comparable<Emplead
 		this.sueldo =  Salario.SALARIO_BASE;
 		Administrador.empleadosAsigandos.add(this);//Cardinalidad de clases
 		empleados.add(this);
-		Persona.personas.add(this);
 	}
 	
 	
 	//-----------METODO ABSTRACTOS-----------
-		public String mostrarVigenciaSeguro() {
+		public String gestionSeguros() {
+			
+			LocalDateTime inicioVinculacion = super.getInicioVinculacion();
+			LocalDateTime finVinculacion = super.getInicioVinculacion().plusMonths(this.duracionMesesSeguro);
 			
 			DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			
-			return "Empleado con ARL " + this.nivelARL + " esta asegurado de " + super.getInicioVinculacion().format(formato) + " a " + super.getInicioVinculacion().plusMonths(this.duracionMesesSeguro).format(formato);
+			if(LocalDateTime.now().isAfter(finVinculacion) ) {
 			
+			return "Empleado "  + this.getNombre() + " " + this.getApellido() + " con ARL " + this.nivelARL + " tiene vencido el seguro, caducó el: " + finVinculacion.format(formato);
+			
+			}else {
+				return "Empleado "  + this.getNombre() + " " + this.getApellido() + " con ARL " + this.nivelARL + " esta asegurado de " + inicioVinculacion.format(formato) + " a " + finVinculacion.format(formato);
+			}
+				
 		}
 	
 
