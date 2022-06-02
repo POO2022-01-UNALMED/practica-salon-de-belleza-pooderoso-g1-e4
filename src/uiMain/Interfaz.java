@@ -100,7 +100,7 @@ public class Interfaz {
 				gestorInterfaz.escribir("5.Pagar nomina");
 				gestorInterfaz.escribir("6.Guardar y salir");
 				gestorInterfaz.escribir("7.Guardar y continuar");
-				gestorInterfaz.escribir("8.Mostrar clientes");
+				gestorInterfaz.escribir("8.Mostrar informacion actual");
 				gestorInterfaz.escribir("9.Gestionar seguros");
 				gestorInterfaz.escribir("10.Mostrar inventario");
 				
