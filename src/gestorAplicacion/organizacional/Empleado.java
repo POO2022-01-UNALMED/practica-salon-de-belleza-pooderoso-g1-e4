@@ -126,7 +126,7 @@ public class Empleado extends Persona implements Serializable,Comparable<Emplead
 
 	@Override
 	public String toString() {
-		return "nombre= " + super.getNombre() + ", especialista= " + this.getEspecialidad()+ ", id: "+this.getId() + "fecha registro: " + super.getInicioVinculacion();
+		return "nombre= " + super.getNombre() + ", especialista= " + this.getEspecialidad()+ ", id: "+this.getId() + " fecha registro: " + super.getInicioVinculacion();
 	}
 	
 	public String getIdEmpleado() {

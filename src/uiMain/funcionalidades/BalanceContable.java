@@ -27,7 +27,7 @@ public class BalanceContable {
 		// Comienza la interaccion con el usuario
 
 		System.out.println("=========================================================");
-		System.out.println("¡Bienvenido al menu para calcular el balance contable!");
+		System.out.println("!Bienvenido al menu para calcular el balance contable!");
 		System.out.println("=========================================================");
 
 		System.out.println("A continuacion podra ver de cuales meses se tienen registros para el calculo:");

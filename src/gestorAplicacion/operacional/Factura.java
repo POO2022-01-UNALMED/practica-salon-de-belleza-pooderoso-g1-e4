@@ -138,6 +138,12 @@ public class Factura implements Serializable {
 		this.precioTotal = ans;
 		return ans;
 	}
+
+	@Override
+	public String toString() {
+		return "Factura, id=" + idFactura + ", " + cita + ", precio total=" + precioTotal + ", fecha="
+				+ fecha + ", metodo pago=" + metodoPago + ", productos vendidos=" + productosVendidos ;
+	}
 	
 	
 	

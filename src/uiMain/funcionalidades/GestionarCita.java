@@ -89,7 +89,7 @@ public class GestionarCita {
      * @return Muestra por consola los empleados
      */
 	public static void mostrarEmpleados() {		
-		gestorInterfaz.escribir("------ Lista de empleados ------");
+		gestorInterfaz.escribir("======= Lista de empleados =======");
 		gestorInterfaz.escribir(" ");
 		for(Empleado e : Empleado.getEmpleados()) {
 			gestorInterfaz.escribir(e);
@@ -106,8 +106,8 @@ public class GestionarCita {
 		
 		gestorInterfaz.escribir("Por favor ingrese los datos del cliente:");
 		gestorInterfaz.escribir("");
-		gestorInterfaz.escribir("1. para ingresar solo datos obligatorios");
-		gestorInterfaz.escribir("2. para ingresar todos los datos");
+		gestorInterfaz.escribir("[1] para ingresar solo datos obligatorios");
+		gestorInterfaz.escribir("[2] para ingresar todos los datos");
 		gestorInterfaz.escribir("");
 		int obligatorio=gestorInterfaz.leerEntero();
 		
@@ -117,11 +117,11 @@ public class GestionarCita {
 			
 			String nombre=gestorInterfaz.leer("Por favor ingrese nombre del cliente: ");	
 			String apellido=gestorInterfaz.leer("Por favor ingrese apellido del cliente: ");
-			int id=gestorInterfaz.leerEntero("Por favor ingrese identificaión del cliente: ");
+			int id=gestorInterfaz.leerEntero("Por favor ingrese identificacion del cliente: ");
 			for(Cliente cliente: Cliente.getClientes()) {
 				if(cliente.getId()==id) {
-					gestorInterfaz.escribir("");
-					gestorInterfaz.escribir("----Cliente ya existente, verifique nuevamente la informacion----");
+					gestorInterfaz.escribir(" ");
+					gestorInterfaz.escribir("==== Cliente ya existente, verifique nuevamente la informacion ====");
 					GestionarCita.crearNuevoCliente();
 				}
 			}
@@ -138,11 +138,11 @@ public class GestionarCita {
 			
 			String nombre=gestorInterfaz.leer("Por favor ingrese nombre del cliente: ");	
 			String apellido=gestorInterfaz.leer("Por favor ingrese apellido del cliente: ");
-			int id=gestorInterfaz.leerEntero("Por favor ingrese identificaión del cliente: ");
+			int id=gestorInterfaz.leerEntero("Por favor ingrese identificacion del cliente: ");
 			for(Cliente cliente: Cliente.getClientes()) {
 				if(cliente.getId()==id) {
 					gestorInterfaz.escribir("");
-					gestorInterfaz.escribir("----Cliente ya existente, verifique nuevamente la informacion----");
+					gestorInterfaz.escribir("==== Cliente ya existente, verifique nuevamente la informacion ====");
 					GestionarCita.crearNuevoCliente();
 				}
 			}
@@ -181,7 +181,7 @@ public class GestionarCita {
 			}			
 		}
 		
-		int nuevaCedula=gestorInterfaz.leerEntero("Empledo no encontrado, por favor ingrese nuevamente la identificación del empleado:");
+		int nuevaCedula=gestorInterfaz.leerEntero("Empledo no encontrado, por favor ingrese nuevamente la identificacion del empleado:");
 		return GestionarCita.devuelveEmpleado(nuevaCedula);
 		
 		 
@@ -263,11 +263,12 @@ public class GestionarCita {
 		
 		if(citasAsignadas==false) {
 			
-			gestorInterfaz.escribir(p.getNombre()+" no sposee citas asignadas este d�a");
-			int cambioDia=gestorInterfaz.leerEntero("Digite 0 para escoger otro d�a, de lo contrario 1");//Escoger otro d�a
+			gestorInterfaz.escribir(p.getNombre()+" no posee citas asignadas este dia");
+			gestorInterfaz.escribir(" ");
+			int cambioDia=gestorInterfaz.leerEntero("Digite 0 para escoger otro dia, de lo contrario 1");//Escoger otro d�a
 			if (cambioDia==0){
 				gestorInterfaz.escribir(" ");
-				int NuevoMes=GestionarCita.ingresarMes();//Escoger otro mes
+				int NuevoMes=GestionarCita.ingresarMes();//Escoger otro mes1		
 				int nuevoDia=GestionarCita.ingresarDia(NuevoMes);//Escoger otro mes
 				boolean estado = mostrarCitas(p, NuevoMes, nuevoDia);
 				gestionarFecha(estado,p, NuevoMes, nuevoDia,servicios);
@@ -320,7 +321,7 @@ public class GestionarCita {
 		return null;
 		
 	}	
-	
+ 	
 
 
 	  /**
@@ -467,7 +468,7 @@ public class GestionarCita {
 	* hace una casteo a partir de lo que recibe de otros metodos
     */
 	public static void  gestionCancelar() {
-		int cedula =gestorInterfaz.leerEntero("Ingrese la identificaci�n del cliente o del empleado al cual se le quiere cancelar la cita: ");
+		int cedula =gestorInterfaz.leerEntero("Ingrese la identificacion del cliente o del empleado al cual se le quiere cancelar la cita: ");
 		
 		
 		Persona persona =devolverPersona(cedula);
@@ -521,11 +522,11 @@ public class GestionarCita {
 	public static void cancelarCita(Empleado empleado) {
 		
 		gestorInterfaz.escribir(" ");
-		gestorInterfaz.escribir("=== Se muestra las citas ordenadas por fecha ===");
+		gestorInterfaz.escribir("==== Se muestra las citas ordenadas por fecha ====");
 		gestorInterfaz.escribir(" ");
 		Collections.sort(empleado.getCitasAsignadas());
 		for (Cita cita : empleado.getCitasAsignadas()) {
-			if(cita.getEstado()!="Cancelada") {
+			if(cita.getEstado()!="Cancelada" && cita.getEstado()!="Exitosa") {
 				gestorInterfaz.escribir("id de la cita: "+cita.getId()+" - "+cita);
 				gestorInterfaz.escribir(" ");				
 			}
@@ -535,7 +536,7 @@ public class GestionarCita {
 		int id=gestorInterfaz.leerEntero("Digite el id de la cita que desea cancelar: ");
 		
 		for (Cita cita : empleado.getCitasAsignadas()) {
-			if(id==cita.getId()) {
+			if(id==cita.getId() && cita.getEstado()!="Cancelada" && cita.getEstado()!="Exitosa") {
 				Administrador.consolidarCancelacion(cita);//Se pone la cita cancelada
 				gestorInterfaz.escribir(" ");
 				gestorInterfaz.escribir("================== Cita Cancelada exitosamente ==================");
@@ -560,11 +561,11 @@ public class GestionarCita {
 	public static void cancelarCita(Cliente cliente) {
 		
 		gestorInterfaz.escribir(" ");
-		gestorInterfaz.escribir("=== Se muestra las citas ordenadas por fecha ===");
+		gestorInterfaz.escribir("==== Se muestra las citas ordenadas por fecha ====");
 		gestorInterfaz.escribir(" ");
 		Collections.sort(cliente.getCitasGeneradas());
 		for (Cita cita : cliente.getCitasGeneradas()) {
-			if(cita.getEstado()!="Cancelada") {
+			if(cita.getEstado()!="Cancelada" && cita.getEstado()!="Exitosa") {
 				gestorInterfaz.escribir("id de la cita: "+cita.getId()+" - "+cita);
 				gestorInterfaz.escribir(" ");
 			}
@@ -574,7 +575,7 @@ public class GestionarCita {
 		int id=gestorInterfaz.leerEntero("Digite el id de la cita que desea cancelar: ");
 		
 		for (Cita cita : cliente.getCitasGeneradas()) {
-			if(id==cita.getId()) {
+			if(id==cita.getId() && cita.getEstado()!="Cancelada" && cita.getEstado()!="Exitosa") {
 				Administrador.consolidarCancelacion(cita);//Se pone la cita cancelada
 				gestorInterfaz.escribir(" ");
 				gestorInterfaz.escribir("================== Cita Cancelada exitosamente ==================");
@@ -625,7 +626,7 @@ public class GestionarCita {
 		int mesActual= LocalDateTime.now().getMonthValue();
 		
 		if( dia< diaActual  && mes <= mesActual ) {
-			gestorInterfaz.escribir("El dia debe estar ser mayor al actua�");
+			gestorInterfaz.escribir("El dia debe estar ser mayor al actual");
 			return GestionarCita.ingresarDia(mes);
 		}
 		else if(dia<=0 || dia >31){

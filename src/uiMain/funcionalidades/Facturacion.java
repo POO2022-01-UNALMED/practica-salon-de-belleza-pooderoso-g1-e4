@@ -267,7 +267,7 @@ public class Facturacion {
 					System.out.println("Factura # " + facturaCita.getIdFactura());
 					System.out.println("Fecha: " + facturaCita.getFecha().format(formato));
 					System.out.println("Cliente id # " + facturaCita.getCita().getCliente().getId() +  " - " + facturaCita.getCita().getCliente().getNombre() + " " + facturaCita.getCita().getCliente().getApellido());
-					System.out.println("Atendió " + facturaCita.getCita().getEmpleado().getNombre() +  " " + facturaCita.getCita().getEmpleado().getApellido() + " - id " + facturaCita.getCita().getEmpleado().getId());
+					System.out.println("Atendio " + facturaCita.getCita().getEmpleado().getNombre() +  " " + facturaCita.getCita().getEmpleado().getApellido() + " - id " + facturaCita.getCita().getEmpleado().getId());
 					System.out.println("Servicios: ");
 					for(Servicio s : facturaCita.getCita().getServicios()) {
 						System.out.println( s + " - Precio: " + s.getPrecio());
@@ -280,7 +280,7 @@ public class Facturacion {
 			
 		}catch(Exception e) {
 			System.out.println("       ");
-			System.out.println("Ocurrió un error: ");
+			System.out.println("Ocurrio un error: ");
 			System.out.println("Asegurese por favor de no ingresar letras");
 		}
 	}
