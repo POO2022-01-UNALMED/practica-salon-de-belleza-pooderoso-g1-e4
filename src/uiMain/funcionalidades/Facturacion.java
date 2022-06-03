@@ -199,78 +199,89 @@ public class Facturacion {
 					
 				}
 				
+				boolean tieneCitasPendientes = false;
 				
-				
+				System.out.println("las citas registradas de este cliente son: ");
 				for(Cita c : citasTomadas) {
 					if(c.getCliente().getId() == clienteCita.getId()) {
 						
-						System.out.println("las citas de este cliente son: ");
-						System.out.println("   ");
-						System.out.println("Cita Id #: " + c.getId() +  " realizada el: " + c.getFechaReserva().format(formato));
-			
+						if(c.getEstado().equals("Pendiente")) {
+							tieneCitasPendientes = true;
+							System.out.println("   ");
+							System.out.println("Cita Id #: " + c.getId() +  " realizada el: " + c.getFechaReserva().format(formato) + " ESTADO: " + c.getEstado());
+							
+						}else {
+							System.out.println("   ");
+							System.out.println("Cita Id #: " + c.getId() +  " realizada el: " + c.getFechaReserva().format(formato) + " ESTADO: " + c.getEstado());
+							
+						}
+						
 					}
 					
 				}
 				
-				System.out.println("Por favor ingrese el id de la cita que a cancelar: ");
-				
-				int idCita = entradaFacturacion.nextInt();
+				if(tieneCitasPendientes == false) {
+					System.out.println("El cliente no tiene citas pendientes para facturar");		
+				}
+				else {
+					
+					System.out.println("Por favor ingrese el id de la cita que a facturar: ");
+					
+					int idCita = entradaFacturacion.nextInt();
 
 
-				for(Cita c : citasTomadas) {
-					if(c.getId() == idCita) {
+					for(Cita c : citasTomadas) {
+						if(c.getId() == idCita) {
+							if(c.getEstado().equals("Pendiente")) {
+								citaAFacturar = c;	
+							}
+							else if(c.getEstado().equals("Exitosa")) {
+								System.out.println("");
+							}
+						}
 						
-						citaAFacturar = c;
-						
-			
 					}
 					
+					LocalDateTime horaFacturaCita = LocalDateTime.now();
+					
+					System.out.println("1. Efectivo");
+					System.out.println("2. QR");
+					System.out.println("3. Transferencia");
+					System.out.println("Cual es el metodo de pago?");
+					String metodoPagoFactura ="";
+					int tipoMetodoPago = entradaFacturacion.nextInt();
+					
+					switch(tipoMetodoPago){
+						case 1:
+							metodoPagoFactura = "Efectivo";break;
+						case 2:
+							metodoPagoFactura = "QR";break;
+						case 3: 
+							metodoPagoFactura = "Transferencia";break;
+							
+					}
+					
+					Factura facturaCita = new Factura(citaAFacturar, horaFacturaCita, metodoPagoFactura);
+					
+					System.out.println("===============FACTURA CITAS=================");
+					System.out.println("Factura # " + facturaCita.getIdFactura());
+					System.out.println("Fecha: " + facturaCita.getFecha().format(formato));
+					System.out.println("Cliente id # " + facturaCita.getCita().getCliente().getId() +  " - " + facturaCita.getCita().getCliente().getNombre() + " " + facturaCita.getCita().getCliente().getApellido());
+					System.out.println("Atendió " + facturaCita.getCita().getEmpleado().getNombre() +  " " + facturaCita.getCita().getEmpleado().getApellido() + " - id " + facturaCita.getCita().getEmpleado().getId());
+					System.out.println("Servicios: ");
+					for(Servicio s : facturaCita.getCita().getServicios()) {
+						System.out.println( s + " - Precio: " + s.getPrecio());
+					}
+					System.out.println("El valor a pagar es de " + facturaCita.precioTotalServicios()); 
+					System.out.println("===============================");						
 				}
-				
-				LocalDateTime horaFacturaCita = LocalDateTime.now();
-				
-				System.out.println("1. Efectivo");
-				System.out.println("2. QR");
-				System.out.println("3. Transferencia");
-				System.out.println("Cual es el metodo de pago?");
-				String metodoPagoFactura ="";
-				int tipoMetodoPago = entradaFacturacion.nextInt();
-				
-				switch(tipoMetodoPago){
-					case 1:
-						metodoPagoFactura = "Efectivo";break;
-					case 2:
-						metodoPagoFactura = "QR";break;
-					case 3: 
-						metodoPagoFactura = "Transferencia";break;
-						
-				}
-				
-				Factura facturaCita = new Factura(citaAFacturar, horaFacturaCita, metodoPagoFactura);
-				
-				System.out.println("===============FACTURA CITAS=================");
-				System.out.println("Factura # " + facturaCita.getIdFactura());
-				System.out.println("Fecha: " + facturaCita.getFecha().format(formato));
-				System.out.println("Cliente id # " + facturaCita.getCita().getCliente().getId() +  " - " + facturaCita.getCita().getCliente().getNombre() + " " + facturaCita.getCita().getCliente().getApellido());
-				System.out.println("Atendió " + facturaCita.getCita().getEmpleado().getNombre() +  " " + facturaCita.getCita().getEmpleado().getApellido() + " - id " + facturaCita.getCita().getEmpleado().getId());
-				System.out.println("Servicios: ");
-				for(Servicio s : facturaCita.getCita().getServicios()) {
-					System.out.println( s + " - Precio: " + s.getPrecio());
-				}
-				System.out.println("El valor a pagar es de " + facturaCita.precioTotalServicios()); 
-				System.out.println("===============================");
-				
+								
 			}
-			
 			
 		}catch(Exception e) {
 			System.out.println("       ");
 			System.out.println("Ocurrió un error: ");
 			System.out.println("Asegurese por favor de no ingresar letras");
 		}
-		
-	
-		
 	}
-
 }
