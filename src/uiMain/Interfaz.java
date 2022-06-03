@@ -131,8 +131,8 @@ public class Interfaz {
 				
 				
 				gestorInterfaz.escribir("----Upps, hemos vuelto al menu principal----");
-				System.out.println(e);
-				e.printStackTrace();
+				//System.out.println(e);
+				//e.printStackTrace();
 				gestorInterfaz.escribir(" ");
 				opcion=5555;
 			}
