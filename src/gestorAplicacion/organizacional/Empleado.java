@@ -34,7 +34,7 @@ public class Empleado extends Persona implements Serializable,Comparable<Emplead
 	// ahora si el codigo
 
 
-	private String idEmpleado;
+	
 	private String especialidad;
 	private ArrayList<Factura> serviciosRealizados = new ArrayList<Factura>();
 	private ArrayList<Cita> citasAsignadas = new ArrayList<Cita>();//---------------------------
@@ -126,12 +126,11 @@ public class Empleado extends Persona implements Serializable,Comparable<Emplead
 
 	@Override
 	public String toString() {
-		return "nombre= " + super.getNombre() + ", especialista= " + this.getEspecialidad()+ ", id: "+this.getId() + " fecha registro: " + super.getInicioVinculacion();
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+		return "Nombre= " + super.getNombre() + ", especialista= " + this.getEspecialidad()+ ", id: "+this.getId() + " fecha registro: " + super.getInicioVinculacion().format(format);
 	}
 	
-	public String getIdEmpleado() {
-		return idEmpleado;
-	}
+
 	
 
 
