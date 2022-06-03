@@ -36,22 +36,14 @@ public class Interfaz {
 		Producto removedor = new Producto("Removedor", 5500);
 		Producto acondicionador  = new Producto("Acondicionador", 700);
 		
-//		Map<Producto, Integer> cantidadProductos = Map.ofEntries(entry(gomina, 10), entry(keratina, 15),
-//				entry(colagenoCapilar, 20), entry(balsamo,10),
-//				entry(esmalte,100),entry(removedor,12),entry(acondicionador,30)
-//				);
-//		HashMap<Producto, Integer> cantidadHash = new HashMap<>(cantidadProductos);
-//	
-//		Inventario inv = new Inventario(cantidadHash);
-
-				
+		
 		Cliente c1 = new Cliente("Julian", "Londono",10013,21,3212345,"Ninguna",true), c2 = new Cliente("Pepito","Martinez",5234,24,32156778,"Ninguna", false);
 		ArrayList<Servicio> s1 = new ArrayList<>(List.of(Servicio.ALIZADO, Servicio.CEJAS, Servicio.CORTE_CABALLERO));
 		ArrayList<Servicio> s2 = new ArrayList<>(List.of(Servicio.CEJAS));
 		ArrayList<Servicio> s3 = new ArrayList<>(List.of(Servicio.DEPILACION_LASER, Servicio.EXFOLIACION_FACIAL));
 		ArrayList<Servicio> s4 = new ArrayList<>(List.of(Servicio.CORTE_DAMA));
 		
-		Empleado empleado1 =new Empleado("Marlon", "Nivia", 1000349061, 21, 32088456, "U�as");
+		Empleado empleado1 =new Empleado("Marlon", "Nivia", 1000349061, 21, 32088456, "Unas");
 		Empleado empleado2 =new Empleado("Julian", "Ospina", 525206530, 20, 3208844, "Pelo");
 		
 		LocalDateTime fechaPrueba = LocalDateTime.of(2021, 5,1,12,0);
