@@ -132,34 +132,8 @@ public class Administrador extends Persona implements Serializable, Salario {
 		cita.setEstado("Cancelada");
 		
 	}
-	public void venderProducto() {
-	}
+
 	
-	public void generarFactura() {
-		System.out.println("generamos la Fcatura");		
-	}
+
 	
-	public void reservarCita() {
-		System.out.println("cita reservada");		
-	}
-	
-	public void cancelarCita() {
-		System.out.println("cita reservada");		
-	}
-	
-	public void generarBalance() {
-		System.out.println("balance");		
-	}
-	
-	public void pagarNomina() {
-		//cuentaahorros
-		//Factura
-		//Empleados
-		System.out.println("nomina Pagada");		
-	}
-	
-	
-	public void ventaProductos() {
-		System.out.println("venta Productos");		
-	}	
 }
