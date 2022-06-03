@@ -24,8 +24,8 @@ public abstract class Persona implements Serializable {
 	
 	
 	//-----------ATRIBUTOS-----------
-	private String nombre;
-	private String apellido;
+	protected String nombre;
+	protected String apellido;
 	private int id;
 	private int Edad;
 	private int Numero;
