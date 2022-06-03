@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 import gestorAplicacion.operacional.Factura;
 import gestorAplicacion.operacional.Producto;
+import gestorAplicacion.operacional.Servicio;
 import gestorAplicacion.operacional.Venta;
 import gestorAplicacion.organizacional.Cliente;
 import gestorAplicacion.organizacional.Empleado;
@@ -23,28 +24,8 @@ public class Facturacion {
 	
 	public static void facturar() {
 		
-		//Productos del salón de belleza POODEROSO
-		Producto gomina = new Producto("Gomina", 2500);
-		Producto keratina = new Producto("keratina", 30000);
-		Producto colagenoCapilar = new Producto("Colageno Capilar", 3000);
-		Producto balsamo = new Producto("Balsamo", 1500);
-		Producto esmalte = new Producto("Esmalte", 4000);
-		Producto removedor = new Producto("Removedor", 5500);
-		Producto acondicionador  = new Producto("Acondicionador", 700);
 		
-		
-		//*INICIALIZACIÓN PRODUCTOS
-		
-		//Ingreso de productos al inventario
-		HashMap<Producto, Integer> stockInicial = new HashMap<Producto, Integer>();
-		stockInicial.put(gomina, 23);
-		stockInicial.put(keratina, 11);
-		stockInicial.put(colagenoCapilar, 34);
-		stockInicial.put(balsamo, 21);
-		stockInicial.put(esmalte, 34);
-		
-		//Inventario
-		Inventario inventario = new Inventario(stockInicial);
+		Inventario inventario = Inventario.getInventarios().get(0);
 		
 		//Productos que serán vendidos
 		HashMap<Producto, Integer> productosVendidos = new HashMap<Producto, Integer>();
@@ -171,7 +152,7 @@ public class Facturacion {
 				LocalDateTime horaFactura = LocalDateTime.now();
 				Factura facturaProductos = new Factura(productosVendidos, horaFactura, metodoPago);	
 				facturaProductos.precioTotalProductos();
-				System.out.println("===============================");
+				System.out.println("=============FACTURA PRODUCTOS=============");
 				System.out.println("Factura # " + facturaProductos.getIdFactura());
 				System.out.println("Fecha: " + facturaProductos.getFecha().format(formato));
 				System.out.println("Vendido por " + empleado.getNombre() + " " + empleado.getApellido());
@@ -267,16 +248,17 @@ public class Facturacion {
 				
 				Factura facturaCita = new Factura(citaAFacturar, horaFacturaCita, metodoPagoFactura);
 				
-				System.out.println("===============================");
+				System.out.println("===============FACTURA CITAS=================");
 				System.out.println("Factura # " + facturaCita.getIdFactura());
 				System.out.println("Fecha: " + facturaCita.getFecha().format(formato));
 				System.out.println("Cliente id # " + facturaCita.getCita().getCliente().getId() +  " - " + facturaCita.getCita().getCliente().getNombre() + " " + facturaCita.getCita().getCliente().getApellido());
 				System.out.println("Atendió " + facturaCita.getCita().getEmpleado().getNombre() +  " " + facturaCita.getCita().getEmpleado().getApellido() + " - id " + facturaCita.getCita().getEmpleado().getId());
+				System.out.println("Servicios: ");
+				for(Servicio s : facturaCita.getCita().getServicios()) {
+					System.out.println( s + " - Precio: " + s.getPrecio());
+				}
 				System.out.println("El valor a pagar es de " + facturaCita.precioTotalServicios()); 
 				System.out.println("===============================");
-				
-			
-				
 				
 			}
 			

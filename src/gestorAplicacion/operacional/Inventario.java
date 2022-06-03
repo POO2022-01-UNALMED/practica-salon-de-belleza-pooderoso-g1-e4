@@ -12,14 +12,19 @@ public class Inventario implements Serializable {
 			private static final long serialVersionUID = 1L;
 			
 			private static HashMap<Producto, Integer> inventario;
+			private static ArrayList<Inventario> inventarios;
 			static {
 				inventario = new HashMap<Producto, Integer>();
+				inventarios = new ArrayList<Inventario>();
 			}
 			
 
 			public static HashMap<Producto, Integer> getInventario() {
 					return inventario;
 				}
+			public static ArrayList<Inventario> getInventarios(){
+				return inventarios;
+			}
 			
 			
 	//-----------ATRIBUTOS-----------
@@ -29,7 +34,8 @@ public class Inventario implements Serializable {
 	//-----------CONSTRUCTOR-----------
 	public Inventario(HashMap<Producto, Integer> lista) {
 		this.listaProductos = lista;
-		Inventario.inventario = lista;	
+		Inventario.inventario = lista;
+		Inventario.inventarios.add(this);
 	}
 	
 	//-----------GETTERS y SETTERS-----------
@@ -44,7 +50,7 @@ public class Inventario implements Serializable {
 	//-----------OTROS METODOS-----------
 	public void agregarProducto(Producto producto, int existencias) {
 		this.listaProductos.put(producto, existencias);
-		Inventario.inventario.put(producto, existencias);
+		//Inventario.inventario.put(producto, existencias);
 	}
 	public float calcularPatrimonio() {
 		float total = 0;
@@ -58,7 +64,7 @@ public class Inventario implements Serializable {
 		if(sePuedeVender(producto, cantidad)) {
 			Integer oldValue = this.listaProductos.get(producto);
 			this.listaProductos.put(producto,  oldValue - cantidad);
-			Inventario.inventario.put(producto, oldValue - cantidad);
+			//Inventario.inventario.put(producto, oldValue - cantidad);
 		}		
 	}
 	
@@ -85,19 +91,4 @@ public class Inventario implements Serializable {
 		return "Cantidades= "+ this.listaProductos.values();
 		
 	}
-	// Caso de uso:
-	/*
-	public static void main(String[] args) {
-		Producto p1 = new Producto("Shampoo",15000), p2= new Producto("Gomina",12000), p3 = new Producto("Esmalte",10000);
-		HashMap<Producto, Integer> listaInventario = new HashMap<Producto, Integer>();
-		listaInventario.put(p1, 10);
-		listaInventario.put(p2,15);
-		listaInventario.put(p3,25);
-		Inventario inv = new Inventario(listaInventario);
-		System.out.println(inv.calcularPatrimonio());
-		inv.actualizarExistencias(p1, 5);
-		System.out.println(inv.getListaProductos());
-		System.out.println(inv.calcularPatrimonio());
-	}
-	*/
 }

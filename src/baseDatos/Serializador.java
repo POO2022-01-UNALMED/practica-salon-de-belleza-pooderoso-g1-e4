@@ -77,6 +77,7 @@ public class Serializador {
 		Serializador.serializar(Empleado.getEmpleados(), "empleados");
 		Serializador.serializar(Persona.getPersonas(), "personas");
 		Serializador.serializar(Inventario.getInventario(), "inventario");
+		Serializador.serializar(Inventario.getInventarios(), "inventarios");
 		
 	}
 

@@ -36,13 +36,13 @@ public class Interfaz {
 		Producto removedor = new Producto("Removedor", 5500);
 		Producto acondicionador  = new Producto("Acondicionador", 700);
 		
-		Map<Producto, Integer> cantidadProductos = Map.ofEntries(entry(gomina, 10), entry(keratina, 15),
-				entry(colagenoCapilar, 20), entry(balsamo,10),
-				entry(esmalte,100),entry(removedor,12),entry(acondicionador,30)
-				);
-		HashMap<Producto, Integer> cantidadHash = new HashMap<>(cantidadProductos);
-	
-		Inventario inv = new Inventario(cantidadHash);
+//		Map<Producto, Integer> cantidadProductos = Map.ofEntries(entry(gomina, 10), entry(keratina, 15),
+//				entry(colagenoCapilar, 20), entry(balsamo,10),
+//				entry(esmalte,100),entry(removedor,12),entry(acondicionador,30)
+//				);
+//		HashMap<Producto, Integer> cantidadHash = new HashMap<>(cantidadProductos);
+//	
+//		Inventario inv = new Inventario(cantidadHash);
 
 				
 		Cliente c1 = new Cliente("Julian", "Londono",10013,21,3212345,"Ninguna",true), c2 = new Cliente("Pepito","Martinez",5234,24,32156778,"Ninguna", false);
@@ -62,10 +62,6 @@ public class Interfaz {
 		Cita cita3 = new Cita(empleado1, c2, s3,  LocalDateTime.of(2022, 5,1,12,0), LocalDateTime.of(2022, 6,15,14,0),60);
 		Cita cita4 = new Cita(empleado1, c1, s4,  LocalDateTime.of(2022, 5,3,12,0), LocalDateTime.of(2022, 8,21,14,0),60);
 		
-		
-		Venta venta1 = new Venta(gomina, empleado1, LocalDateTime.of(2022, 5,10,12,0),5, inv);
-		Venta venta2 = new Venta(keratina, empleado2, LocalDateTime.of(2022, 8,14,12,0),5, inv);
-		
 		HashMap<Producto, Integer> stockInicial = new HashMap<Producto, Integer>();
 		stockInicial.put(gomina, 23);
 		stockInicial.put(keratina, 11);
@@ -75,6 +71,11 @@ public class Interfaz {
 		
 		//Inventario
 		Inventario inventario = new Inventario(stockInicial);
+		
+		Venta venta1 = new Venta(gomina, empleado1, LocalDateTime.of(2022, 5,10,12,0),5, inventario);
+		Venta venta2 = new Venta(keratina, empleado2, LocalDateTime.of(2022, 8,14,12,0),5, inventario);
+		
+		
 		}
 		
 
