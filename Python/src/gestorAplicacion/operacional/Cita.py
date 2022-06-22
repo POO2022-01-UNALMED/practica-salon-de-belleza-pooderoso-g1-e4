@@ -11,7 +11,7 @@ class Cita:
     #-----------SERIALIZADOR-----------
     _SERIALVERSIONUID = 1
 
-    _citas = None
+    _citas = []
 
     @classmethod
     def _static_initializer(cls):

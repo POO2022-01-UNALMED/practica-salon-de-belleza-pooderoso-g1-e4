@@ -31,7 +31,7 @@ class Venta:
     #-----------ATRIBUTOS-----------
     PORCENTAJECOMISION = 0.2
     numVenta = 0
-    _ventas=None
+    _ventas=[]
 
     #-----------CONSTRUCTOR-----------
     def __init__(self, productoVendido, empleadoComision, fechaVenta, cantidadVendida, inventario):

@@ -23,7 +23,8 @@ class Inventario:
     """
 
     #-----------ATRIBUTOS-----------
-
+    _inventario = []
+    _inventarios = []
 
     #-----------CONSTRUCTOR-----------
     def __init__(self, lista):

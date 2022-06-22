@@ -40,7 +40,7 @@ class Empleado(Persona, Salario):
 
     HORAINICIO = timedelta(hours=9, minutes=0)
     HORAFINAL = timedelta(hours=18, minutes=0)
-    _empleados = None
+    _empleados = []
 
     def __init__(self, nombre, apellido, id, edad, numero, especialidad):
         #instance fields found by Java to Python Converter:

@@ -62,19 +62,22 @@ class Cliente(Persona):
 #ORIGINAL LINE: public Cliente(String nombre, String apellido, int id, int edad, int numero, String anotaciones, boolean clientePremiun)
     def __init__(self, nombre, apellido, id, edad, numero, anotaciones, clientePremiun):
         from ..organizacional.Administrador import Administrador
-        self._initialize_instance_fields()
+        #self._initialize_instance_fields()
 
         super().__init__(nombre, apellido, id, edad, numero)
         self._anotaciones = anotaciones
-        self._ClientePremiun = clientePremiun
+        self._citasGeneradas = []
+        self._facturas = None
+        self._ClientePremiun = False
         Administrador.clientes.append(self)
         Cliente._clientes.append(self)
 
 
-#JAVA TO PYTHON CONVERTER TODO TASK: There is no Python equivalent to multiple constructors:
-#ORIGINAL LINE: public Cliente(String nombre, String apellido, int id)
-    def __init__(self, nombre, apellido, id):
-        self(nombre,apellido,id,0,0," No posee anotaciones")
+ #JAVA TO PYTHON CONVERTER TODO TASK: There is no Python equivalent to multiple constructors:
+  #ORIGINAL LINE: public Cliente(String nombre, String apellido, int id)
+   # def __init__(self, nombre, apellido, id):
+    #    self(nombre,apellido,id,0,0," No posee anotaciones")
+  
 
     #----------METODO ABSTRACTO-----------
     def gestionSeguros(self):
