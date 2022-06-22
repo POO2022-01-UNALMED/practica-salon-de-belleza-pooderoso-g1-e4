@@ -11,6 +11,7 @@ class Empleado(Persona, Salario):
 
 
     #todo esto es del serializador
+    """
     _SERIALVERSIONUID = 1
 
     _empleados = None
@@ -32,14 +33,14 @@ class Empleado(Persona, Salario):
     #también en cada constructor se debe poner el add al array
     # ahora si el codigo
 
-
+    """
 
 
     #Constantes de tiempos de atenci�n de los empleados (9 am - 6 pm)
 
     HORAINICIO = timedelta(hours=9, minutes=0)
     HORAFINAL = timedelta(hours=18, minutes=0)
-
+    _empleados = None
 
     def __init__(self, nombre, apellido, id, edad, numero, especialidad):
         #instance fields found by Java to Python Converter:

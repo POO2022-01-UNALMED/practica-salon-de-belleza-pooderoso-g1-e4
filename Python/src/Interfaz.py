@@ -15,7 +15,7 @@ from  gestorAplicacion.operacional.Servicio import Servicio
 from  gestorAplicacion.operacional.Factura import Factura
 from  gestorAplicacion.operacional.Producto import Producto
 
-from .uiMain.gestorInterfaz import  gestorInterfaz
+from uiMain.gestorInterfaz import  gestorInterfaz
 
 
 if __name__ == "__main__":

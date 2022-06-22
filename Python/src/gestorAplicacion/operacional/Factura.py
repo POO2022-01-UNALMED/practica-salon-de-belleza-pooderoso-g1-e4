@@ -1,6 +1,6 @@
 class Factura:
 
-
+    """
     def _initialize_instance_fields(self):
         #instance fields found by Java to Python Converter:
         self._idFactura = 0
@@ -28,11 +28,11 @@ class Factura:
     @staticmethod
     def setFacturas(facturas):
         Factura._facturas = facturas
-
+    """
 
     #-----------ATRIBUTOS-----------
     NumFacturas =0
-
+    _facturas = []
 
     #-----------CONSTRUCTORES-----------
     #-----------1. Para facturar una cita -----------

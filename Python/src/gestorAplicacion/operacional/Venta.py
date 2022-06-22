@@ -4,7 +4,7 @@ from gestorAplicacion.organizacional import Empleado
 
 class Venta:
 
-    
+    """
     #-----------SERIALIZADOR-----------
     _SERIALVERSIONUID = 1
 
@@ -24,26 +24,18 @@ class Venta:
     def setVentas(ventas):
         Venta._ventas = ventas
 
-    
+    """
 
 
 
     #-----------ATRIBUTOS-----------
     PORCENTAJECOMISION = 0.2
     numVenta = 0
-
+    _ventas=None
 
     #-----------CONSTRUCTOR-----------
     def __init__(self, productoVendido, empleadoComision, fechaVenta, cantidadVendida, inventario):
         #instance fields found by Java to Python Converter:
-        self._productoVendido = None
-        self._idVenta = 0
-        self._cantidadVendida = 0
-        self._empleadoComision = None
-        self._fechaVenta = None
-        self._comision = 0
-        self._inventario = None
-
         self._productoVendido = productoVendido
         self._empleadoComision = empleadoComision
         self._empleadoComision.setProductosVendidos(productoVendido)

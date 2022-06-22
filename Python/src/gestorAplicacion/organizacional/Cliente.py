@@ -1,9 +1,9 @@
 import datetime
 
 from ..organizacional.Persona import Persona
-from ..organizacional.Administrador import Administrador
+#from ..organizacional.Administrador import Administrador
 
-from gestorAplicacion.operacional import Factura
+#from gestorAplicacion.operacional import Factura
 #from uiMain.gestorInterfaz import 
 
 
@@ -16,18 +16,18 @@ class Cliente(Persona):
         self._citasGeneradas = []
         self._facturas = []
         self._ClientePremiun = False
-    """
-
+    
+    
     #-----------SERIALIZADOR-----------
     _SERIALVERSIONUID = 1
 
     _clientes = None
 
-    @staticmethod
-    def _static_initializer():
-        Cliente._clientes = []
+    @classmethod
+    def static_initializer(cls):
+        cls._clientes = []
 
-    _static_initializer()
+    static_initializer()
 
     @staticmethod
     def getClientes():
@@ -37,16 +37,17 @@ class Cliente(Persona):
     def setClientes(clientes):
         Cliente._clientes = clientes
         Administrador.clientes=clientes
-
+    """
 
 
     #-----------ATRIBUTOS-----------
 
-
+    _clientes=[]
     #-----------CONSTRUCTORES-----------
 #JAVA TO PYTHON CONVERTER TODO TASK: There is no Python equivalent to multiple constructors:
 #ORIGINAL LINE: public Cliente(String nombre, String apellido, int id, int edad, int numero, String anotaciones)
     def __init__(self, nombre, apellido, id, edad, numero, anotaciones):
+        from ..organizacional.Administrador import Administrador
         self._initialize_instance_fields()
 
         super().__init__(nombre, apellido, id, edad, numero)
@@ -60,6 +61,7 @@ class Cliente(Persona):
 #JAVA TO PYTHON CONVERTER TODO TASK: There is no Python equivalent to multiple constructors:
 #ORIGINAL LINE: public Cliente(String nombre, String apellido, int id, int edad, int numero, String anotaciones, boolean clientePremiun)
     def __init__(self, nombre, apellido, id, edad, numero, anotaciones, clientePremiun):
+        from ..organizacional.Administrador import Administrador
         self._initialize_instance_fields()
 
         super().__init__(nombre, apellido, id, edad, numero)

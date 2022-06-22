@@ -1,5 +1,6 @@
 class Producto:
     
+    """
     #-----------SERIALIZADOR-----------
     _SERIALVERSIONUID = 1
 
@@ -18,9 +19,10 @@ class Producto:
     def setProductos(productos):
         Producto._productos = productos
 
-
+    """
     #-----------ATRIBUTOS-----------
     numProducto = 0
+    _productos = []
 
     #-----------CONSTRUCTOR-----------
     def __init__(self, nombreProducto, precioVenta):
