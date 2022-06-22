@@ -77,9 +77,9 @@ if __name__ == "__main__":
             print(clientes)
 
 
-    condition = True
-    while condition:
-
+    opcion = 345464
+    while (opcion!=6):
+        opcion=int(input())
         try:
             gestorInterfaz.escribir("              ")
             gestorInterfaz.escribir("              ")
@@ -125,7 +125,7 @@ if __name__ == "__main__":
             elif opcion == 6:
                 #Serializador.serializarTodo()
                 print(6)
-                condition=False
+                condition=6
             elif opcion == 7:
                 #Serializador.serializarTodo()
                 print(7)
@@ -148,7 +148,7 @@ if __name__ == "__main__":
             gestorInterfaz.escribir(" ")
             opcion=5555
 
-
+    opcion=int(input())
         
     
 
