@@ -2,7 +2,7 @@ import datetime
 from types import ClassMethodDescriptorType
 
 #from ..organizacional.Cliente import Cliente
-#from ..organizacional.Empleado import Empleado
+from ..organizacional.Empleado import Empleado
 #from uiMain.gestorInterfaz import 
 
 
