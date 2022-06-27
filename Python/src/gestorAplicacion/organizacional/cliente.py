@@ -1,6 +1,6 @@
 import datetime
 
-from .persona import Persona
+from ..organizacional.Persona import Persona
 #from ..organizacional.Administrador import Administrador
 
 #from gestorAplicacion.operacional import Factura
@@ -47,7 +47,7 @@ class Cliente(Persona):
 #JAVA TO PYTHON CONVERTER TODO TASK: There is no Python equivalent to multiple constructors:
 #ORIGINAL LINE: public Cliente(String nombre, String apellido, int id, int edad, int numero, String anotaciones)
     def __init__(self, nombre, apellido, id, edad, numero, anotaciones):
-        from .administrador import Administrador
+        from ..organizacional.Administrador import Administrador
         self._initialize_instance_fields()
 
         super().__init__(nombre, apellido, id, edad, numero)
@@ -61,7 +61,7 @@ class Cliente(Persona):
 #JAVA TO PYTHON CONVERTER TODO TASK: There is no Python equivalent to multiple constructors:
 #ORIGINAL LINE: public Cliente(String nombre, String apellido, int id, int edad, int numero, String anotaciones, boolean clientePremiun)
     def __init__(self, nombre, apellido, id, edad, numero, anotaciones, clientePremiun):
-        from .administrador import Administrador
+        from ..organizacional.Administrador import Administrador
         #self._initialize_instance_fields()
 
         super().__init__(nombre, apellido, id, edad, numero)

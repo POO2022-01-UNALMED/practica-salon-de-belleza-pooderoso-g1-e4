@@ -79,7 +79,7 @@ class Persona:
         self._fechaRegistro = nuevaFechaRegistro
 
 
-    #-----------METODOS ABSTRACTOS-----------
+    #-----------METODO ABSTRACTOS-----------
 
     def gestionSeguros(self):
         pass

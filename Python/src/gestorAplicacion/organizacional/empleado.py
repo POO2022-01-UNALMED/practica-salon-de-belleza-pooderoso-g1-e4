@@ -1,9 +1,9 @@
 from datetime import datetime,timedelta
 
 
-from .persona import Persona
-from .administrador import Administrador
-from .salario import Salario
+from ..organizacional.Persona import Persona
+from ..organizacional.Administrador import Administrador
+from ..organizacional.Salario import Salario
 
 
 
@@ -110,8 +110,6 @@ class Empleado(Persona, Salario):
 
     def setCitasAsignadas(self, citasAsignadas):
         self._citasAsignadas = citasAsignadas
-    def addCitaAsignada(self, cita):
-        self._citasAsignadas.append(cita)
 
     def toString(self):        
         return "Nombre= " + super().getNombre() + ", especialista= " + self.getEspecialidad()+ ", id: "+str(self.getId()) + " fecha registro: " + super().getInicioVinculacion().isoformat()

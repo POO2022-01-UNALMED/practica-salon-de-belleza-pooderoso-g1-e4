@@ -23,7 +23,7 @@ class Inventario:
     """
 
     #-----------ATRIBUTOS-----------
-    _inventario = {}
+    _inventario = []
     _inventarios = []
 
     #-----------CONSTRUCTOR-----------

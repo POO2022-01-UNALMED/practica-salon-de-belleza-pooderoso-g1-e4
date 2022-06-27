@@ -2,7 +2,7 @@
 import datetime
 
 
-#from gestorAplicacion.organizacional.Persona import Persona
+#from ..gestorAplicacion.organizacional.Persona import Persona
 from  gestorAplicacion.organizacional.Administrador import Administrador
 from  gestorAplicacion.organizacional.Empleado import Empleado
 from  gestorAplicacion.organizacional.Cliente import Cliente
@@ -77,7 +77,7 @@ if __name__ == "__main__":
             print(clientes)
 
 
-    opcion = 345464
+    opcion = 34
     while (opcion!=6):
         opcion=int(input())
         try:

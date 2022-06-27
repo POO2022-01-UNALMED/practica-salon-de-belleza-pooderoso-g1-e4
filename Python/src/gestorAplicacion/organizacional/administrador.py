@@ -1,9 +1,9 @@
 
-from  ..operacional.cita import Cita
-from ..operacional.servicio import Servicio
-from .cliente import Cliente
-from .persona import Persona
-from .salario import Salario
+from  ..operacional.Cita import Cita
+from ..operacional.Servicio import Servicio
+from ..organizacional.Cliente import Cliente
+from ..organizacional.Persona import Persona
+from ..organizacional.Salario import Salario
 
 
 

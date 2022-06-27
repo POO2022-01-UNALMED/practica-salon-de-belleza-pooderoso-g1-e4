@@ -1,24 +1,31 @@
-from datetime import datetime
-from datetime import timedelta
+import datetime
+from types import ClassMethodDescriptorType
 
-
-from gestorAplicacion.organizacional.Cliente import Cliente
-from gestorAplicacion.organizacional.Empleado import Empleado
+#from ..organizacional.Cliente import Cliente
+#from ..organizacional.Empleado import Empleado
 #from uiMain.gestorInterfaz import 
 
 
 class Cita:
     
     #-----------SERIALIZADOR-----------
+    _SERIALVERSIONUID = 1
+
     _citas = []
 
     @classmethod
-    def getCitas(cls):
+    def _static_initializer(cls):
+        cls._citas = []
+
+    #_static_initializer()
+
+    @staticmethod
+    def getCitas():
         return Cita._citas
 
 
-    @classmethod
-    def setCitas(cls, citas):
+    @staticmethod
+    def setCitas(citas):
         Cita._citas = citas
 
     
@@ -40,7 +47,10 @@ class Cita:
         self._fechaCita = fechaCita
         self._duracion = duracion
         cliente.addCita(self)
-        empleado.addCitaAsignada(self) #Se le anade una a la lista de citas el empleado
+
+        empleado.getCitasAsignadas().append(self) #Se le anade una a la lista de citas el empleado
+
+
 
         Cita._citas.append(self) #del Serializador
 
@@ -76,7 +86,6 @@ class Cita:
         return self._fechaReserva
     def setFechaReserva(self, fechaReserva):
         self._fechaReserva = fechaReserva
-
     def getFechaCita(self):
         return self._fechaCita
     def setFechaCita(self, fechaCita):
@@ -96,22 +105,21 @@ class Cita:
 
     #-----------OTROS METODOS-----------
     def toString(self):
-        return self._cliente + ", fecha de la cita: " + self._fechaCita.strftime("%d/%m/%Y %H:%M")  + ", duracion:" + str(self._duracion) + ". Termina a las "+ (self._fechaCita + timedelta(minutes=self._duracion)).strftime("%H:%M")+". "+ self._estado
+        #formatter = java.time.format.DateTimeFormatter.ofPattern("HH:mm")
+        #format = java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")
+        return self._cliente + ", fecha de la cita: " + self._fechaCita.strftime("%d/%m/%Y %H:%M")  + ", duracion:" + str(self._duracion) + ". Termina a las "+ (self._fechaCita + self._duracion).strftime("%H:%M")+". "+ self._estado
 
-    def __eq__(self, other):
-        return self._fechaCita == other._fechaCita
-    def __ne__(self, other):
-        return self._fechaCita != other._fechaCita
-    def __lt__(self, other):
-        return self._fechaCita < other._fechaCita
-    def __gt__(self, other):
-        return self._fechaCita > other._fechaCita
-    def __le__(self, other):
-        return self._fechaCita <= other._fechaCita  
-    def __ge__(self, other):
-        return self._fechaCita >= other._fechaCita
-    
 
+    def compareTo(self, o):
+        # TODO Auto-generated method stub
+        return self._fechaCita.compareTo(o.getFechaCita())
+
+    #	 *     
+    #	 * Devuelve la duracion de una cita a partir una cita	
+    #    * @param servicios: lista de servicios 
+    #    * 
+    #    * @return la duracion de una cita a partir de los servicios escogidos
+    #    
     @staticmethod
     def duracionCita(servicios):
 
@@ -119,8 +127,6 @@ class Cita:
         for ser in servicios:
             duracion += ser.getDuracion()
         return duracion
-
-
 
     #	  *
     #     * Verifica que una cita se pueda llevar a cabo 
@@ -132,14 +138,14 @@ class Cita:
     #     * @return true en caso de que se pueda generar una cita false de lo contrario
     #     
 
-    @classmethod
-    def validarHora(cls,p, horaTentativa, servicios):
+    @staticmethod
+    def validarHora(p, horaTentativa, servicios):
 
         
         duracion =Cita.duracionCita(servicios)
-        horaTentativaFin =horaTentativa + timedelta(minutes=duracion)
+        horaTentativaFin =horaTentativa + duracion
 
-        if horaTentativa<(Empleado.HORAINICIO) or horaTentativa>(Empleado.HORAFINAL):
+        if horaTentativa.timedelta()<(Empleado.HORAINICIO) or horaTentativa.timedelta()>(Empleado.HORAFINAL):
             print("Recuerde que los horarios de atencion son de: 9 a 18 ")
             return False
 
@@ -148,13 +154,13 @@ class Cita:
             mesComparacion =cita.getFechaCita().month #Mes cita
             diaComparacion =cita.getFechaCita().day #Dia cita
             existenteInicial =cita.getFechaCita() #hora Inicial
-            existenteFinal =cita.getFechaCita() + timedelta(minutes=cita.getDuracion()) #hora Final
+            existenteFinal =cita.getFechaCita() + cita.getDuracion() #hora Final
             if((horaTentativa.month== mesComparacion) and (horaTentativa.day== diaComparacion) and cita.getCita()!=("Cancelada")):
                 if((horaTentativa<existenteInicial) and (horaTentativaFin<existenteFinal) or ((horaTentativa>existenteInicial) and (horaTentativaFin >existenteFinal))):
                     print(" ")
                     print("Es posible generar la cita")
                     return True                    
                 else:
-                    print("Existen horarios trocados con la cita: "+ cita)
+                    print("Eexiten horarior trocados con la cita: "+ cita)
                     return False
         return True
