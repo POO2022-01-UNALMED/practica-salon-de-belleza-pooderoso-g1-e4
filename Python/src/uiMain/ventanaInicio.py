@@ -9,7 +9,7 @@ class VentanaInicio(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("Ventana inicio")
-        self.geometry("1000x600")
+        self.geometry("1200x600")
         self.option_add("*tearOff", False)
 
         
@@ -40,6 +40,7 @@ class VentanaInicio(tk.Tk):
         self.frameP1.mostrarDescripcion()
 
 class FrameIzquierdo(tk.Frame):
+    posCarrusel = 0
     def __init__(self, parent):
         super().__init__(parent)
 
@@ -51,28 +52,48 @@ class FrameIzquierdo(tk.Frame):
 
         frameP4 = tk.Frame(self)
         frameP4.pack()
-        boton = tk.Button(frameP4,text="Ventana principal",command=parent.principal)
+        self.image_size = (600,400)
+        carrusel = ImageTk.PhotoImage(Image.open(path+"/imagenes/carrusel1.JPG").resize(self.image_size, Image.ANTIALIAS))
+        #Create a Label Widget to display the text or Image
+        labelCarrusel = tk.Label(frameP4, image = carrusel, width=self.image_size[0]+10, height=self.image_size[1]+10)
+        labelCarrusel.image = carrusel
+        labelCarrusel.bind("<Leave>",self.cambiarCarrusel)
+        labelCarrusel.pack()
+        self.labelCarrusel = labelCarrusel
+
+
+        boton = tk.Button(frameP4,text="Ventana principal",command=parent.principal, font=("Arial",12), cursor="hand2")
         boton.pack(expand=True)
         self.frameP4 = frameP4
         
     
     def mostrarDescripcion(self):
-        descripcion = tk.Label(self.frameP3, text="Esta seria una descripcion valida, si tan solo\ntuviera una buena y completa", font=("Arial",18))
+        with open(path+"/textos/descripcion.txt") as f:
+            textoDescripcion = f.read()
+        descripcion = tk.Label(self.frameP3, text=textoDescripcion, font=("Arial",12), justify=tk.LEFT)
         descripcion.pack()
 
+    def cambiarCarrusel(self,event):
+        FrameIzquierdo.posCarrusel = (FrameIzquierdo.posCarrusel+1)%5
+
+        new = ImageTk.PhotoImage(Image.open(path+"/imagenes/carrusel"+str(FrameIzquierdo.posCarrusel+1)+".JPG").resize(self.image_size, Image.ANTIALIAS))
+        #Create a Label Widget to display the text or Image
+        self.labelCarrusel.config(image=new)
+        self.labelCarrusel.image = new    
+        
 
 
 class FrameDerecho(tk.Frame):
     personas = ["paula", "julian","marlon","juan"]
     persona = 0
-    image_size = (200,200)
+    image_size = (220,220)
 
     def __init__(self, parent):
         super().__init__(parent)
         nombre = "paula"
         frameP5 = tk.Frame(self)
         frameP5.pack(side="top")
-        hv = tk.Text(frameP5, height=6, font=("Arial", 14), cursor="hand2")
+        hv = tk.Text(frameP5, height=5, font=("Arial", 12), cursor="hand2")
         with open(path+"/textos/"+nombre+".txt","r") as f:
             textoInicial = f.read()
         hv.insert(tk.END, textoInicial)

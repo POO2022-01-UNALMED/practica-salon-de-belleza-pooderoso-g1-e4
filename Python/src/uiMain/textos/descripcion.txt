@@ -1,0 +1,3 @@
+Esta aplicacion le permite al administrador del Salon de Belleza 
+manejar mas facilmente la venta de productos, la reserva y 
+cancelacion de citas, entre otros.
