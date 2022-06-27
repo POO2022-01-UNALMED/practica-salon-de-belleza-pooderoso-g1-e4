@@ -37,7 +37,7 @@ class VentanaInicio(tk.Tk):
 
 
     def mostrarDescripcion(self):
-        self.frame.mostrarDescripcion()
+        self.frameP1.mostrarDescripcion()
 
 class FrameIzquierdo(tk.Frame):
     def __init__(self, parent):
@@ -63,44 +63,88 @@ class FrameIzquierdo(tk.Frame):
 
 
 class FrameDerecho(tk.Frame):
+    personas = ["paula", "julian","marlon","juan"]
+    persona = 0
+    image_size = (200,200)
+
     def __init__(self, parent):
         super().__init__(parent)
-
+        nombre = "paula"
         frameP5 = tk.Frame(self)
         frameP5.pack(side="top")
-        hv = tk.Text(frameP5, height=6, font=("Arial", 14))
-        hv.insert(tk.END, "Maria Paula\nEsta seria su descripcion\n\n\n\n\n\n\n\n\n\n\nY aca terminaria...")
+        hv = tk.Text(frameP5, height=6, font=("Arial", 14), cursor="hand2")
+        with open(path+"/textos/"+nombre+".txt","r") as f:
+            textoInicial = f.read()
+        hv.insert(tk.END, textoInicial)
+        hv.bind("<Button-1>", self.cambiarPersona)
+        hv.config(state="disabled")
         hv.pack(side="top")
+        self.hv = hv
         self.frameP5 = frameP5
 
         frameP6 = tk.Frame(self)
         frameP6.pack()
-        image_size = (200,200)
+        
         #Create an object of tkinter ImageTk
-        img = ImageTk.PhotoImage(Image.open(path+"/imagenes/paulahv1.jpeg").resize(image_size, Image.ANTIALIAS))
-        img2 = ImageTk.PhotoImage(Image.open(path+"/imagenes/paulahv2.jpeg").resize(image_size, Image.ANTIALIAS))
-        img3 = ImageTk.PhotoImage(Image.open(path+"/imagenes/paulahv3.jpeg").resize(image_size, Image.ANTIALIAS))
-        img4 = ImageTk.PhotoImage(Image.open(path+"/imagenes/paulahv4.jpeg").resize(image_size, Image.ANTIALIAS))
+        img = ImageTk.PhotoImage(Image.open(path+"/imagenes/"+nombre+"hv1.jpeg").resize(self.image_size, Image.ANTIALIAS))
+        img2 = ImageTk.PhotoImage(Image.open(path+"/imagenes/"+nombre+"hv2.jpeg").resize(self.image_size, Image.ANTIALIAS))
+        img3 = ImageTk.PhotoImage(Image.open(path+"/imagenes/"+nombre+"hv3.jpeg").resize(self.image_size, Image.ANTIALIAS))
+        img4 = ImageTk.PhotoImage(Image.open(path+"/imagenes/"+nombre+"hv4.jpeg").resize(self.image_size, Image.ANTIALIAS))
 
 
         #Create a Label Widget to display the text or Image
-        label1 = tk.Label(frameP6, image = img, width=image_size[0]*1.1, height=image_size[1]*1.1)
+        label1 = tk.Label(frameP6, image = img, width=self.image_size[0]+10, height=self.image_size[1]+10)
         label1.image = img
         label1.grid(row=0, column=0)
+        self.label1 = label1
     
-        label2 = tk.Label(frameP6, image = img2, width=image_size[0]*1.1, height=image_size[1]*1.1)
+        label2 = tk.Label(frameP6, image = img2, width=self.image_size[0]+10, height=self.image_size[1]+10)
         label2.ima1e = img2
         label2.grid(row=0, column=1)
+        self.label2 = label2
  
-        label3 = tk.Label(frameP6, image = img3, width=image_size[0]*1.1, height=image_size[1]*1.1)
+        label3 = tk.Label(frameP6, image = img3, width=self.image_size[0]+10, height=self.image_size[1]+10)
         label3.ima1e=img3
         label3.grid(row=1, column=0)
+        self.label3 = label3
 
-        label4 = tk.Label(frameP6, image = img4, width=image_size[0]*1.1, height=image_size[1]*1.1)
+        label4 = tk.Label(frameP6, image = img4, width=self.image_size[0]+10, height=self.image_size[1]+10)
         label4.ima1e = img4
         label4.grid(row=1, column=1)
+        self.label4 = label4
 
-        label5 = tk.Label(frameP6, text="Como asi wey")
-        label5.grid(row=2, column=0, columnspan=2)       
         self.frameP6 = frameP6
+    
 
+    def cambiarPersona(self, event):
+        self.persona = (self.persona+1)%4
+        nombre = self.personas[self.persona]
+        with open(path+"/textos/"+nombre+".txt", "r") as hv:
+            textoNuevo = hv.read()
+        self.hv.config(state="normal")
+        self.hv.delete("1.0", "end-1c")
+        self.hv.insert(tk.END, textoNuevo)
+        self.hv.config(state="disabled")
+
+        
+        img = ImageTk.PhotoImage(Image.open(path+"/imagenes/"+nombre+"hv1.jpeg").resize(self.image_size, Image.ANTIALIAS))
+        img2 = ImageTk.PhotoImage(Image.open(path+"/imagenes/"+nombre+"hv2.jpeg").resize(self.image_size, Image.ANTIALIAS))
+        img3 = ImageTk.PhotoImage(Image.open(path+"/imagenes/"+nombre+"hv3.jpeg").resize(self.image_size, Image.ANTIALIAS))
+        img4 = ImageTk.PhotoImage(Image.open(path+"/imagenes/"+nombre+"hv4.jpeg").resize(self.image_size, Image.ANTIALIAS))
+
+        #Create a Label Widget to display the text or Image
+        self.label1 = tk.Label(self.frameP6, image = img, width=self.image_size[0]+10, height=self.image_size[1]+10)
+        self.label1.image = img
+        self.label1.grid(row=0, column=0)
+    
+        self.label2 = tk.Label(self.frameP6, image = img2, width=self.image_size[0]+10, height=self.image_size[1]+10)
+        self.label2.ima1e = img2
+        self.label2.grid(row=0, column=1)
+ 
+        self.label3 = tk.Label(self.frameP6, image = img3, width=self.image_size[0]+10, height=self.image_size[1]+10)
+        self.label3.ima1e=img3
+        self.label3.grid(row=1, column=0)
+
+        self.label4 = tk.Label(self.frameP6, image = img4, width=self.image_size[0]+10, height=self.image_size[1]+10)
+        self.label4.ima1e = img4
+        self.label4.grid(row=1, column=1)

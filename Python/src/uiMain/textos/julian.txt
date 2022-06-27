@@ -1,7 +1,4 @@
-Julián Esteban Londoño Ruiz
+Julian Esteban Londono Ruiz
 Github: julondonor
 Correo: julondonor@unal.edu.co
-Soy estudiante de Ciencias de la Computación, actualmente me interesa
-todo lo relacionado con Ciencia de Datos y Machine Learning, aunque
-también me gusta aprender sobre algoritmos y estructuras de datos para
-programación competitiva.
+Soy estudiante de Ciencias de la Computacion, actualmente me interesa todo lo relacionado con Ciencia de Datos y Machine Learning, aunque tambien me gusta aprender sobre algoritmos y estructuras de datos para programacion competitiva.
