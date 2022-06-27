@@ -75,7 +75,7 @@ class FrameDerecho(tk.Frame):
 
         frameP6 = tk.Frame(self)
         frameP6.pack()
-        image_size = (100,100)
+        image_size = (200,200)
         #Create an object of tkinter ImageTk
         img = ImageTk.PhotoImage(Image.open(path+"/imagenes/paulahv1.jpeg").resize(image_size, Image.ANTIALIAS))
         img2 = ImageTk.PhotoImage(Image.open(path+"/imagenes/paulahv2.jpeg").resize(image_size, Image.ANTIALIAS))
@@ -84,20 +84,20 @@ class FrameDerecho(tk.Frame):
 
 
         #Create a Label Widget to display the text or Image
-        label1 = tk.Label(frameP6, image = img, width=120, height=120)
+        label1 = tk.Label(frameP6, image = img, width=image_size[0]*1.1, height=image_size[1]*1.1)
         label1.image = img
         label1.grid(row=0, column=0)
     
-        label2 = tk.Label(frameP6, image = img2, width=120, height=120)
-        label2.image = img2
+        label2 = tk.Label(frameP6, image = img2, width=image_size[0]*1.1, height=image_size[1]*1.1)
+        label2.ima1e = img2
         label2.grid(row=0, column=1)
  
-        label3 = tk.Label(frameP6, image = img3, width=120, height=120)
-        label3.image=img3
+        label3 = tk.Label(frameP6, image = img3, width=image_size[0]*1.1, height=image_size[1]*1.1)
+        label3.ima1e=img3
         label3.grid(row=1, column=0)
 
-        label4 = tk.Label(frameP6, image = img4, width=120, height=120)
-        label4.image = img4
+        label4 = tk.Label(frameP6, image = img4, width=image_size[0]*1.1, height=image_size[1]*1.1)
+        label4.ima1e = img4
         label4.grid(row=1, column=1)
 
         label5 = tk.Label(frameP6, text="Como asi wey")
