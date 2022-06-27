@@ -34,14 +34,13 @@ def serializar(lista, className):
         print("Error de serializacion")
 
 def serializarTodo():
-
- 	serializar(Cita.getCitas(), "citas");
-	serializar(Factura.getFacturas(), "facturas");
-	serializar(Producto.getProductos(), "productos");
-	serializar(Venta.getVentas(), "ventas");
-	serializar(Administrador.getAdministradores(), "administradores");
-	serializar(Cliente.getClientes(), "clientes");
-	serializar(Empleado.getEmpleados(), "empleados");
-	serializar(Persona.getPersonas(), "personas");
-	serializar(Inventario.getInventario(), "inventario");
-	serializar(Inventario.getInventarios(), "inventarios");
+    serializar(Cita.getCitas(), "citas")
+    serializar(Factura.getFacturas(), "facturas")
+    serializar(Producto.getProductos(), "productos")
+    serializar(Venta.getVentas(), "ventas")
+    serializar(Administrador.getAdministradores(), "administradores")
+    serializar(Cliente.getClientes(), "clientes")
+    serializar(Empleado.getEmpleados(), "empleados")
+    serializar(Persona.getPersonas(), "personas")
+    serializar(Inventario.getInventario(), "inventario")
+    serializar(Inventario.getInventarios(), "inventarios")
