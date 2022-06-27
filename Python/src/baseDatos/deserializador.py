@@ -2,18 +2,18 @@ import pathlib
 import pickle
 import os
 
-from gestorAplicacion.organizacional.empleado import Empleado
-from gestorAplicacion.organizacional.administrador import Administrador
-from gestorAplicacion.organizacional.cliente import Cliente
-from gestorAplicacion.organizacional.persona import Persona
-from gestorAplicacion.organizacional.salario import Salario
+from gestorAplicacion.organizacional.Empleado import Empleado
+from gestorAplicacion.organizacional.Administrador import Administrador
+from gestorAplicacion.organizacional.Cliente import Cliente
+from gestorAplicacion.organizacional.Persona import Persona
+from gestorAplicacion.organizacional.Salario import Salario
 
-from gestorAplicacion.operacional.cita import Cita
-from gestorAplicacion.operacional.factura import Factura
-from gestorAplicacion.operacional.inventario import Inventario
-from gestorAplicacion.operacional.venta import Venta
-from gestorAplicacion.operacional.producto import Producto
-from gestorAplicacion.operacional.servicio import Servicio
+from gestorAplicacion.operacional.Cita import Cita
+from gestorAplicacion.operacional.Factura import Factura
+from gestorAplicacion.operacional.Inventario import Inventario
+from gestorAplicacion.operacional.Venta import Venta
+from gestorAplicacion.operacional.Producto import Producto
+from gestorAplicacion.operacional.Servicio import Servicio
 
 
 def deserializar(lista, className):
