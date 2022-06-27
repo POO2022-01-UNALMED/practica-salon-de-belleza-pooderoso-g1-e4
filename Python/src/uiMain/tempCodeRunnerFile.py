@@ -1,0 +1,1 @@
+ VentanaPrincipal(tk.Tk)

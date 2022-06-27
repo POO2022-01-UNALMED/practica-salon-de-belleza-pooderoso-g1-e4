@@ -1,7 +1,7 @@
 import tkinter as tk
 from ventanaInicio import VentanaInicio
 
-class VentanaPrincipal(tk.Tk):
+class  VentanaPrincipal(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("Ventana principal")
