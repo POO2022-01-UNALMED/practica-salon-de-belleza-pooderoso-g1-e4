@@ -2,7 +2,7 @@
 import datetime
 
 
-#from ..gestorAplicacion.organizacional.Persona import Persona
+#from gestorAplicacion.organizacional.Persona import Persona
 from  gestorAplicacion.organizacional.Administrador import Administrador
 from  gestorAplicacion.organizacional.Empleado import Empleado
 from  gestorAplicacion.organizacional.Cliente import Cliente
