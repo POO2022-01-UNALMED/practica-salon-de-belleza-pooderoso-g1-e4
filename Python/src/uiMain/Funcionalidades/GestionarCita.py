@@ -185,6 +185,7 @@ class GestionarCita:
 
 
 
+
     @classmethod
     def escogerServicios(cls):
 
@@ -311,6 +312,20 @@ class GestionarCita:
         print("")
 
          
+    @classmethod
+    def gestionCancelar(cls):
+        for cita in Cita._citas:
+            if(cita.getEstado()!="Cancelada" or cita.getEstado()!="Exitosa"):
+                print(str(cita.getId())+" "+str(cita))
+
+        id=int(input("Escoga la cita a cancelar"))
+        for cita in Cita._citas:
+            if(cita.getId()==id):
+                cita.setEstado("Cancelada")
+                print("========== Cita cancelada ==========")
+                print("")
+                print(str(cita))
+
 
     
 

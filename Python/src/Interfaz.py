@@ -148,7 +148,7 @@ if __name__ == "__main__":
                 GestionarCita.reservarCita()
                 print(1)
             elif opcion == 2:
-                #GestionarCita.gestionCancelar()
+                GestionarCita.gestionCancelar()
                 print(2)
             elif opcion == 3:
                 #Facturacion.facturar()
