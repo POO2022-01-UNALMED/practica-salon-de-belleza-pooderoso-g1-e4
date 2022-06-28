@@ -105,14 +105,8 @@ class Administrador(Persona, Salario):
     #Metodo para crear nuevo cliente desde administrador
     @staticmethod
     def NuevoCliente(nombre, apellido, id, edad, numero, anotaciones):
-        Cliente(nombre, apellido, id, edad, numero, anotaciones) 
-        return Cliente(nombre, apellido, id, edad, numero, anotaciones)  
-
-    #Metodo para crear nuevo cliente desde administrador solo para datos obligatorios
-    @staticmethod
-    def NuevoCliente(nombre, apellido, id):    
-        return Cliente(nombre, apellido, id)
-
+        Cliente(nombre, apellido, id, edad, numero, anotaciones,False) 
+        return Cliente(nombre, apellido, id, edad, numero, anotaciones,False)  
 
     #Metodo para consilidar una nueva cita-
     @staticmethod

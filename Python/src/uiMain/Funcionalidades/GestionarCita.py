@@ -97,56 +97,30 @@ class GestionarCita:
 
         print("Por favor ingrese los datos del cliente:")
         print("")
-        print("[1] para ingresar solo datos obligatorios")
-        print("[2] para ingresar todos los datos")
+
+        c1 = Cliente("Julian", "Londono",10013,21,3212345,"Ninguna",True)
+
+
+
+        nombre =input("Por favor ingrese nombre del cliente: ")
+        apellido =input("Por favor ingrese apellido del cliente: ")
+        id =int(input("Por favor ingrese identificacion del cliente: "))
+        for cliente in Cliente._clientes:
+            if cliente.getId()==id:
+                print("")
+                print("==== Cliente ya existente, verifique nuevamente la informacion ====")
+                GestionarCita.crearNuevoCliente()
+
+        edad =int(input("Por favor ingrese edad del cliente: "))
+        numero =int(input("Por favor ingrese numero del cliente: "))
+        anotaciones =input("Por favor ingrese anotaciones del cliente: ")
+
+        nuevoCliente = Administrador.NuevoCliente(nombre, apellido, id, edad, numero, anotaciones)
+
         print("")
-        obligatorio =uiMain.gestorInterfaz.leerEntero()
+        print("El nuevo cliente es: "+ str(nuevoCliente))
 
-        nuevoCliente = None
-
-        if obligatorio==1:
-
-            nombre =uiMain.gestorInterfaz.leer("Por favor ingrese nombre del cliente: ")
-            apellido =uiMain.gestorInterfaz.leer("Por favor ingrese apellido del cliente: ")
-            id =uiMain.gestorInterfaz.leerEntero("Por favor ingrese identificacion del cliente: ")
-            for cliente in Cliente.getClientes():
-                if cliente.getId()==id:
-                    print(" ")
-                    print("==== Cliente ya existente, verifique nuevamente la informacion ====")
-                    GestionarCita.crearNuevoCliente()
-
-            nuevoCliente = Administrador.NuevoCliente(nombre, apellido, id)
-
-            print("")
-            print("El nuevo cliente es: "+ nuevoCliente)
-
-            return nuevoCliente
-
-        else:
-
-            nombre =uiMain.gestorInterfaz.leer("Por favor ingrese nombre del cliente: ")
-            apellido =uiMain.gestorInterfaz.leer("Por favor ingrese apellido del cliente: ")
-            id =uiMain.gestorInterfaz.leerEntero("Por favor ingrese identificacion del cliente: ")
-            for cliente in Cliente.getClientes():
-                if cliente.getId()==id:
-                    print("")
-                    print("==== Cliente ya existente, verifique nuevamente la informacion ====")
-                    GestionarCita.crearNuevoCliente()
-
-            edad =uiMain.gestorInterfaz.leerEntero("Por favor ingrese edad del cliente: ")
-            numero =uiMain.gestorInterfaz.leerEntero("Por favor ingrese numero del cliente: ")
-            anotaciones =uiMain.gestorInterfaz.leer("Por favor ingrese anotaciones del cliente: ")
-
-            nuevoCliente = Administrador.NuevoCliente(nombre, apellido, id, edad, numero, anotaciones)
-
-            print("")
-            print("El nuevo cliente es: "+ nuevoCliente)
-
-            return nuevoCliente
-
-
-
-
+        return nuevoCliente
 
 
 
