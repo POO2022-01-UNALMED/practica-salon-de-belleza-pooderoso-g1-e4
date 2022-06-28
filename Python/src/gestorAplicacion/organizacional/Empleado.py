@@ -111,7 +111,7 @@ class Empleado(Persona, Salario):
     def setCitasAsignadas(self, citasAsignadas):
         self._citasAsignadas = citasAsignadas
 
-    def toString(self):        
+    def __str__(self):        
         return "Nombre= " + super().getNombre() + ", especialista= " + self.getEspecialidad()+ ", id: "+str(self.getId()) + " fecha registro: " + super().getInicioVinculacion().isoformat()
 
 

@@ -54,7 +54,7 @@ class Producto:
         self._precioVenta = precioVenta
 
     #-----------OTROS METODOS-----------
-    def toString(self):
+    def __str__(self):
         return "El producto= "+ self._nombreProducto +" "+ "tiene un precio de venta de = " + str(self._precioVenta)
 
 

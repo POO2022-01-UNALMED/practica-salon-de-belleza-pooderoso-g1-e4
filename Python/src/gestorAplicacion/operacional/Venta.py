@@ -72,8 +72,8 @@ class Venta:
         return self._cantidadVendida
 
     #-----------OTROS METODOS-----------
-    def toString(self):
-        return "El empleado "+ self._empleadoComision.getNombre() +" "+self._empleadoComision.getApellido()+" "+"" + " realiza una venta de "+ self._productoVendido.getNombreProducto() + " en la fecha "+ self._fechaVenta+" y recibe una comisi�n de: " + str(self.calcularComision(self._productoVendido))
+    def __str__(self):
+        return "El empleado "+ self._empleadoComision.getNombre() +" "+self._empleadoComision.getApellido()+" "+"" + " realiza una venta de "+ self._productoVendido.getNombreProducto() + " en la fecha "+ str(self._fechaVenta) +" y recibe una comisi�n de: " + str(self.calcularComision(self._productoVendido))
 
     def calcularComision(self, productoVendido):
         comision= productoVendido.getPrecioVenta() * Venta.PORCENTAJECOMISION

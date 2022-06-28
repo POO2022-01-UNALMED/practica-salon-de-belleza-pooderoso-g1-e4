@@ -130,7 +130,7 @@ class Cliente(Persona):
         self._ClientePremiun = clientePremiun
 
     #-----------OTROS METODOS-----------
-    def toString(self):
+    def __str__(self):
         return "Cliente: "+ self.getNombre() +" "+ self.getApellido()+", anotaciones: "+ self._anotaciones
 
     @staticmethod

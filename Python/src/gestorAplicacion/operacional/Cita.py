@@ -104,10 +104,10 @@ class Cita:
 
 
     #-----------OTROS METODOS-----------
-    def toString(self):
+    def __str__(self):
         #formatter = java.time.format.DateTimeFormatter.ofPattern("HH:mm")
         #format = java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")
-        return self._cliente + ", fecha de la cita: " + self._fechaCita.strftime("%d/%m/%Y %H:%M")  + ", duracion:" + str(self._duracion) + ". Termina a las "+ (self._fechaCita + self._duracion).strftime("%H:%M")+". "+ self._estado
+        return str(self._cliente) + ", fecha de la cita: " + self._fechaCita.strftime("%d/%m/%Y %H:%M")  + ", duracion:" + str(self._duracion) + ". Termina a las "+ (self._fechaCita + datetime.timedelta(minutes=self._duracion)).strftime("%H:%M")+". "+ self._estado
 
 
     def compareTo(self, o):

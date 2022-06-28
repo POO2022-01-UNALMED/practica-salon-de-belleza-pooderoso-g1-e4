@@ -73,13 +73,49 @@ if __name__ == "__main__":
         gestorInterfaz.escribir("=============== Clientes ===============")
         gestorInterfaz.escribir("=========================================")
 
-        for clientes in Cliente.getClientes():
+        for clientes in Cliente._clientes:
             print(clientes)
 
+        gestorInterfaz.escribir("=========================================")
+        gestorInterfaz.escribir("=============== Empleados ===============")
+        gestorInterfaz.escribir("=========================================")
 
-    
+        for emp in Empleado._empleados:
+            print(emp)
+
+        gestorInterfaz.escribir("=========================================")
+        gestorInterfaz.escribir("=============== Citas ===============")
+        gestorInterfaz.escribir("=========================================")
+
+        for cit in Cita._citas:
+            print(cit)
+
+        gestorInterfaz.escribir("=========================================")
+        gestorInterfaz.escribir("=============== Ventas ===============")
+        gestorInterfaz.escribir("=========================================")
+
+        for ven in Venta._ventas:
+            print(ven)
+            
+
+
+        gestorInterfaz.escribir("=========================================")
+        gestorInterfaz.escribir("=============== Producto ===============")
+        gestorInterfaz.escribir("=========================================")
+
+        for pro in Producto._productos:
+            print(pro)
+
+        gestorInterfaz.escribir("=========================================")
+        gestorInterfaz.escribir("=============== Factura ===============")
+        gestorInterfaz.escribir("=========================================")
+
+        for fac in Factura._facturas:
+            print(fac)
+
+
     while (True):
-        try:
+        #try:
             gestorInterfaz.escribir("              ")
             gestorInterfaz.escribir("              ")
             gestorInterfaz.escribir("    ========== BIENVENIDO A EL SOFTWARE ADMINISTRADOR ========== ")
@@ -139,14 +175,14 @@ if __name__ == "__main__":
                 #Otras.mostrarInventario()
 
 
-        except Exception as e:
+        #except Exception as e:
 
 
-            gestorInterfaz.escribir("----Upps, hemos vuelto al menu principal----")
+        #    gestorInterfaz.escribir("----Upps, hemos vuelto al menu principal----")
             #System.out.println(e)
             #e.printStackTrace()
-            gestorInterfaz.escribir(" ")
-            opcion=5555
+        #    gestorInterfaz.escribir(" ")
+        #    opcion=5555
 
         
     

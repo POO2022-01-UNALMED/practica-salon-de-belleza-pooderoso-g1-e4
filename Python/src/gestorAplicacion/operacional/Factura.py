@@ -124,7 +124,7 @@ class Factura:
         self._precioTotal = ans
         return ans
 
-    def toString(self):
+    def __strt__(self):
         return "Factura, id=" + str(self._idFactura) + ", " + self._cita + ", precio total=" + str(self._precioTotal) + ", fecha=" + self._fecha + ", metodo pago=" + self._metodoPago + ", productos vendidos=" + self._productosVendidos
 
 
