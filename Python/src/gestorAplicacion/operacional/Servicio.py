@@ -11,3 +11,15 @@ class Servicio(Enum):
     EXFOLIACION_FACIAL=(11000,60)
     CEJAS=(13000,30)
     DEPILACION_LASER=(107000,80)    
+
+    def __init__(self,precio,duracion) -> None:
+        self._precio=precio
+        self._duracion=duracion
+
+    @property
+    def getDuracion(self):
+        return self._duracion
+
+    @property
+    def getPrecio(self):
+        return self._precio    

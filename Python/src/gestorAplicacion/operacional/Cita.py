@@ -2,7 +2,7 @@ import datetime
 from types import ClassMethodDescriptorType
 
 #from ..organizacional.Cliente import Cliente
-#from ..organizacional.Empleado import Empleado
+from ..organizacional.Empleado import Empleado
 #from uiMain.gestorInterfaz import 
 
 
@@ -120,12 +120,12 @@ class Cita:
     #    * 
     #    * @return la duracion de una cita a partir de los servicios escogidos
     #    
-    @staticmethod
-    def duracionCita(servicios):
+    @classmethod
+    def duracionCita(cls,servicios):
 
         duracion =0
         for ser in servicios:
-            duracion += ser.getDuracion()
+            duracion += ser.getDuracion
         return duracion
 
     #	  *
@@ -138,29 +138,33 @@ class Cita:
     #     * @return true en caso de que se pueda generar una cita false de lo contrario
     #     
 
-    @staticmethod
-    def validarHora(p, horaTentativa, servicios):
+    @classmethod
+    def validarHora(cls,p, horaTentativa, servicios):
 
         
-        duracion =Cita.duracionCita(servicios)
-        horaTentativaFin =horaTentativa + duracion
+        #duracion =Cita.duracionCita(servicios)
+        #horaTentativaFin =horaTentativa + duracion
 
-        if horaTentativa.timedelta()<(Empleado.HORAINICIO) or horaTentativa.timedelta()>(Empleado.HORAFINAL):
+        if int(horaTentativa.hour)<int(9) or int(horaTentativa.hour)>int(18):
             print("Recuerde que los horarios de atencion son de: 9 a 18 ")
             return False
 
 
         for cita in p.getCitasAsignadas():
+
             mesComparacion =cita.getFechaCita().month #Mes cita
             diaComparacion =cita.getFechaCita().day #Dia cita
             existenteInicial =cita.getFechaCita() #hora Inicial
-            existenteFinal =cita.getFechaCita() + cita.getDuracion() #hora Final
-            if((horaTentativa.month== mesComparacion) and (horaTentativa.day== diaComparacion) and cita.getCita()!=("Cancelada")):
-                if((horaTentativa<existenteInicial) and (horaTentativaFin<existenteFinal) or ((horaTentativa>existenteInicial) and (horaTentativaFin >existenteFinal))):
+            #existenteFinal =cita.getFechaCita() + cita.getDuracion() #hora Final
+            print(horaTentativa.month," ", mesComparacion ," " , horaTentativa.day," ",diaComparacion ,cita.getEstado(),horaTentativa.hour)
+            if( (horaTentativa.month== mesComparacion) and (horaTentativa.day== diaComparacion) and (cita.getEstado()!=("Cancelada")) ):
+                if((horaTentativa.hour != existenteInicial)):
+
+                #if((horaTentativa<existenteInicial) and (horaTentativaFin<existenteFinal) or ((horaTentativa>existenteInicial) and (horaTentativaFin >existenteFinal))):
                     print(" ")
                     print("Es posible generar la cita")
                     return True                    
                 else:
-                    print("Eexiten horarior trocados con la cita: "+ cita)
+                    print("Existen horarior trocados con la cita: "+ str(cita))
                     return False
         return True

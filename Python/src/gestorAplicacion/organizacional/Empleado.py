@@ -2,7 +2,6 @@ from datetime import datetime,timedelta
 
 
 from ..organizacional.Persona import Persona
-from ..organizacional.Administrador import Administrador
 from ..organizacional.Salario import Salario
 
 
@@ -43,6 +42,7 @@ class Empleado(Persona, Salario):
     _empleados = []
 
     def __init__(self, nombre, apellido, id, edad, numero, especialidad):
+        from ..organizacional.Administrador import Administrador
         #instance fields found by Java to Python Converter:
         self._especialidad = None
         self._serviciosRealizados = []

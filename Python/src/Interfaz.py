@@ -16,6 +16,7 @@ from  gestorAplicacion.operacional.Factura import Factura
 from  gestorAplicacion.operacional.Producto import Producto
 
 from uiMain.gestorInterfaz import  gestorInterfaz
+from uiMain.Funcionalidades.GestionarCita import  GestionarCita
 
 
 if __name__ == "__main__":
@@ -51,6 +52,7 @@ if __name__ == "__main__":
     cita2 = Cita(empleado2, c1, s2, datetime.datetime(2022, 5,10,12,0), datetime.datetime(2022, 5,31,14,0),60)
     cita3 = Cita(empleado1, c2, s3, datetime.datetime(2022, 5,1,12,0), datetime.datetime(2022, 6,15,14,0),60)
     cita4 = Cita(empleado1, c1, s4, datetime.datetime(2022, 5,3,12,0), datetime.datetime(2022, 8,21,14,0),60)
+    #cita5 = Cita(empleado1, c1, s4, datetime.datetime(2022, 6,28,12,0), datetime.datetime(2022, 8,21,14,0),60)
 
     stockInicial = {}
     stockInicial[gomina] = 23
@@ -143,7 +145,7 @@ if __name__ == "__main__":
             opcion = int(input())
 
             if opcion == 1:
-                #GestionarCita.reservarCita()
+                GestionarCita.reservarCita()
                 print(1)
             elif opcion == 2:
                 #GestionarCita.gestionCancelar()
