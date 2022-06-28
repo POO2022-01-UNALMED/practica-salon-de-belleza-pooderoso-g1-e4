@@ -2,7 +2,7 @@
 import datetime
 
 
-#from ..gestorAplicacion.organizacional.Persona import Persona
+from  gestorAplicacion.organizacional.Persona import Persona
 from  gestorAplicacion.organizacional.Administrador import Administrador
 from  gestorAplicacion.organizacional.Empleado import Empleado
 from  gestorAplicacion.organizacional.Cliente import Cliente
@@ -77,9 +77,8 @@ if __name__ == "__main__":
             print(clientes)
 
 
-    opcion = 34
-    while (opcion!=6):
-        opcion=int(input())
+    
+    while (True):
         try:
             gestorInterfaz.escribir("              ")
             gestorInterfaz.escribir("              ")
@@ -105,7 +104,7 @@ if __name__ == "__main__":
 
             gestorInterfaz.escribir("                       ")
             gestorInterfaz.escribir(" Digite Opcion: ")
-            opcion = gestorInterfaz.leer()
+            opcion = int(input())
 
             if opcion == 1:
                 #GestionarCita.reservarCita()
@@ -125,6 +124,7 @@ if __name__ == "__main__":
             elif opcion == 6:
                 #Serializador.serializarTodo()
                 print(6)
+                break
                 condition=6
             elif opcion == 7:
                 #Serializador.serializarTodo()
@@ -148,7 +148,6 @@ if __name__ == "__main__":
             gestorInterfaz.escribir(" ")
             opcion=5555
 
-    opcion=int(input())
         
     
 
