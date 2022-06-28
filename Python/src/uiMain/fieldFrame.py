@@ -31,10 +31,13 @@ class FieldFrame(tk.Frame):
         botonAceptar.grid(row=i+1, column=1, pady=20)
         botonBorrar.grid(row=i+1, column=3, pady=20)
 
+
     def getValue(self, criterio):
-        pos = self.criterios.find(criterio)
-        valor = eval("criterio{pos+1}Entry.get()")
+        pos = self.criterios.index(criterio)
+        valor = eval(f"self.criterio{pos+1}Entry.get()")
         return valor
+
+
     def aceptar(self):
         vacios = []
         for j,entrada in enumerate(self.entries):
@@ -52,17 +55,21 @@ class FieldFrame(tk.Frame):
         else:
             self.validarEntradas()
 
+
     def borrar(self):
         for entrada in self.entries:
             entrada.delete(0, tk.END)
+
+
     def validarEntradas(self):
-        pass
+        for criterio in self.criterios:
+            print(self.getValue(criterio))
 
 if __name__ == "__main__":
     #Para testear que si este funcionando...
     root = tk.Tk()
     root.geometry("600x300")
-    criterios = ["Codigo","Nombre","Descripcion"]
+    criterios = ["idCliente","idEmpleado","Fecha"]
     a = FieldFrame(root, "Criterio", criterios,"Valor",)#[10013,"Julian","Soy un campeon"], ["Codigo"])
     a.pack()
     root.mainloop()
