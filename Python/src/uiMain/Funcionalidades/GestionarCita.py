@@ -63,7 +63,23 @@ class GestionarCita:
  
     @classmethod
     def cancelarReseva(cls,idCita):
-        print("hola")
+        cita=GestionarCita.devuelvecita(idCita)
+        if(cita== None):
+            return "No se enuentra la cita"
+        else:
+            cita.setEstado("Cancelada")
+            return str(cita)   
+        
+
+
+    @classmethod
+    def devuelvecita(cls,idcita):
+
+        for c in Cita._cita:
+            if Cita.getId == idcita:
+                return c
+        
+        return None
 
 
      
