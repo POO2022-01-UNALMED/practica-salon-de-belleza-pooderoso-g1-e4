@@ -5,7 +5,6 @@ from uiMain.ventanaInicio import VentanaInicio
 
 
 
-
 # Deserializar
 deserializarTodo()
 

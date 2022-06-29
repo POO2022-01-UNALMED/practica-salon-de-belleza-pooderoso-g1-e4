@@ -31,7 +31,7 @@ class VentanaInicio(tk.Tk):
         self.mainloop()
 
     def principal(self):
-        from ventanaPrincipal import VentanaPrincipal
+        from uiMain.ventanaPrincipal import VentanaPrincipal
         self.destroy()
         VentanaPrincipal()
 
