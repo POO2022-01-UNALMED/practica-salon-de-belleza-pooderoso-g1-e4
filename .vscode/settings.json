@@ -1,5 +1,6 @@
 {
     "python.analysis.extraPaths": [
-        "./Python/src/gestorAplicacion"
+        "./Python/src/gestorAplicacion",
+        "./Python/src/gestorAplicacion/organizacional"
     ]
 }

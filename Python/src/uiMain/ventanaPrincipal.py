@@ -3,7 +3,7 @@ from ventanaInicio import VentanaInicio
 import os 
 import pathlib
 from fieldFrame import FieldFrame
-from Funcionalidades.mostrarInformacionActual import mostrarClientes
+#from Funcionalidades.mostrarInformacionActual import mostrarClientes
 
 path = os.path.join(pathlib.Path(__file__).parent.absolute())
 
