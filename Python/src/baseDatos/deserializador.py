@@ -39,7 +39,7 @@ def deserializar(lista, className):
         return lista
 
 def deserializarTodo():
-    Cita._cita=deserializar(Cita._citas, "citas")
+    Cita._cita=deserializar(Cita._cita, "citas")
     Factura._factura=deserializar(Factura._factura, "facturas");
     Producto._producto=deserializar(Producto._producto, "productos");
     Venta._venta=deserializar(Venta._venta, "ventas");

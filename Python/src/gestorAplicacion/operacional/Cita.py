@@ -42,7 +42,7 @@ class Cita:
 
     @classmethod
     def getCitas(cls):
-        return cls._citas
+        return cls._cita
 
     @classmethod
     def setCitas(cls, citas):
@@ -160,5 +160,3 @@ class Cita:
                     print("Existen horarior trocados con la cita: "+ str(cita))
                     return False
         return True
-
-print(Cita.getCitas())
