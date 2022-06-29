@@ -1,3 +1,13 @@
-Este proceso le permite al administrador reservar la cita de un cliente, 
-especificando el id del cliente, el id del empleado, los servicios que desea adquirir
-y la fecha y hora que desea.
+Este proceso le permite al administrador reservar la cita de un cliente, especificando
+ el id del cliente, el id del empleado, los servicios que desea adquirir y la fecha y
+ hora que desea.
+
+Recurde que los servicios son:
+
+    1.PEDICURE  2.MANICURE  3.ALIZADO  4.CEPILLADO  5.KERATINA  6.CORTE CABALLERO
+    7.CORTE DAMA  8.EXFOLIACION_FACIAL  9.CEJAS  10.DEPILACION_LASER
+
+    Escoja cada numeral de servicio separado por espacio
+
+Ingrese la fecha y hora en el siguiente formato    
+    mes-dia-hora

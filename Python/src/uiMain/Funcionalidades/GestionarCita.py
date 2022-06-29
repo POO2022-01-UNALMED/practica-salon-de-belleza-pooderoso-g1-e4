@@ -22,7 +22,49 @@ class GestionarCita:
     #     * Reune todos los parametros para poder generar una cita de manera correcta.
     #     *
     #     * @return Diferentes preguntas de confirmacion
-    #     	
+    #
+    # 
+    # 
+    # 
+    @classmethod
+    def reservarCitaEficiente(cls,idCliente,idEmpleado,servicios,hora):
+        
+        cliente
+        empleado
+
+
+        if(idCliente not in Cliente._cliente):
+            cliente=Cliente("Nuevo", "Cliente",idCliente,99,300000,"Ninguna",False)
+        else:
+            cliente=GestionarCita.devuelveCliente(idCliente)   
+
+        if(idEmpleado not in Empleado._empleado):
+            return "No existe el empleado"
+        else:
+            empleado= GestionarCita.devuelveEmpleado(idEmpleado)
+
+        serviciosDepurados=GestionarCita.escogerServiciosModificado(servicios)
+
+        horadepu=hora.split("-")
+        mes=horadepu[0]
+        dia=horadepu[1]
+        hora=horadepu[2]
+        tiene=GestionarCita.mostrarCitasEficiente(empleado,mes,dia)
+        fechaCita =GestionarCita.gestionarFechaEficiente(tiene,empleado, mes, dia,hora,serviciosDepurados) #fecha
+
+        if(fechaCita==False):
+            return("Horas trocadas")
+            
+        citafinal=GestionarCita.generarCita(empleado, cliente, servicios, datetime.datetime.now(), fechaCita)
+        return str(citafinal)
+
+                    
+
+
+
+
+     
+         	
     @classmethod
     def reservarCita(cls):
 
@@ -182,6 +224,20 @@ class GestionarCita:
                 
         return tiene
 
+    @classmethod
+    def mostrarCitasEficiente(cls,empleado, mes, dia):
+        tiene=False
+        for i in empleado.getCitasAsignadas():
+            mescom=i.getFechaCita().month
+            diacom=i.getFechaCita().day
+            if(mes ==mescom and dia == diacom and i.getEstado()!="Cancelada"):
+                tiene=True
+                print(i)
+                
+        return tiene
+
+        
+
 
 
 
@@ -250,6 +306,56 @@ class GestionarCita:
 
         return serviciosescogidos
 
+
+    @classmethod
+    def escogerServiciosModificado(cls,reserva):
+        arregloreservs = reserva.split(" ")
+        #print("fffsfsfsfsfs",arregloreservs)
+        serviciosescogidos=[]
+        
+
+        for i in arregloreservs:
+            if (int(i)>=1 and int(i)<=10):
+                if(i=="1"):
+                    if Servicio.PEDICURE not in serviciosescogidos:
+                            serviciosescogidos.append(Servicio.PEDICURE)
+                elif(i=="2"):
+                    if Servicio.MANICURE not in serviciosescogidos:
+                            serviciosescogidos.append(Servicio.MANICURE)
+                elif(i=="3"):
+                    if Servicio.ALIZADO not in serviciosescogidos:
+                        #print(3,"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+                        serviciosescogidos.append(Servicio.ALIZADO)
+                elif(i=="4"):
+                    if Servicio.CEPILLADO not in serviciosescogidos:
+                            serviciosescogidos.append(Servicio.CEPILLADO)                           
+                elif(i=="5"):
+                    if Servicio.KERATINA not in serviciosescogidos:
+                            serviciosescogidos.append(Servicio.KERATINA)                             
+                elif(i=="6"):
+                    if Servicio.CORTE_CABALLERO not in serviciosescogidos:
+                            serviciosescogidos.append(Servicio.CORTE_CABALLERO)
+                elif(i=="7"):
+                    if Servicio.CORTE_DAMA not in serviciosescogidos:
+                            serviciosescogidos.append(Servicio.CORTE_DAMA)                                                        
+                elif(i=="8"):
+                    if Servicio.EXFOLIACION_FACIAL not in serviciosescogidos:
+                            serviciosescogidos.append(Servicio.EXFOLIACION_FACIAL)
+                elif(i=="9"):
+                    if Servicio.CEJAS not in serviciosescogidos:
+                            serviciosescogidos.append(Servicio.CEJAS)
+                elif(i=="10"):
+                    if Servicio.DEPILACION_LASER not in serviciosescogidos:
+                            serviciosescogidos.append(Servicio.DEPILACION_LASER)
+        #print("")
+        #print("Servicos escogidos")
+        #print(serviciosescogidos)
+
+        return serviciosescogidos        
+
+
+
+
     @classmethod
     def ingresarMes(cls):
         mes = int(input("Digite el mes de la cita:"))
@@ -297,6 +403,17 @@ class GestionarCita:
 
             return  horafin
 
+    @classmethod
+    def gestionarFechaEficiente(cls,citaAsig,em,mes,dia,hora,serv):
+
+        horafin=datetime.timedelta(year=2022,month=mes,days=dia,hours=hora)
+        validar=Cita.validarHora(em,horafin,serv)
+        if(validar==False):
+            return False
+        else:
+            return horafin
+
+
 
 
     @classmethod
@@ -310,6 +427,19 @@ class GestionarCita:
         print("Fecha de la cita: " + str(fechaCita))
         print("Estado de la cita: " +citacreada.getEstado())
         print("")
+
+    @classmethod
+    def  generarCitaEficiente(cls,empleado,cliente,servi,fecgare,fechaCita):
+        citacreada= Administrador.consolidarCita(empleado,cliente,servi,fecgare,fechaCita)
+        return citacreada
+        print("")
+        print("================== Cita Generada exitosamente ==================")
+        print("")
+        print("Empleado: " +empleado.getNombre() + " "+ empleado.getApellido())
+        print("Cliente: " +cliente.getNombre()+ " "+ cliente.getApellido())
+        print("Fecha de la cita: " + str(fechaCita))
+        print("Estado de la cita: " +citacreada.getEstado())
+        print("")        
 
          
     @classmethod

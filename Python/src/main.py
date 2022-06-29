@@ -4,6 +4,8 @@ from baseDatos.deserializador import deserializarTodo
 from uiMain.ventanaInicio import VentanaInicio
 
 
+
+
 # Deserializar
 deserializarTodo()
 
