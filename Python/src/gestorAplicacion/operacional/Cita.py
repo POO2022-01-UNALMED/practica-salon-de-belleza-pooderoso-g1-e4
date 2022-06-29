@@ -9,7 +9,7 @@ from gestorAplicacion.organizacional.Empleado import Empleado
 class Cita:
  
   
-    _citas=[] #serializador
+    _cita=[] #serializador
 
 
 
@@ -35,7 +35,7 @@ class Cita:
 
         empleado.getCitasAsignadas().append(self) #Se le anade una a la lista de citas el empleado
 
-        Cita._citas.append(self) #Serializador
+        Cita._cita.append(self) #Serializador
 
 
     #-----------GETTERS Y SETTERS-----------

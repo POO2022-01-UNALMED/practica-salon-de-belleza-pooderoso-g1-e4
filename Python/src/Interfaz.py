@@ -73,28 +73,28 @@ if __name__ == "__main__":
         gestorInterfaz.escribir("=============== Clientes ===============")
         gestorInterfaz.escribir("=========================================")
 
-        for clientes in Cliente._clientes:
+        for clientes in Cliente._cliente:
             print(clientes)
 
         gestorInterfaz.escribir("=========================================")
         gestorInterfaz.escribir("=============== Empleados ===============")
         gestorInterfaz.escribir("=========================================")
 
-        for emp in Empleado._empleados:
+        for emp in Empleado._empleado:
             print(emp)
 
         gestorInterfaz.escribir("=========================================")
         gestorInterfaz.escribir("=============== Citas ===============")
         gestorInterfaz.escribir("=========================================")
 
-        for cit in Cita._citas:
+        for cit in Cita._cita:
             print(cit)
 
         gestorInterfaz.escribir("=========================================")
         gestorInterfaz.escribir("=============== Ventas ===============")
         gestorInterfaz.escribir("=========================================")
 
-        for ven in Venta._ventas:
+        for ven in Venta._venta:
             print(ven)
             
 
@@ -103,14 +103,14 @@ if __name__ == "__main__":
         gestorInterfaz.escribir("=============== Producto ===============")
         gestorInterfaz.escribir("=========================================")
 
-        for pro in Producto._productos:
+        for pro in Producto._producto:
             print(pro)
 
         gestorInterfaz.escribir("=========================================")
         gestorInterfaz.escribir("=============== Factura ===============")
         gestorInterfaz.escribir("=========================================")
 
-        for fac in Factura._facturas:
+        for fac in Factura._factura:
             print(fac)
 
 

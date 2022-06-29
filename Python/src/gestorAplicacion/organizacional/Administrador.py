@@ -12,7 +12,6 @@ class Administrador(Persona, Salario):
     _administrador = []   #serializador
 
 
-    #-----------ATRIBUTOS DE CLASE-----------
     clientes = []
     empleadosAsigandos = []
 

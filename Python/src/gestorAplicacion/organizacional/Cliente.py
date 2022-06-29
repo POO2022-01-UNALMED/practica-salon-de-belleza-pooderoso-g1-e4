@@ -10,7 +10,6 @@ from ..organizacional.Persona import Persona
 class Cliente(Persona):
 
 
-
     _cliente=[]  #serializador
 
         #-----------CONSTRUCTORES-----------

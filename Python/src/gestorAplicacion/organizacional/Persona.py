@@ -2,7 +2,7 @@ import datetime
 
 
 
-_persona=[]    #serializador
+#_persona=[]    #serializador
 
 class Persona:
 

@@ -8,7 +8,6 @@ from ..organizacional.Salario import Salario
 
 class Empleado(Persona, Salario):
 
-
     _empleado=[]  #serializador
 
 
