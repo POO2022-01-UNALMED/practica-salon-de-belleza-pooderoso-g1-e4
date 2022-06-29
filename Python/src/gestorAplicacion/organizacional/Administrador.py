@@ -9,29 +9,7 @@ from ..organizacional.Salario import Salario
 
 class Administrador(Persona, Salario):
 
-    """
-    #-----------SERIALIZADOR-----------
-    _SERIALVERSIONUID = 1
-
-    _administradores = None
-    @staticmethod
-    def _static_initializer():
-        gestorAplicacion.organizacional.Administrador._administradores = []
-
-    _static_initializer()
-
-
-    @staticmethod
-    def getAdministradores():
-        return gestorAplicacion.organizacional.Administrador._administradores
-
-    @staticmethod
-    def setAdministradores(administradores):
-        Administrador._administradores = administradores
-
-
-    """
-    #-----------ATRIBUTOS DE INSTANCIA-----------
+     _administrador = []   #serializador
 
 
     #-----------ATRIBUTOS DE CLASE-----------
@@ -51,12 +29,22 @@ class Administrador(Persona, Salario):
         super().__init__(nombre, apellido, id, edad, numero)
         self._horarioLaboral=horarioLaboral
         self._nomina=nomina
-        #empleadosAsigandos = Administrador.empleadosAsigandos
-        #self._sueldo = Salario.SALARIO_BASE * 3 ----------------------------------------------Cuando importe Salario
-        #gestorAplicacion.organizacional.Administrador._administradores.append(self) ----------------Serializador
+       
+        Administrador._administrador.append(self) #serializador
+       
 
 
     #-----------GETTERS y SETTERS-----------
+
+      @classmethod    #serializador
+    def getAdministradores(cls):
+        return cls._administrador
+
+    @classmethod     #serializador
+    def setAdministradores(cls, administrador):
+        cls._administrador = administrador
+
+
     def getHorarioLaboral(self):
         return self._horarioLaboral
     def setHorarioLaboral(self, horarioLaboral):

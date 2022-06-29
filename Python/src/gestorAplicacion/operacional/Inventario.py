@@ -1,39 +1,29 @@
 class Inventario:
-    """
-    #-----------SERIALIZADOR-----------
-    _SERIALVERSIONUID = 1
-
-    _inventario = None
-    _inventarios = None
-    @staticmethod
-    def _static_initializer():
-        gestorAplicacion.operacional.Inventario._inventario = {}
-        gestorAplicacion.operacional.Inventario._inventarios = []
-
-    _static_initializer()
-
-
-    @staticmethod
-    def getInventario():
-        return gestorAplicacion.operacional.Inventario._inventario
-  
-
-    """
+ 
 
     #-----------ATRIBUTOS-----------
-    _inventario = []
-    _inventarios = []
+    _inventario = []   #serializador
+
 
     #-----------CONSTRUCTOR-----------
     def __init__(self, lista):
-        #instance fields found by Java to Python Converter:
+       
         self._listaProductos = {}
 
         self._listaProductos = lista
-        Inventario._inventario = lista
-        Inventario._inventarios.append(self)
-
+        
+        Inventario._inventario.append(self)   #serializador
+ 
     #-----------GETTERS y SETTERS-----------
+
+     @classmethod       #serializador
+    def getInventarios(cls):
+        return cls._inventario
+
+    @classmethod        #serializador
+    def setInventarios(cls,inventarios):
+        cls._inventario = inventarios
+
     def getListaProductos(self):
         return self._listaProductos
     def setListaProductos(self, listaProductos):

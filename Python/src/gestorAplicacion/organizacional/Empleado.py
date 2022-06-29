@@ -9,37 +9,15 @@ from ..organizacional.Salario import Salario
 class Empleado(Persona, Salario):
 
 
-    #todo esto es del serializador
-    """
-    _SERIALVERSIONUID = 1
-
-    _empleados = None
-    @staticmethod
-    def _static_initializer():
-        Empleado._empleados = []
-
-    _static_initializer()
-
-    @staticmethod
-    def getEmpleados():
-        return Empleado._empleados
-
-    @staticmethod
-    def setEmpleados(empleados):
-        Empleado._empleados = empleados
-
-
-    #también en cada constructor se debe poner el add al array
-    # ahora si el codigo
-
-    """
+   _empleado=[]  #serializador
 
 
     #Constantes de tiempos de atenci�n de los empleados (9 am - 6 pm)
 
     HORAINICIO = timedelta(hours=9, minutes=0)
     HORAFINAL = timedelta(hours=18, minutes=0)
-    _empleados = []
+
+
 
     def __init__(self, nombre, apellido, id, edad, numero, especialidad):
         from ..organizacional.Administrador import Administrador
@@ -56,7 +34,7 @@ class Empleado(Persona, Salario):
         self._especialidad = especialidad
         self._sueldo = Salario.SALARIO_BASE
         Administrador.empleadosAsigandos.append(self) #Cardinalidad de clases
-        Empleado._empleados.append(self)
+        Empleado._empleado.append(self)   #serializador
 
 
     #-----------METODO ABSTRACTOS-----------
@@ -76,6 +54,13 @@ class Empleado(Persona, Salario):
 
 
 
+        @classmethod    #serializador
+    def getEmpleados(cls):
+        return cls._empleado
+
+    @classmethod     #serializador
+    def setEmpleados(cls, empleado):
+        cls._empleado= empleado
 
     def getEspecialidad(self):
         return self._especialidad

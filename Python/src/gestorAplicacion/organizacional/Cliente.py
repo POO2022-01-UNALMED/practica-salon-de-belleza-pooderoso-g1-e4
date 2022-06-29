@@ -9,44 +9,12 @@ from ..organizacional.Persona import Persona
 
 class Cliente(Persona):
 
-    """
-    def _initialize_instance_fields(self):
-        #instance fields found by Java to Python Converter:
-        self._anotaciones = None
-        self._citasGeneradas = []
-        self._facturas = []
-        self._ClientePremiun = False
-    
-    
-    #-----------SERIALIZADOR-----------
-    _SERIALVERSIONUID = 1
-
-    _clientes = None
-
-    @classmethod
-    def static_initializer(cls):
-        cls._clientes = []
-
-    static_initializer()
-
-    @staticmethod
-    def getClientes():
-        return Cliente._clientes
-
-    @staticmethod
-    def setClientes(clientes):
-        Cliente._clientes = clientes
-        Administrador.clientes=clientes
-    """
 
 
-    #-----------ATRIBUTOS-----------
+    _cliente=[]  #serializador
 
-    _clientes=[]
     #-----------CONSTRUCTORES-----------
-#JAVA TO PYTHON CONVERTER TODO TASK: There is no Python equivalent to multiple constructors:
-#ORIGINAL LINE: public Cliente(String nombre, String apellido, int id, int edad, int numero, String anotaciones)
-    def __init__(self, nombre, apellido, id, edad, numero, anotaciones):
+def __init__(self, nombre, apellido, id, edad, numero, anotaciones):
         from ..organizacional.Administrador import Administrador
         self._initialize_instance_fields()
 
@@ -56,11 +24,9 @@ class Cliente(Persona):
         self._facturas = None
         self._ClientePremiun = False
         Administrador.clientes.append(self)
-        Cliente._clientes.append(self)
+        Cliente._cliente.append(self)    #serializador
 
-#JAVA TO PYTHON CONVERTER TODO TASK: There is no Python equivalent to multiple constructors:
-#ORIGINAL LINE: public Cliente(String nombre, String apellido, int id, int edad, int numero, String anotaciones, boolean clientePremiun)
-    def __init__(self, nombre, apellido, id, edad, numero, anotaciones, clientePremiun):
+def __init__(self, nombre, apellido, id, edad, numero, anotaciones, clientePremiun):
         from ..organizacional.Administrador import Administrador
         #self._initialize_instance_fields()
 
@@ -70,13 +36,10 @@ class Cliente(Persona):
         self._facturas = None
         self._ClientePremiun = False
         Administrador.clientes.append(self)
-        Cliente._clientes.append(self)
+        Cliente._cliente.append(self)
 
 
- #JAVA TO PYTHON CONVERTER TODO TASK: There is no Python equivalent to multiple constructors:
-  #ORIGINAL LINE: public Cliente(String nombre, String apellido, int id)
-   # def __init__(self, nombre, apellido, id):
-    #    self(nombre,apellido,id,0,0," No posee anotaciones")
+
   
 
     #----------METODO ABSTRACTO-----------
@@ -104,6 +67,15 @@ class Cliente(Persona):
 
 
     #-----------GETTERS Y SETTERS-----------
+
+        @classmethod    #serializador
+    def getClientes(cls):
+        return cls._cliente
+
+    @classmethod     #serializador
+    def setClientes(cls, cliente):
+        cls._cliente= cliente
+
     def getAnotaciones(self):
         return self._anotaciones
     def setAnotaciones(self, anotaciones):

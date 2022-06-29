@@ -7,26 +7,11 @@ from ..organizacional.Empleado import Empleado
 
 
 class Cita:
-    
-    #-----------SERIALIZADOR-----------
-    _SERIALVERSIONUID = 1
-
-    _citas = []
-
-    @classmethod
-    def _static_initializer(cls):
-        cls._citas = []
-
-    #_static_initializer()
-
-    @staticmethod
-    def getCitas():
-        return Cita._citas
+ 
+  
+_cita=[] #serializador
 
 
-    @staticmethod
-    def setCitas(citas):
-        Cita._citas = citas
 
     
 
@@ -50,12 +35,19 @@ class Cita:
 
         empleado.getCitasAsignadas().append(self) #Se le anade una a la lista de citas el empleado
 
-
-
-        Cita._citas.append(self) #del Serializador
+        Cita._citas.append(self) #Serializador
 
 
     #-----------GETTERS Y SETTERS-----------
+
+      @classmethod
+    def getCitas(cls):
+        return cls._cita
+
+    @classmethod
+    def setCitas(cls, citas):
+        cls._cita = citas
+
     def getId(self):
         return self._idCita
     def setId(self, id):

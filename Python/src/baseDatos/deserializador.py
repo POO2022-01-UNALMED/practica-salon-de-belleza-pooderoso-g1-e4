@@ -38,14 +38,16 @@ def deserializar(lista, className):
         return lista
 
 def deserializarTodo():
-    Cita.cita=deserializar(Cita.cita, "citas");
-	Factura.factura=deserializar(Factura.factura, "facturas");
-	Producto.producto=deserializar(Producto.producto, "productos");
-	Venta.venta=deserializar(Venta.venta(), "ventas");
-	Administrador.administradordeserializar(Administrador.administrador(), "administradores");
-	Cliente.cliente=deserializar(Cliente.cliente(), "clientes");
-	Empleado.empleado=deserializar(Empleado.empleado(), "empleados");
-	Persona.persona= deserializar(Persona.persona(), "personas");
-	Inventario.inventario=deserializar(Inventario.inventario(), "inventario");
+    Cita._cita=deserializar(Cita._cita, "citas");
+	Factura._factura=deserializar(Factura._factura, "facturas");
+	Producto._producto=deserializar(Producto._producto, "productos");
+	Venta._venta=deserializar(Venta._venta, "ventas");
+
+	Administrador._administrador=deserializar(Administrador._administrador, "administradores");
+
+	Cliente._cliente=deserializar(Cliente._cliente, "clientes");
+	Empleado._empleado=deserializar(Empleado._empleado, "empleados");
+	Persona._persona= deserializar(Persona._persona, "personas");
+	Inventario._inventario=deserializar(Inventario._inventario, "inventario");
 
 	

@@ -1,32 +1,13 @@
 class Producto:
     
-    """
-    #-----------SERIALIZADOR-----------
-    _SERIALVERSIONUID = 1
-
-    _productos = None
-    @staticmethod
-    def _static_initializer():
-        Producto._productos = []
-
-    _static_initializer()
-
-    @staticmethod
-    def getProductos():
-        return Producto._productos
-
-    @staticmethod
-    def setProductos(productos):
-        Producto._productos = productos
-
-    """
+ 
     #-----------ATRIBUTOS-----------
     numProducto = 0
-    _productos = []
+    _producto = []     #serializador
 
     #-----------CONSTRUCTOR-----------
     def __init__(self, nombreProducto, precioVenta):
-        #instance fields found by Java to Python Converter:
+    
         self._productoId = 0
         self._nombreProducto = None
         self._precioVenta = 0
@@ -36,9 +17,18 @@ class Producto:
         self._nombreProducto = nombreProducto
         self._precioVenta = precioVenta
         Producto.numProducto += 1
-        Producto._productos.append(self)
+        Producto._producto.append(self)     #serializador
 
     #-----------GETTERS y SETTERS-----------
+
+     @classmethod          #serializador
+    def getProductos(cls):
+        return cls._producto
+
+    @classmethod             #serializador
+    def setProductos(cls, productos):
+        cls._producto = productos
+
     def getProductoId(self):
         return self._productoId
     def setProductoId(self, productoId):

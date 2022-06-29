@@ -1,28 +1,13 @@
 import datetime
 
+
+
+_persona=[]    #serializador
+
 class Persona:
-    """"
-    #-----------SERIALIZADOR-----------
-    _SERIALVERSIONUID = 1
-
-    personas = None
-    @staticmethod
-    def _static_initializer():
-        gestorAplicacion.organizacional.Persona.personas = []
-
-    _static_initializer()
 
 
-    @staticmethod
-    def getPersonas():
-        return gestorAplicacion.organizacional.Persona.personas
-
-    @staticmethod
-    def setPersonas(personas):
-        Persona.personas = personas
-
-    """
-    #-----------ATRIBUTOS-----------
+_persona=[]    #serializador
 
     #-----------CONSTRUCTOR-----------
     def __init__(self, nombre, apellido, id, edad, numero):
@@ -41,11 +26,20 @@ class Persona:
         self._fechaRegistro = datetime.datetime.now()
         self._Edad = edad
         self._Numero = numero
-        #gestorAplicacion.organizacional.Persona.personas.append(self)
+        Persona._persona.append(self)   #serializador
 
 
 
     #-----------GETTERS y SETTERS-----------
+
+        @classmethod    #serializador
+    def getPersonas(cls):
+        return cls._persona
+
+    @classmethod     #serializador
+    def setEmpleados(cls, persona):
+        cls._persona= persona
+
     def getNombre(self):
         return self.nombre
     def setNombre(self, nombre):

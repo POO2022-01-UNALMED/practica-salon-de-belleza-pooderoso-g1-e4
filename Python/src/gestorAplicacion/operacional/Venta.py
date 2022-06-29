@@ -4,34 +4,10 @@ from gestorAplicacion.organizacional import Empleado
 
 class Venta:
 
-    """
-    #-----------SERIALIZADOR-----------
-    _SERIALVERSIONUID = 1
-
-    _ventas = None
-    @staticmethod
-    def _static_initializer():
-        Venta._ventas = []
-
-    _static_initializer()
-
-
-    @staticmethod
-    def getVentas():
-        return Venta._ventas
-
-    @staticmethod
-    def setVentas(ventas):
-        Venta._ventas = ventas
-
-    """
-
-
-
     #-----------ATRIBUTOS-----------
     PORCENTAJECOMISION = 0.2
     numVenta = 0
-    _ventas=[]
+    _venta=[]         #serializador
 
     #-----------CONSTRUCTOR-----------
     def __init__(self, productoVendido, empleadoComision, fechaVenta, cantidadVendida, inventario):
@@ -45,11 +21,20 @@ class Venta:
         self._idVenta = Venta.numVenta
         self._inventario = inventario
         self._inventario.actualizarExistencias(productoVendido, cantidadVendida)
-        Venta._ventas.append(self)
+        Venta._venta.append(self)           #serializador
+
 
 
 
     #-----------GETTERS y SETTERS-----------
+     @classmethod           #serializador
+    def getVentas(cls):
+        return cls._venta
+
+    @classmethod               #serializador
+    def setVentas(cls, ventas:
+        cls._venta = ventas
+
     def getProductoVendido(self):
         return self._productoVendido
 

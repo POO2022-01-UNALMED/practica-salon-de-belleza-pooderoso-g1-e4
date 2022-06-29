@@ -42,4 +42,4 @@ def serializarTodo():
     serializar(Cliente.getClientes(), "clientes")
     serializar(Empleado.getEmpleados(), "empleados")
     serializar(Persona.getPersonas(), "personas")
-    serializar(Inventario.getInventario(), "inventario")
+    serializar(Inventario.getInventarios(), "inventario")
