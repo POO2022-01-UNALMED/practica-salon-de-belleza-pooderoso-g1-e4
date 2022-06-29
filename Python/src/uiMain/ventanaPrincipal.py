@@ -6,6 +6,8 @@ from fieldFrame import FieldFrame
 
 path = os.path.join(pathlib.Path(__file__).parent.absolute())
 
+from baseDatos.serializador import serializarTodo
+
 
 class  VentanaPrincipal(tk.Tk):
     def __init__(self):
@@ -128,7 +130,10 @@ class  VentanaPrincipal(tk.Tk):
         self.frame1 = FieldFrame(self, "Criterios", ["Numero Mes"],"Valores")
         self.frame1.pack(side="top")    
 
-
+    def cerrarGuardar():
+            from guiMain.ventanaInicio import VentanaInicio
+            serializarTodo()
+            self.destroy()
 
 if __name__=='__main__':
     VentanaInicio()
