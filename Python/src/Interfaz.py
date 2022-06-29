@@ -17,6 +17,7 @@ from  gestorAplicacion.operacional.Producto import Producto
 
 from uiMain.gestorInterfaz import  gestorInterfaz
 from uiMain.Funcionalidades.GestionarCita import  GestionarCita
+from uiMain.Funcionalidades import mostrarInformacionActual
 
 
 if __name__ == "__main__":
@@ -67,7 +68,7 @@ if __name__ == "__main__":
 
 
 
-    def mostrarClientes():
+def mostrarClientes():
 
         gestorInterfaz.escribir("=========================================")
         gestorInterfaz.escribir("=============== Clientes ===============")
@@ -114,7 +115,7 @@ if __name__ == "__main__":
             print(fac)
 
 
-    while (True):
+while (True):
         #try:
             gestorInterfaz.escribir("              ")
             gestorInterfaz.escribir("              ")
@@ -166,7 +167,7 @@ if __name__ == "__main__":
                 #Serializador.serializarTodo()
                 print(7)
             elif opcion == 8:
-                mostrarClientes()
+                mostrarInformacionActual.mostrarClientes()
             elif opcion == 9:
                 print(9)
                 #Otras.gestionarSeguros()

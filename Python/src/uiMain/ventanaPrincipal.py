@@ -3,6 +3,7 @@ from ventanaInicio import VentanaInicio
 import os 
 import pathlib
 from fieldFrame import FieldFrame
+#from Funcionalidades.mostrarInformacionActual import mostrarClientes
 
 path = os.path.join(pathlib.Path(__file__).parent.absolute())
 
@@ -38,7 +39,7 @@ class  VentanaPrincipal(tk.Tk):
         menu2.add_cascade(label="Factura", menu=menuFactura)
         menu2.add_command(label="Balance Contable", command=self.balanceContable)
         menu2.add_command(label="Pago de Nomina")
-        menu2.add_command(label="Mostrar Informacion Actual")
+        menu2.add_command(label="Mostrar Informacion Actual", command=self.mostrarInfo)
         
 
         # Tercer Menu: Ayuda: Acerca de
@@ -129,7 +130,72 @@ class  VentanaPrincipal(tk.Tk):
         self.frame2.pack(side="top")
         self.frame1.pack_forget()
         self.frame1 = FieldFrame(self, "Criterios", ["Numero Mes"],"Valores")
-        self.frame1.pack(side="top")    
+        self.frame1.pack(side="top") 
+
+    def mostrarInfo(self):
+         # Frame por default
+        def mostrarClientes():
+        
+
+            path = os.path.join(pathlib.Path(__file__).parent.absolute())
+            path_archivo = path+"\\textos\\mostrarInformacion.txt"
+            file = open(path_archivo, "w")
+            print("=========================================", file=file)
+            print("=============== Clientes ===============", file=file)
+            print("=========================================", file=file)
+
+            for clientes in Cliente._cliente:
+                print(clientes, file=file)
+
+            print("=========================================", file=file)
+            print("=============== Empleados ===============", file=file)
+            print("=========================================", file=file)
+
+            for emp in Empleado._empleado:
+                print(emp, file=file)
+
+            print("=========================================", file=file)
+            print("=============== Citas ===============", file=file)
+            print("=========================================", file=file)
+
+            for cit in Cita._cita:
+                print(cit, file=file)
+
+            print("=========================================", file=file)
+            print("=============== Ventas ===============", file=file)
+            print("=========================================", file=file)
+
+            for ven in Venta._venta:
+                print(ven, file=file)
+                
+
+
+            print("=========================================", file=file)
+            print("=============== Producto ===============", file=file)
+            print("=========================================", file=file)
+
+            for pro in Producto._producto:
+                print(pro, file=file)
+
+            print("=========================================", file=file)
+            print("=============== Factura ===============", file=file)
+            print("=========================================", file=file)
+
+            for fac in Factura._factura:
+                print(fac, file=file)
+
+            file.close()
+        mostrarClientes()
+
+
+        self.frame1.pack_forget()
+        self.frame1 = tk.Frame(self)
+        self.frame1.pack()
+        with open(path+"/textos/mostrarInformacion.txt","r") as f:
+            texto = f.read()
+        texto_inicio = tk.Text(self.frame1)
+        texto_inicio.insert("1.0",texto)
+        texto_inicio.pack(expand=True, anchor="n", padx=20, pady=20)          
 
     
 

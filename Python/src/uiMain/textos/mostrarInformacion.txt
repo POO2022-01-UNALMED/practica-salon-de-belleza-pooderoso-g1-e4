@@ -1,0 +1,35 @@
+=========================================
+=============== Clientes ===============
+=========================================
+Cliente: Julian Londono, anotaciones: Ninguna
+Cliente: Pepito Martinez, anotaciones: Ninguna
+=========================================
+=============== Empleados ===============
+=========================================
+Nombre= Marlon, especialista= Unas, id: 1000349061 fecha registro: 2022-06-29T12:13:16.024422
+Nombre= Julian, especialista= Pelo, id: 525206530 fecha registro: 2021-05-01T12:00:00
+=========================================
+=============== Citas ===============
+=========================================
+Cliente: Julian Londono, anotaciones: Ninguna, fecha de la cita: 30/05/2022 14:00, duracion:60. Termina a las 15:00. Pendiente
+Cliente: Julian Londono, anotaciones: Ninguna, fecha de la cita: 31/05/2022 14:00, duracion:60. Termina a las 15:00. Pendiente
+Cliente: Pepito Martinez, anotaciones: Ninguna, fecha de la cita: 15/06/2022 14:00, duracion:60. Termina a las 15:00. Pendiente
+Cliente: Julian Londono, anotaciones: Ninguna, fecha de la cita: 21/08/2022 14:00, duracion:60. Termina a las 15:00. Pendiente
+=========================================
+=============== Ventas ===============
+=========================================
+El empleado Marlon Nivia  realiza una venta de Gomina en la fecha 2022-05-10 12:00:00 y recibe una comision de: 500.0
+El empleado Julian Ospina  realiza una venta de keratina en la fecha 2022-08-14 12:00:00 y recibe una comision de: 6000.0
+=========================================
+=============== Producto ===============
+=========================================
+El producto= Gomina tiene un precio de venta de = 2500
+El producto= keratina tiene un precio de venta de = 30000
+El producto= Colageno Capilar tiene un precio de venta de = 3000
+El producto= Balsamo tiene un precio de venta de = 1500
+El producto= Esmalte tiene un precio de venta de = 4000
+El producto= Removedor tiene un precio de venta de = 5500
+El producto= Acondicionador tiene un precio de venta de = 700
+=========================================
+=============== Factura ===============
+=========================================
