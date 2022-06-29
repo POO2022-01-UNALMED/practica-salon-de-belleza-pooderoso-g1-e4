@@ -36,7 +36,7 @@ class Factura:
     #-----------GETTERS Y SETTERS-----------
 
 
-     @classmethod    #serialiador
+    @classmethod    #serialiador
     def getFacturas(cls):
         return cls._factura
 

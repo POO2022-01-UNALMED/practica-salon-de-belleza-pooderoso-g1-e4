@@ -2,14 +2,14 @@ import datetime
 from types import ClassMethodDescriptorType
 
 #from ..organizacional.Cliente import Cliente
-from ..organizacional.Empleado import Empleado
+from gestorAplicacion.organizacional.Empleado import Empleado
 #from uiMain.gestorInterfaz import 
 
 
 class Cita:
  
   
-_cita=[] #serializador
+    _citas=[] #serializador
 
 
 
@@ -40,9 +40,9 @@ _cita=[] #serializador
 
     #-----------GETTERS Y SETTERS-----------
 
-      @classmethod
+    @classmethod
     def getCitas(cls):
-        return cls._cita
+        return cls._citas
 
     @classmethod
     def setCitas(cls, citas):
@@ -160,3 +160,5 @@ _cita=[] #serializador
                     print("Existen horarior trocados con la cita: "+ str(cita))
                     return False
         return True
+
+print(Cita.getCitas())

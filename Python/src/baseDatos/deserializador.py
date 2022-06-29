@@ -15,10 +15,11 @@ from gestorAplicacion.operacional.Venta import Venta
 from gestorAplicacion.operacional.Producto import Producto
 from gestorAplicacion.operacional.Servicio import Servicio
 
+path = os.path.join(pathlib.Path(__file__).parent.absolute())
 
 def deserializar(lista, className):
         def camino(className):
-            return os.path.join(pathlib.Path(__file__).parent.absolute(), f"temp\{className}.txt")
+            return path+ f"\\temp\\{className}.txt"
 
         # Leer el archivo
         try:
@@ -38,16 +39,13 @@ def deserializar(lista, className):
         return lista
 
 def deserializarTodo():
-    Cita._cita=deserializar(Cita._cita, "citas");
-	Factura._factura=deserializar(Factura._factura, "facturas");
-	Producto._producto=deserializar(Producto._producto, "productos");
-	Venta._venta=deserializar(Venta._venta, "ventas");
+    Cita._cita=deserializar(Cita._citas, "citas")
+    Factura._factura=deserializar(Factura._factura, "facturas");
+    Producto._producto=deserializar(Producto._producto, "productos");
+    Venta._venta=deserializar(Venta._venta, "ventas");
+    Administrador._administrador=deserializar(Administrador._administrador, "administradores");
 
-	Administrador._administrador=deserializar(Administrador._administrador, "administradores");
-
-	Cliente._cliente=deserializar(Cliente._cliente, "clientes");
-	Empleado._empleado=deserializar(Empleado._empleado, "empleados");
-	Persona._persona= deserializar(Persona._persona, "personas");
-	Inventario._inventario=deserializar(Inventario._inventario, "inventario");
-
-	
+    Cliente._cliente=deserializar(Cliente._cliente, "clientes");
+    Empleado._empleado=deserializar(Empleado._empleado, "empleados");
+    Persona._persona= deserializar(Persona._persona, "personas");
+    Inventario._inventario=deserializar(Inventario._inventario, "inventario");

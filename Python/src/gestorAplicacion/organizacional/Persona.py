@@ -7,7 +7,7 @@ _persona=[]    #serializador
 class Persona:
 
 
-_persona=[]    #serializador
+    _persona=[]    #serializador
 
     #-----------CONSTRUCTOR-----------
     def __init__(self, nombre, apellido, id, edad, numero):
@@ -32,7 +32,7 @@ _persona=[]    #serializador
 
     #-----------GETTERS y SETTERS-----------
 
-        @classmethod    #serializador
+    @classmethod    #serializador
     def getPersonas(cls):
         return cls._persona
 

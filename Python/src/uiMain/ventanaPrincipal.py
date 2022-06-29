@@ -6,7 +6,7 @@ from fieldFrame import FieldFrame
 
 path = os.path.join(pathlib.Path(__file__).parent.absolute())
 
-from baseDatos.serializador import serializarTodo
+#from baseDatos.serializador import serializarTodo
 
 
 class  VentanaPrincipal(tk.Tk):

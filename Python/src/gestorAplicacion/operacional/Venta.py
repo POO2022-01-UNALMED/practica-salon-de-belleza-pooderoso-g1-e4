@@ -27,12 +27,12 @@ class Venta:
 
 
     #-----------GETTERS y SETTERS-----------
-     @classmethod           #serializador
+    @classmethod           #serializador
     def getVentas(cls):
         return cls._venta
 
     @classmethod               #serializador
-    def setVentas(cls, ventas:
+    def setVentas(cls, ventas):
         cls._venta = ventas
 
     def getProductoVendido(self):
