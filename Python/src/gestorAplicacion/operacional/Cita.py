@@ -9,7 +9,7 @@ from ..organizacional.Empleado import Empleado
 class Cita:
  
   
-_cita=[] #serializador
+    _cita=[] #serializador
 
 
 
@@ -35,12 +35,12 @@ _cita=[] #serializador
 
         empleado.getCitasAsignadas().append(self) #Se le anade una a la lista de citas el empleado
 
-        Cita._citas.append(self) #Serializador
+        Cita._cita.append(self) #Serializador
 
 
     #-----------GETTERS Y SETTERS-----------
 
-      @classmethod
+    @classmethod
     def getCitas(cls):
         return cls._cita
 

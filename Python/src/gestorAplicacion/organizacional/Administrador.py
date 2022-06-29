@@ -9,10 +9,10 @@ from ..organizacional.Salario import Salario
 
 class Administrador(Persona, Salario):
 
-     _administrador = []   #serializador
+
+    _administrador = []   #serializador
 
 
-    #-----------ATRIBUTOS DE CLASE-----------
     clientes = []
     empleadosAsigandos = []
 
@@ -36,7 +36,7 @@ class Administrador(Persona, Salario):
 
     #-----------GETTERS y SETTERS-----------
 
-      @classmethod    #serializador
+    @classmethod    #serializador
     def getAdministradores(cls):
         return cls._administrador
 

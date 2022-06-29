@@ -16,7 +16,7 @@ class Inventario:
  
     #-----------GETTERS y SETTERS-----------
 
-     @classmethod       #serializador
+    @classmethod       #serializador
     def getInventarios(cls):
         return cls._inventario
 

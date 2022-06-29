@@ -8,8 +8,7 @@ from ..organizacional.Salario import Salario
 
 class Empleado(Persona, Salario):
 
-
-   _empleado=[]  #serializador
+    _empleado=[]  #serializador
 
 
     #Constantes de tiempos de atenci�n de los empleados (9 am - 6 pm)
@@ -54,7 +53,7 @@ class Empleado(Persona, Salario):
 
 
 
-        @classmethod    #serializador
+    @classmethod    #serializador
     def getEmpleados(cls):
         return cls._empleado
 

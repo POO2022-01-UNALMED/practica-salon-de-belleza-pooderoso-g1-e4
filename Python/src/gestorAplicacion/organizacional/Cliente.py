@@ -10,33 +10,32 @@ from ..organizacional.Persona import Persona
 class Cliente(Persona):
 
 
-
     _cliente=[]  #serializador
 
-    #-----------CONSTRUCTORES-----------
-def __init__(self, nombre, apellido, id, edad, numero, anotaciones):
-        from ..organizacional.Administrador import Administrador
-        self._initialize_instance_fields()
+        #-----------CONSTRUCTORES-----------
+    def __init__(self, nombre, apellido, id, edad, numero, anotaciones):
+            from ..organizacional.Administrador import Administrador
+            self._initialize_instance_fields()
 
-        super().__init__(nombre, apellido, id, edad, numero)
-        self._anotaciones = anotaciones
-        self._citasGeneradas = []
-        self._facturas = None
-        self._ClientePremiun = False
-        Administrador.clientes.append(self)
-        Cliente._cliente.append(self)    #serializador
+            super().__init__(nombre, apellido, id, edad, numero)
+            self._anotaciones = anotaciones
+            self._citasGeneradas = []
+            self._facturas = None
+            self._ClientePremiun = False
+            Administrador.clientes.append(self)
+            Cliente._cliente.append(self)    #serializador
 
-def __init__(self, nombre, apellido, id, edad, numero, anotaciones, clientePremiun):
-        from ..organizacional.Administrador import Administrador
-        #self._initialize_instance_fields()
+    def __init__(self, nombre, apellido, id, edad, numero, anotaciones, clientePremiun):
+            from ..organizacional.Administrador import Administrador
+            #self._initialize_instance_fields()
 
-        super().__init__(nombre, apellido, id, edad, numero)
-        self._anotaciones = anotaciones
-        self._citasGeneradas = []
-        self._facturas = None
-        self._ClientePremiun = False
-        Administrador.clientes.append(self)
-        Cliente._cliente.append(self)
+            super().__init__(nombre, apellido, id, edad, numero)
+            self._anotaciones = anotaciones
+            self._citasGeneradas = []
+            self._facturas = None
+            self._ClientePremiun = False
+            Administrador.clientes.append(self)
+            Cliente._cliente.append(self)
 
 
 
@@ -68,7 +67,7 @@ def __init__(self, nombre, apellido, id, edad, numero, anotaciones, clientePremi
 
     #-----------GETTERS Y SETTERS-----------
 
-        @classmethod    #serializador
+    @classmethod    #serializador
     def getClientes(cls):
         return cls._cliente
 

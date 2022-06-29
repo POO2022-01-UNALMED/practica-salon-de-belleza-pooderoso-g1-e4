@@ -21,7 +21,7 @@ class Producto:
 
     #-----------GETTERS y SETTERS-----------
 
-     @classmethod          #serializador
+    @classmethod          #serializador
     def getProductos(cls):
         return cls._producto
 
