@@ -16,9 +16,7 @@ class Inventario:
     @staticmethod
     def getInventario():
         return gestorAplicacion.operacional.Inventario._inventario
-    @staticmethod
-    def getInventarios():
-        return gestorAplicacion.operacional.Inventario._inventarios
+  
 
     """
 
