@@ -29,16 +29,20 @@ class GestionarCita:
     @classmethod
     def reservarCitaEficiente(cls,idCliente,idEmpleado,servicios,hora):
         
+
+        idCliente=int(idCliente)
+        idEmpleado=int(idEmpleado)
+
         cliente
         empleado
 
 
-        if(idCliente not in Cliente._cliente):
+        if(GestionarCita.devuelveCliente(idCliente) == None ):
             cliente=Cliente("Nuevo", "Cliente",idCliente,99,300000,"Ninguna",False)
         else:
             cliente=GestionarCita.devuelveCliente(idCliente)   
 
-        if(idEmpleado not in Empleado._empleado):
+        if(GestionarCita.devuelveEmpleado(idEmpleado) == None):
             return "No existe el empleado"
         else:
             empleado= GestionarCita.devuelveEmpleado(idEmpleado)
@@ -59,8 +63,10 @@ class GestionarCita:
         return str(citafinal)
 
                     
-
-
+ 
+    @classmethod
+    def cancelarReseva(cls,idCita):
+        print("hola")
 
 
      
@@ -176,12 +182,13 @@ class GestionarCita:
     def devuelveEmpleado(cls,cedula):
 
 
-        for e in Empleado._empleados:
+        for e in Empleado._empleado:
             if e.getId()==cedula:
                 return e
 
-        nuevaCedula =int(input("Empledo no encontrado, por favor ingrese nuevamente la identificacion del empleado:"))
-        return GestionarCita.devuelveEmpleado(nuevaCedula)
+        #nuevaCedula =int(input("Empledo no encontrado, por favor ingrese nuevamente la identificacion del empleado:"))
+        #return GestionarCita.devuelveEmpleado(nuevaCedula)
+        return None
 
 
 
@@ -194,7 +201,7 @@ class GestionarCita:
     @classmethod
     def devuelveCliente(cls,cedula):
 
-        for c in Cliente._clientes:
+        for c in Cliente._cliente:
             if c.getId()==cedula:
                 print(c)
                 return c
