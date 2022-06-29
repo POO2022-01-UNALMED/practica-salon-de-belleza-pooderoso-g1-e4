@@ -1,0 +1,10 @@
+        Como usar la aplicacion del Salon de Belleza POOderoso:
+
+En el menu de arriba podra ver la opcion de "Procesos y Consultas", alli podra ver las diferentes opciones que ofrece la aplicacion.
+
+En general, al seleccionar una opcion debera diligenciar algun formulario. Por favor revisar bien que haya completado todos los campos solicitados, ademas, revisar que si existan en los registros de aplicacion lo que esta ingresando. 
+
+En caso de necesitar revisar codigos de Empleados, Clientes o Productos, puede escoger la opcion "Mostrar Informacion Actual".
+
+
+Una vez finalizada su consulta, no olvide seleccionar la opcion de Guardar y Salir.

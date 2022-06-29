@@ -1,0 +1,7 @@
+                Salon de Belleza Pooderoso
+
+
+Se trata de una aplicacion que busca facilitar el trabajo de
+un administrador de Salon de belleza. Permitiendole llevar 
+un registro de las ventas de productos, la reserva y cancelacion 
+de citas, entre otros.

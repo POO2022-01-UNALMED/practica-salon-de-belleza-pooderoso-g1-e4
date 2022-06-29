@@ -1,0 +1,3 @@
+Este proceso le permite al administrador reservar la cita de un cliente, 
+especificando el id del cliente, el id del empleado, los servicios que desea adquirir
+y la fecha y hora que desea.
