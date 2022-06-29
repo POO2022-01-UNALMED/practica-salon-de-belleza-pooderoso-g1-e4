@@ -29,12 +29,12 @@ class  VentanaPrincipal(tk.Tk):
         menu2 = tk.Menu(self.menuBar)
         self.menuBar.add_cascade(label="Procesos y Consultas", menu=menu2)
         menu2.add_command(label="Reservar Cita", command=self.reservarCita)
-        menu2.add_command(label="Cancelar Cita")
+        menu2.add_command(label="Cancelar Cita", command=self.cancelarCita)
         menuFactura = tk.Menu(self.menuBar)
         menuFactura.add_command(label="Facturar Cita")
         menuFactura.add_command(label="Facturar Producto")
         menu2.add_cascade(label="Factura", menu=menuFactura)
-        menu2.add_command(label="Balance Contable")
+        menu2.add_command(label="Balance Contable", command=self.balanceContable)
         menu2.add_command(label="Pago de Nomina")
         menu2.add_command(label="Mostrar Informacion Actual")
         
@@ -53,10 +53,11 @@ class  VentanaPrincipal(tk.Tk):
         texto_inicio.insert("1.0",texto)
         texto_inicio.pack(expand=True, anchor="n", padx=20, pady=20)
         
-        
+        self.frame2 = tk.Frame(self)
+        self.frame2.pack()
 
 
-
+    
         self.mainloop()
 
 
@@ -83,15 +84,51 @@ class  VentanaPrincipal(tk.Tk):
         acercaLabel.pack()
 
     def reservarCita(self):
-        tituloProceso = tk.Label(self, text="Reservar Cita", font=("Arial",16))
+        self.frame2.pack_forget()
+        self.frame2 = tk.Frame()
+        tituloProceso = tk.Label(self.frame2, text="Reservar Cita", font=("Arial",16))
         tituloProceso.pack(side="top")
         with open(path+"/textos/reservarCita.txt","r") as f:
             texto = f.read()
-        descripcionProceso = tk.Label(self, text = texto, font=("Arial",12), justify="left")
+        descripcionProceso = tk.Label(self.frame2, text = texto, font=("Arial",12), justify="left")
         descripcionProceso.pack(side="top")
+        self.frame2.pack(side="top")
+
         self.frame1.pack_forget()
         self.frame1 = FieldFrame(self, "Criterios", ["id Cliente","id Empleado","Servicios","Fecha y Hora"],"Valores")
         self.frame1.pack(side="top")
+
+    def cancelarCita(self):
+        self.frame2.pack_forget()
+        self.frame2 = tk.Frame()
+        tituloProceso = tk.Label(self.frame2, text="Cancelar Cita", font=("Arial",16))
+        tituloProceso.pack(side="top")
+        with open(path+"/textos/cancelarCita.txt","r") as f:
+            texto = f.read()
+        descripcionProceso = tk.Label(self.frame2, text = texto, font=("Arial",12), justify="left")
+        descripcionProceso.pack(side="top")
+
+        self.frame2.pack(side="top")
+        self.frame1.pack_forget()
+        self.frame1 = FieldFrame(self, "Criterios", ["id Cita"],"Valores")
+        self.frame1.pack(side="top")    
+
+    def balanceContable(self):
+        self.frame2.pack_forget()
+        self.frame2 = tk.Frame()
+        tituloProceso = tk.Label(self.frame2, text="Balance Contable", font=("Arial",16))
+        tituloProceso.pack(side="top")
+        with open(path+"/textos/balanceContable.txt","r") as f:
+            texto = f.read()
+        descripcionProceso = tk.Label(self.frame2, text = texto, font=("Arial",12), justify="left")
+        descripcionProceso.pack(side="top")
+
+        self.frame2.pack(side="top")
+        self.frame1.pack_forget()
+        self.frame1 = FieldFrame(self, "Criterios", ["Numero Mes"],"Valores")
+        self.frame1.pack(side="top")    
+
+
 
 if __name__=='__main__':
     VentanaInicio()

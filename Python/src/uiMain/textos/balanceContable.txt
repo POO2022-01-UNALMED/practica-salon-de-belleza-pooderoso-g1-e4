@@ -1,0 +1,4 @@
+Este proceso le muestra al administrador, dado un mes del 2022, 
+como fue el flujo de caja. Esto es, cuanto dinero se gano por servicios,
+venta de productos, y cuanto se les pago a los empleados por pago mensual,
+comisiones, entre otros.

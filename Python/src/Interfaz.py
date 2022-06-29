@@ -20,7 +20,6 @@ from uiMain.Funcionalidades.GestionarCita import  GestionarCita
 
 
 if __name__ == "__main__":
-    #Deserializador.deserializarTodo()
 
 
     superAdministador = Administrador("Juan","Cuadrado",123,21,444444,"12-2",2222)

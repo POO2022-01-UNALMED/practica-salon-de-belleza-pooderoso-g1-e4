@@ -1,0 +1,3 @@
+Este proceso le permite al administrador cancelar una cita, especificando el id de la misma.
+En caso de no recordar el id de las citas actuales, puede ir a la opcion "Mostrar Informacion Actual"
+del menu "Procesos y Consultas".
