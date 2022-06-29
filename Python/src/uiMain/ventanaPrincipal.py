@@ -4,10 +4,10 @@ import os
 import pathlib
 from uiMain.fieldFrame import FieldFrame
 from uiMain.Funcionalidades.mostrarInformacionActual import mostrarClientes
+from baseDatos.serializador import serializarTodo
 
 path = os.path.join(pathlib.Path(__file__).parent.absolute())
 
-#from baseDatos.serializador import serializarTodo
 
 
 class  VentanaPrincipal(tk.Tk):
@@ -133,7 +133,8 @@ class  VentanaPrincipal(tk.Tk):
         self.frame1.pack(side="top") 
 
     def mostrarInfo(self):
-
+        self.frame2.pack_forget()
+        self.frame2 = tk.Frame()
         mostrarClientes()
 
 
