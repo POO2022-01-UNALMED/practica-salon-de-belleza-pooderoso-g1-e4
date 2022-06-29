@@ -65,6 +65,7 @@ class  VentanaPrincipal(tk.Tk):
 
     def volver(self):
         self.destroy()
+        serializarTodo()
         VentanaInicio()
 
     def aplicacion(self):
@@ -130,10 +131,7 @@ class  VentanaPrincipal(tk.Tk):
         self.frame1 = FieldFrame(self, "Criterios", ["Numero Mes"],"Valores")
         self.frame1.pack(side="top")    
 
-    def cerrarGuardar():
-            from guiMain.ventanaInicio import VentanaInicio
-            serializarTodo()
-            self.destroy()
+    
 
 if __name__=='__main__':
     VentanaInicio()
