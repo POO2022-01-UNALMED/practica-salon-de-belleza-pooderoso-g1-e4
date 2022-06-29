@@ -14,6 +14,7 @@ from  gestorAplicacion.operacional.Inventario import Inventario
 from  gestorAplicacion.operacional.Servicio import Servicio
 from  gestorAplicacion.operacional.Factura import Factura
 from  gestorAplicacion.operacional.Producto import Producto
+from uiMain.Funcionalidades.GestionarCita import GestionarCita
 
 
 

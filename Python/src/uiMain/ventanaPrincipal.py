@@ -5,6 +5,7 @@ import pathlib
 from uiMain.fieldFrame import FieldFrame
 from uiMain.Funcionalidades.mostrarInformacionActual import mostrarClientes
 from baseDatos.serializador import serializarTodo
+from uiMain.Funcionalidades.GestionarCita import GestionarCita
 
 path = os.path.join(pathlib.Path(__file__).parent.absolute())
 
@@ -99,8 +100,14 @@ class  VentanaPrincipal(tk.Tk):
         self.frame2.pack(side="top")
 
         self.frame1.pack_forget()
-        self.frame1 = FieldFrame(self, "Criterios", ["id Cliente","id Empleado","Servicios","Fecha y Hora"],"Valores")
+        string = 'idCliente, idEmpleado, servicios, fechayhora = (self.getValue("id Cliente"),self.getValue("id Empleado"),self.getValue("Servicios"),self.getValue("Fecha y Hora"),) \nprint(GestionarCita.reservarCitaEficiente(idCliente, idEmpleado, servicios, fechayhora))'
+        #idCliente, idEmpleado, servicios, fechayhora = (self.frame1.getValue("id Cliente"),self.frame1.getValue("id Empleado"),self.frame1.getValue("Servicios"),self.frame1.getValue("Fecha y Hora"),) 
+        #print(GestionarCita.reservarCitaEficiente(idCliente, idEmpleado, servicios, fechayhora))
+        self.frame1 = FieldFrame(self, "Criterios", ["id Cliente","id Empleado","Servicios","Fecha y Hora"],"Valores", validar = string)
         self.frame1.pack(side="top")
+        
+
+        
 
     def cancelarCita(self):
         self.frame2.pack_forget()
@@ -116,6 +123,7 @@ class  VentanaPrincipal(tk.Tk):
         self.frame1.pack_forget()
         self.frame1 = FieldFrame(self, "Criterios", ["id Cita"],"Valores")
         self.frame1.pack(side="top")    
+        
 
     def balanceContable(self):
         self.frame2.pack_forget()

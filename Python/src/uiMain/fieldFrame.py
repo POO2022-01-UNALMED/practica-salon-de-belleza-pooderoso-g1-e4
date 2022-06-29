@@ -1,13 +1,14 @@
 import tkinter as tk
 from tkinter import messagebox
-
+from uiMain.Funcionalidades.GestionarCita import GestionarCita
 
 class FieldFrame(tk.Frame):
     default_font = ("Arial",12)
-    def __init__(self, parent, tituloCriterios, criterios, tituloValores, valores=None, habilitado=None):
+    def __init__(self, parent, tituloCriterios, criterios, tituloValores, valores=None, habilitado=None, validar= None):
         super().__init__(parent)
         self.parent = parent
         self.tituloCriterios = tituloCriterios; self.criterios = criterios; self.tituloValores = tituloValores; self.valores = valores; self.habilitado=habilitado
+        self.validar = validar
         criteriosLabel = tk.Label(self, text=tituloCriterios, font=("Arial",14))
         valoresLabel = tk.Label(self, text=tituloValores, font=("Arial",14))
         criteriosLabel.grid(row=0, column=0)
@@ -68,8 +69,8 @@ class FieldFrame(tk.Frame):
 
 
     def validarEntradas(self):
-        for criterio in self.criterios:
-            print(self.getValue(criterio))
+        exec(self.validar)
+        
 
 if __name__ == "__main__":
     #Para testear que si este funcionando...

@@ -33,9 +33,6 @@ class GestionarCita:
         idCliente=int(idCliente)
         idEmpleado=int(idEmpleado)
 
-        cliente
-        empleado
-
 
         if(GestionarCita.devuelveCliente(idCliente) == None ):
             cliente=Cliente("Nuevo", "Cliente",idCliente,99,300000,"Ninguna",False)
@@ -413,7 +410,7 @@ class GestionarCita:
     @classmethod
     def gestionarFechaEficiente(cls,citaAsig,em,mes,dia,hora,serv):
 
-        horafin=datetime.timedelta(year=2022,month=mes,days=dia,hours=hora)
+        horafin=datetime.datetime(year=2022,month=int(mes),day=int(dia),hour=int(hora))
         validar=Cita.validarHora(em,horafin,serv)
         if(validar==False):
             return False
