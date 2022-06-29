@@ -6,7 +6,7 @@ Cliente: Pepito Martinez, anotaciones: Ninguna
 =========================================
 =============== Empleados ===============
 =========================================
-Nombre= Marlon, especialista= Unas, id: 1000349061 fecha registro: 2022-06-29T13:17:49.728547
+Nombre= Marlon, especialista= Unas, id: 1000349061 fecha registro: 2022-06-29T13:07:26.174454
 Nombre= Julian, especialista= Pelo, id: 525206530 fecha registro: 2021-05-01T12:00:00
 =========================================
 =============== Citas ===============

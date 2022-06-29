@@ -115,10 +115,10 @@ class Cita:
     @classmethod
     def duracionCita(cls,servicios):
 
-        duracion =0
-        for ser in servicios:
-            duracion += ser.getDuracion
-        return duracion
+        #duracion =0
+        #for ser in servicios:
+        #    duracion += ser.getDuracion
+        return 60
 
     #	  *
     #     * Verifica que una cita se pueda llevar a cabo 

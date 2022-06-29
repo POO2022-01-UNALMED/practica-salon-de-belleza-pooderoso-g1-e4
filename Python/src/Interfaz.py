@@ -22,6 +22,9 @@ from uiMain.Funcionalidades import mostrarInformacionActual
 
 if __name__ == "__main__":
 
+    
+    
+
 
     superAdministador = Administrador("Juan","Cuadrado",123,21,444444,"12-2",2222)
 
@@ -65,6 +68,8 @@ if __name__ == "__main__":
 
     venta1 = Venta(gomina, empleado1, datetime.datetime(2022, 5,10,12,0),5, inventario)
     venta2 = Venta(keratina, empleado2, datetime.datetime(2022, 8,14,12,0),5, inventario)
+
+    #GestionarCita.reservarCitaEficiente(666,1000349061,"1 2","8-25-12")
 
 
 
